@@ -16,6 +16,7 @@
     <modules>
         <module>allpay-public-soap-common</module>
         <module>allpay-public-soap-client</module>
+        <module>allpay-public-soap-demo</module>
     </modules>
 
     <dependencies>
