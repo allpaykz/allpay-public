@@ -58,7 +58,22 @@ public class CashOutServlet extends HttpServlet {
         srv.createCashOutTransaction(cashOutRequest);
 
         response.setStatus(HttpServletResponse.SC_OK);
-        response.getWriter().write("Request successfully finished");
+        response.getWriter().write("<html>\n" +
+                                           "<body>\n" +
+                                           "    <div>Request successfully finished</div>\n" +
+                                           "    <div id=\"counter\">5</div>\n" +
+                                           "    <script>\n" +
+                                           "        setInterval(function() {\n" +
+                                           "            var div = document.querySelector(\"#counter\");\n" +
+                                           "            var count = div.textContent * 1 - 1;\n" +
+                                           "            div.textContent = count;\n" +
+                                           "            if (count <= 0) {\n" +
+                                           "                location.href=\"/transactions.jsp\";\n" +
+                                           "            }\n" +
+                                           "        }, 1000);\n" +
+                                           "    </script>\n" +
+                                           "</body>\n" +
+                                           "</html>");
         response.getWriter().flush();
         response.getWriter().close();
     }
