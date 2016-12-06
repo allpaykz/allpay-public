@@ -64,6 +64,8 @@ public class CashInServlet extends HttpServlet{
 
         logger.info(cashInTransaction.getTransactionInfo().getTransactionStatus());
 
+        DataBase.getResponseDatabase().put(cashInTransaction.getTransactionInfo().getTransactionId().toString(), cashInTransaction);
+
         response.setStatus(HttpServletResponse.SC_OK);
         response.getWriter().write("Request successfully finished");
         response.getWriter().flush();
