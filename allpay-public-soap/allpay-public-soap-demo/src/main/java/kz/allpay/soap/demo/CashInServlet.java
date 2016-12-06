@@ -14,9 +14,14 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.xml.datatype.DatatypeConfigurationException;
+import javax.xml.datatype.DatatypeFactory;
+import javax.xml.datatype.XMLGregorianCalendar;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.Arrays;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.UUID;
 
 /**
@@ -98,6 +103,13 @@ public class CashInServlet extends HttpServlet{
         final OnlineTransactionRequestHeader header = new OnlineTransactionRequestHeader();
         header.setLang(Language.RU);
         header.setRequester(loginName);
+        GregorianCalendar c = new GregorianCalendar();
+        c.setTime(new Date());
+        try {
+            header.setTimestamp(DatatypeFactory.newInstance().newXMLGregorianCalendar(c));
+        } catch (DatatypeConfigurationException e) {
+            throw new RuntimeException("Calendar not configured");
+        }
         cashInRequest.setHeader(header);
         return cashInRequest;
     }
