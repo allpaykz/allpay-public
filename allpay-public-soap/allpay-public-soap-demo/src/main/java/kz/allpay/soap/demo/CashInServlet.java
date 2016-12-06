@@ -14,13 +14,10 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.ws.rs.core.Response;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.UUID;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 /**
  * User: Sanzhar Aubakirov
@@ -52,9 +49,8 @@ public class CashInServlet extends HttpServlet{
         final BigDecimal amount = BigDecimal.valueOf(Long.parseLong(dirtyAmount));
         logger.info("amount\t"+amount);
 
-        TransactionManagementV1_0 srv = TransactionManagementV1_0Client.getService(
-                " http://192.168.1.159:8080/allpay-public-soap/transaction-management/v1.0?wsdl",
-                Arrays.asList(new SecuritySoapHandlerClient())
+        TransactionManagementV1_0 srv = TransactionManagementV1_0Client.getService(PropertiesUtil.getApiUrl(),
+                                                                                   Arrays.asList(new SecuritySoapHandlerClient())
         );
 
         final CashInRequest cashInRequest = getCashInRequest(loginName, toUser, amount);
@@ -64,8 +60,25 @@ public class CashInServlet extends HttpServlet{
 
         logger.info(cashInTransaction.getTransactionInfo().getTransactionStatus());
 
+        DataBase.getResponseDatabase().put(cashInTransaction.getTransactionInfo().getTransactionId().toString(), cashInTransaction);
+
         response.setStatus(HttpServletResponse.SC_OK);
-        response.getWriter().write("Request successfully finished");
+        response.getWriter().write("<html>\n" +
+                                           "<body>\n" +
+                                           "    <div>Request successfully finished</div>\n" +
+                                           "    <div id=\"counter\">5</div>\n" +
+                                           "    <script>\n" +
+                                           "        setInterval(function() {\n" +
+                                           "            var div = document.querySelector(\"#counter\");\n" +
+                                           "            var count = div.textContent * 1 - 1;\n" +
+                                           "            div.textContent = count;\n" +
+                                           "            if (count <= 0) {\n" +
+                                           "                location.href=\"/transactions.jsp\";\n" +
+                                           "            }\n" +
+                                           "        }, 1000);\n" +
+                                           "    </script>\n" +
+                                           "</body>\n" +
+                                           "</html>");
         response.getWriter().flush();
         response.getWriter().close();
     }
