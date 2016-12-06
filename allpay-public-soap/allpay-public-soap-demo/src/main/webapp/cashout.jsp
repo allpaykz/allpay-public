@@ -4,21 +4,41 @@
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/bootstrap.min.css">
 </head>
 <body>
-<div class="col-sm-12 col-lg-6 col-lg-offset-3 text-center">
-    <h2 class="h2">Снять или пополнить</h2>
-</div>
-
-<div class="col-sm-12 col-lg-6 col-lg-offset-3 text-center">
-    <%--Кнопка снятие--%>
-    <div class="col-sm-6">
-        <button type="button" class="btn btn-warning text-uppercase">Снятие</button>
+<div class="panel panel-warning col-sm-12 col-md-6 col-md-offset-3" style="margin-top:142px;">
+    <div class="panel-heading">
+        <h3 class="panel-title text-center">Снятие со счета</h3>
     </div>
+    <div class="panel-body">
+        <form class="form-horizontal" accept-charset="UTF-8" id="form"
+              action="${pageContext.request.contextPath}/cashout"
+              method="post">
 
-    <%--Кнопка пополнение--%>
-    <div class="col-sm-6">
-        <button type="button" class="btn btn-info text-uppercase">Пополнение</button>
+            <div class="form-group">
+                <label for="loginInput" class="control-label">Введите логин</label>
+                <input type="text" class="form-control"
+                       spellcheck="false"
+                       value='' required="true"
+                       id="loginInput" name="loginName" placeholder="Логин агента">
+            </div>
+
+            <div class="form-group">
+                <label for="toUser" class="control-label">Логин юзера</label>
+                <input type="tel" class="form-control"
+                       spellcheck="false"
+                       value='' required="true"
+                       id="toUser" name="toUser" placeholder="У кого снимаем деньги">
+            </div>
+
+            <div class="form-group">
+                <label for="amount" class="control-label">Токен</label>
+                <input type="number" class="form-control"
+                       spellcheck="false"
+                       value='' required="true"
+                       id="amount" name="amount" placeholder="Токен авторизации">
+            </div>
+        </form>
     </div>
 </div>
-
 </body>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/mask.js"></script>
 </html>

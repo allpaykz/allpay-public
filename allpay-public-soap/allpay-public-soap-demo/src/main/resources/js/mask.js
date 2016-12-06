@@ -2,7 +2,7 @@
  * Created by c0rp on 12/6/16.
  */
 
-$("#toUser").mask("+7 999 999-99-9999", {placeholder: "+7 ___-__-____"});
+$("#toUser").mask("+7 999 999-99-99", {placeholder: "+7 ___ ___-__-__"});
 
 
 $("#toUser").on("blur", function() {
