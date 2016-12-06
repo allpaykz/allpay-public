@@ -10,7 +10,7 @@
         <h2 class="panel-title text-center h2">Совершенные транзакции</h2>
     </div>
     <div class="panel-body">
-        <table class="table" id="table">
+        <table class="table table-bordered" id="table">
             <thead>
             <tr>
                 <th>Номер транзакции</th>
@@ -20,31 +20,46 @@
             </tr>
             </thead>
         </table>
+
+        <div class="col-sm-12">
+            <div class="col-sm-6 text-center">
+                <a class="btn btn-success text-uppercase" href="${pageContext.request.contextPath}/complete.jsp">Подтверждение</a>
+            </div>
+            <div class="col-sm-6 text-center">
+                <a class="btn btn-danger text-uppercase" href="${pageContext.request.contextPath}/decline.jsp">Отклонение</a>
+            </div>
+        </div>
     </div>
 </div>
 </body>
-<script
-        src="https://code.jquery.com/jquery-3.1.1.min.js"
-        crossorigin="anonymous"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <script>
     $.ajax({
         type: "GET",
         url: "${pageContext.request.contextPath}/rest/api/transactions"
 
     }).done(function (data) {
-        console.log(data);
         var html = "";
 
         $.each(data, function (index, value) {
-            html += "<tr>";
+            html += "<tr class='clickable-row'>";
             html += "<td>" + value.transactionInfo.transactionId + "</td>";
             html += "<td>" + value.transactionInfo.transactionStatus + "</td>";
             html += "<td>" + value.transactionInfo.amount + "</td>";
             html += "<td>" + value.transactionInfo.commission + "</td>";
-            html+="</tr>";
+            html += "</tr>";
         });
 
         $("#table").append(html);
+
+        $('#table').on('click', '.clickable-row', function(event) {
+            console.log(event);
+            if($(this).hasClass('active')){
+                $(this).removeClass('active');
+            } else {
+                $(this).addClass('active').siblings().removeClass('active');
+            }
+        });
     })
 </script>
 </html>

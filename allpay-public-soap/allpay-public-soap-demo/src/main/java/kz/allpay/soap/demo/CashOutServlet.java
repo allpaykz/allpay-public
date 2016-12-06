@@ -49,9 +49,8 @@ public class CashOutServlet extends HttpServlet {
         final BigDecimal amount = BigDecimal.valueOf(Long.parseLong(dirtyAmount));
         logger.info("amount\t"+amount);
 
-        TransactionManagementV1_0 srv = TransactionManagementV1_0Client.getService(
-                " http://192.168.1.159:8080/allpay-public-soap/transaction-management/v1.0?wsdl",
-                Arrays.asList(new SecuritySoapHandlerClient())
+        TransactionManagementV1_0 srv = TransactionManagementV1_0Client.getService(PropertiesUtil.getApiUrl(),
+                                                                                   Arrays.asList(new SecuritySoapHandlerClient())
         );
 
         final CashOutRequest cashOutRequest = getCashOutRequest(fromUser, token);
