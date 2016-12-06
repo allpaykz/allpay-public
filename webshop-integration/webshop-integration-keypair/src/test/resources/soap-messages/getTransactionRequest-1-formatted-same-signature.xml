@@ -1,0 +1,28 @@
+<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/">
+    <SOAP-ENV:Header>
+        <Signature xmlns="http://www.w3.org/2000/09/xmldsig#">
+            <SignedInfo>
+                <CanonicalizationMethod Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315#WithComments"/>
+                <SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha1"/>
+                <Reference URI="">
+                    <Transforms>
+                        <Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/>
+                    </Transforms>
+                    <DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1"/>
+                    <DigestValue>lKKQ147Vik+XPEtEmSG7oD/iF6I=</DigestValue>
+                </Reference>
+            </SignedInfo>
+            <SignatureValue>nujc8vcEdwNdFcMV+afElicLWWByJTVWJvwtTDe+yZA9zX10CT8dO38mvVWlq3wZ5L1Z5ffBwDcX
+      QflIWVqJ2Nbg3SlFPck9zXPJQRjmDOFN26jRrmdlJnQY08DXoVyi3w7dhntrXr6fLO88+Z9Q+M/Y
+    dieKcRKKu1D9RWNVhF4=
+            </SignatureValue>
+        </Signature>
+    </SOAP-ENV:Header>
+    <SOAP-ENV:Body xmlns:SOAP-SEC="http://schemas.xmlsoap.org/soap/security/2000-12" SOAP-SEC:id="Body">
+        <tran:getTransaction xmlns:tran="http://www.allpay.kz/mfs/soap/TransactionManagement">
+            <GetTransactionRequest>
+                <transactionNumber>1</transactionNumber>
+            </GetTransactionRequest>
+        </tran:getTransaction>
+    </SOAP-ENV:Body>
+</SOAP-ENV:Envelope>

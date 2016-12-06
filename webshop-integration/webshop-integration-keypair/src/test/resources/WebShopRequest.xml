@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<WSReq:WebShopRequest xmlns:WSReq="http://allpay.kz/xsd/1.0.0/WebShopRequest.xsd"
+                      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                      xsi:schemaLocation="http://allpay.kz/xsd/1.0.0/WebShopRequest.xsd http://allpay.kz/xsd/1.0.0/WebShopRequest.xsd">
+    <WSReq:ShopName>string</WSReq:ShopName>
+    <WSReq:InvoiceNumber>string</WSReq:InvoiceNumber>
+    <WSReq:Merchant>
+        <WSReq:MerchantID>string</WSReq:MerchantID>
+        <WSReq:WalletID>string</WSReq:WalletID>
+    </WSReq:Merchant>
+    <!--Optional:-->
+    <WSReq:Cart>
+        <!--1 or more repetitions:-->
+        <WSReq:Items>
+            <WSReq:Code>string</WSReq:Code>
+            <WSReq:Name>string</WSReq:Name>
+            <!--Optional:-->
+            <WSReq:Description>string</WSReq:Description>
+            <WSReq:Quantity>1000.00</WSReq:Quantity>
+            <WSReq:Cost>1000.00</WSReq:Cost>
+        </WSReq:Items>
+    </WSReq:Cart>
+    <WSReq:TotalCost>1000.00</WSReq:TotalCost>
+    <!--Optional:-->
+    <WSReq:SuccessLink>string</WSReq:SuccessLink>
+    <!--Optional:-->
+    <WSReq:FailureLink>string3</WSReq:FailureLink>
+    <WSReq:ResponseURL>string2</WSReq:ResponseURL>
+    <WSReq:TimeoutInSeconds>600</WSReq:TimeoutInSeconds>
+    <WSReq:AutoTransaction>false</WSReq:AutoTransaction>
+</WSReq:WebShopRequest>

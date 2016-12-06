@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:otc="http://allpay.kz/xsd/1.0.0/OnlineTransactionCommons.xsd"
+           targetNamespace="http://allpay.kz/xsd/1.0.0/OnlineTransactionCashIn.xsd"
+           version="1.0.0">
+    <xs:import namespace="http://allpay.kz/xsd/1.0.0/OnlineTransactionCommons.xsd" schemaLocation="OnlineTransactionCommons.xsd"/>
+
+    <xs:complexType name="cashInRequest">
+        <xs:annotation>
+            <xs:documentation>This request creates a pending cashin transaction which only blocks money</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="header" type="otc:onlineTransactionRequestHeader"/>
+            <xs:element name="toUserName" type="otc:userName"/>
+            <xs:element name="amount" type="otc:amount"/>
+            <xs:element name="GUID" type="otc:guid"/>
+        </xs:sequence>
+    </xs:complexType>
+</xs:schema>

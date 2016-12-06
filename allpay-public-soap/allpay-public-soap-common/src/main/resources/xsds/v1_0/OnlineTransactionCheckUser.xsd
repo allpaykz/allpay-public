@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:otc="http://allpay.kz/xsd/1.0.0/OnlineTransactionCommons.xsd"
+           targetNamespace="http://allpay.kz/xsd/1.0.0/OnlineTransactionCheckUser.xsd"
+           xmlns="http://allpay.kz/xsd/1.0.0/OnlineTransactionCheckUser.xsd"
+           version="1.0.0">
+    <xs:import namespace="http://allpay.kz/xsd/1.0.0/OnlineTransactionCommons.xsd" schemaLocation="OnlineTransactionCommons.xsd"/>
+
+    <xs:complexType name="checkUserRequest">
+        <xs:annotation>
+            <xs:documentation>This request answers if user exists or not. If it does then it returns basic information about that user</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="header" type="otc:onlineTransactionRequestHeader"/>
+            <xs:element name="userName" type="otc:userName"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="checkUserResponse">
+        <xs:sequence>
+            <xs:element name="header" type="otc:onlineTransactionResponseHeader"/>
+            <xs:element name="basicUserInfo" type="basicUserInfo" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>If element is present then user is registered in the system. Otherwise user is not registered</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:simpleType name="IIN">
+        <xs:restriction base="xs:token">
+            <xs:pattern value="[0-9]{12}"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:complexType name="basicUserInfo">
+        <xs:sequence>
+            <xs:element name="identified" type="xs:boolean"/>
+            <xs:element name="IIN"        type="IIN"          minOccurs="0"/>
+            <xs:element name="firstName"  type="xs:string"    minOccurs="0"/>
+            <xs:element name="lastName"   type="xs:string"    minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+</xs:schema>

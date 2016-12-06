@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/">
+<SOAP-ENV:Header>
+</SOAP-ENV:Header>
+<SOAP-ENV:Body xmlns:SOAP-SEC="http://schemas.xmlsoap.org/soap/security/2000-12" SOAP-SEC:id="Body">
+<tran:getTransaction xmlns:tran="http://www.allpay.kz/mfs/soap/TransactionManagement">
+<GetTransactionRequest>
+<transactionNumber>1</transactionNumber>
+</GetTransactionRequest>
+</tran:getTransaction>
+</SOAP-ENV:Body>
+</SOAP-ENV:Envelope>

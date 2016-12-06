@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<WSResp:WebShopResponse
+
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+
+        xmlns:WSResp="http://allpay.kz/xsd/1.0.0/WebShopResponse.xsd"
+
+
+                        xsi:schemaLocation="http://allpay.kz/xsd/1.0.0/WebShopResponse.xsd">
+    <WSResp:InvoiceNumber>123456890</WSResp:InvoiceNumber>
+    <WSResp:Transaction>
+<!--THIS IS COMMENT THAT WILL LIVE NEWLINE AFTER OMIT_COMMENT_CANONICALIZATION -->
+        <WSResp:TransactionId>String</WSResp:TransactionId>
+        <WSResp:Status           >String</WSResp:Status           >
+        <WSResp:StatusDescription>String</WSResp:StatusDescription>
+    </WSResp:Transaction>
+</WSResp:WebShopResponse><!--<DigestValue>w4I/gjh5HCynhh2yKA1qgRmo6rY=</DigestValue>-->

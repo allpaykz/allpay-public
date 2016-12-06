@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:otc="http://allpay.kz/xsd/1.0.0/OnlineTransactionCommons.xsd"
+           targetNamespace="http://allpay.kz/xsd/1.0.0/OnlineTransactionManagement.xsd"
+           version="1.0.0">
+    <xs:import namespace="http://allpay.kz/xsd/1.0.0/OnlineTransactionCommons.xsd" schemaLocation="OnlineTransactionCommons.xsd"/>
+
+    <xs:complexType name="completeTransactionRequest">
+        <xs:annotation>
+            <xs:documentation>This request completes a pending transaction and does the actual transfer</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="header" type="otc:onlineTransactionRequestHeader"/>
+            <xs:element name="GUID" type="otc:guid"/>
+            <xs:element name="transactionId" type="xs:integer"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="completeTransactionResponse">
+        <xs:sequence>
+            <xs:element name="header" type="otc:onlineTransactionResponseHeader"/>
+            <xs:element name="transactionInfo" type="otc:transactionInfo"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="declineTransactionRequest">
+        <xs:annotation>
+            <xs:documentation>This request declines a pending transaction and unblocks money previously blocked</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="header" type="otc:onlineTransactionRequestHeader"/>
+            <xs:element name="GUID" type="otc:guid"/>
+            <xs:element name="transactionId" type="xs:integer"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="declineTransactionResponse">
+        <xs:sequence>
+            <xs:element name="header" type="otc:onlineTransactionResponseHeader"/>
+            <xs:element name="transactionInfo" type="otc:transactionInfo"/>
+        </xs:sequence>
+    </xs:complexType>
+</xs:schema>

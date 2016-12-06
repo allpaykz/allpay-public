@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:WSReq="http://allpay.kz/xsd/1.0.0/WebShopRequest.xsd"
+           xmlns:ds="http://www.w3.org/2000/09/xmldsig#"
+           targetNamespace="http://allpay.kz/xsd/1.0.0/WebShopRequest.xsd"
+           elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0.0">
+    <xs:import namespace="http://www.w3.org/2000/09/xmldsig#" schemaLocation="xmldsig-core-schema.xsd"/>
+    <xs:element name="WebShopRequest" type="WSReq:WebShopRequestType">
+        <xs:annotation>
+            <xs:documentation>Request from webshop</xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <xs:complexType name="WebShopRequestType">
+        <xs:annotation>
+            <xs:documentation>Запрос на проведение транзакций</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="ShopName">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:minLength value="1"/>
+                        <xs:maxLength value="256"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:element>
+            <xs:element name="InvoiceNumber">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:minLength value="1"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:element>
+            <xs:element name="Merchant" type="WSReq:MerchantType"/>
+            <xs:element name="Cart" type="WSReq:CartType" minOccurs="0"/>
+            <xs:element name="TotalCost" type="xs:decimal"/>
+            <xs:element name="SuccessLink" type="xs:string" minOccurs="0"/>
+            <xs:element name="FailureLink" type="xs:string" minOccurs="0"/>
+            <xs:element name="ResponseURL" type="xs:string" minOccurs="0"/>
+            <xs:element name="TimeoutInSeconds">
+                <xs:simpleType>
+                    <xs:restriction base="xs:integer">
+                        <xs:minInclusive value="600"/>
+                        <xs:maxInclusive value="86400"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:element>
+            <xs:element name="AutoTransaction" type="xs:boolean" default="false"/>
+            <xs:element ref="ds:Signature"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="CartType">
+        <xs:annotation>
+            <xs:documentation>Корзина</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="Items" type="WSReq:ItemType" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="ItemType">
+        <xs:sequence>
+            <xs:element name="Code">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string"/>
+                </xs:simpleType>
+            </xs:element>
+            <xs:element name="Name" type="xs:string"/>
+            <xs:element name="Description" type="xs:string" minOccurs="0"/>
+            <xs:element name="Quantity" type="xs:decimal"/>
+            <xs:element name="Cost" type="xs:decimal"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="MerchantType">
+        <xs:sequence>
+            <xs:element name="MerchantID">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:minLength value="1"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:element>
+            <xs:element name="WalletID">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:minLength value="1"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+</xs:schema>

@@ -1,0 +1,20 @@
+<project>
+    <modelVersion>4.0.0</modelVersion>
+    <name>allpay-public-api-common</name>
+    <dependencies>
+        <dependency>
+            <groupId>javax</groupId>
+            <artifactId>javaee-api</artifactId>
+            <version>7.0</version>
+        </dependency>
+    </dependencies>
+    <packaging>jar</packaging>
+    <artifactId>allpay.public.api.common</artifactId>
+    <parent>
+        <groupId>kz.allpay.mfs</groupId>
+        <version>1.0.7</version>
+        <artifactId>allpay.public.oauth.api</artifactId>
+    </parent>
+
+
+</project>
