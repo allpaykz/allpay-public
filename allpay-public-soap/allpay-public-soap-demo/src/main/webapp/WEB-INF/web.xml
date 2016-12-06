@@ -1,7 +1,32 @@
-<!DOCTYPE web-app PUBLIC
- "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
- "http://java.sun.com/dtd/web-app_2_3.dtd" >
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- This web.xml file is not required when using Servlet 3.0 container, 
+     see implementation details http://jersey.java.net/nonav/documentation/latest/jax-rs.html#d4e194 -->
+<web-app version="2.5" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
+    <servlet>
+        <servlet-name>Faces Servlet</servlet-name>
+        <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Faces Servlet</servlet-name>
+        <url-pattern>/faces/*</url-pattern>
+    </servlet-mapping>
 
-<web-app>
-  <display-name>Archetype Created Web Application</display-name>
+    <servlet>
+        <servlet-name>Cashin Servlet</servlet-name>
+        <servlet-class>kz.allpay.soap.demo.CashInServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Cashin Servlet</servlet-name>
+        <url-pattern>/cashin</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>Cashout Servlet</servlet-name>
+        <servlet-class>kz.allpay.soap.demo.CashOutServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Cashout Servlet</servlet-name>
+        <url-pattern>/cashout</url-pattern>
+    </servlet-mapping>
 </web-app>
