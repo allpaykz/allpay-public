@@ -25,8 +25,7 @@ $(document).ready(function() {
             token: {
                 validators: {
                     stringLength: {
-                        min: 6,
-                        max: 6,
+                        min: 11,
                         message:'Длина токена 6 символов'
                     },
                     notEmpty: {

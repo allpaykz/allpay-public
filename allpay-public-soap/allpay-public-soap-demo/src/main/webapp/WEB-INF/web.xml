@@ -20,4 +20,13 @@
         <servlet-name>Cashin Servlet</servlet-name>
         <url-pattern>/cashin</url-pattern>
     </servlet-mapping>
+
+    <servlet>
+        <servlet-name>Cashout Servlet</servlet-name>
+        <servlet-class>kz.allpay.soap.demo.CashOutServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Cashout Servlet</servlet-name>
+        <url-pattern>/cashout</url-pattern>
+    </servlet-mapping>
 </web-app>

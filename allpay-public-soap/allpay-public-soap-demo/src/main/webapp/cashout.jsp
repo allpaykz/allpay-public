@@ -44,6 +44,7 @@
                 <input type="tel" class="form-control"
                        spellcheck="false"
                        value='' required="true"
+                       size="6"
                        id="token" name="token" placeholder="Токен авторизации снятия">
             </div>
 
