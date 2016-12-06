@@ -14,12 +14,18 @@
         <div class="text-center">
             <%--Кнопка снятие--%>
             <div class="col-sm-6">
-                <a class="btn btn-warning text-uppercase" href="cashout.jsp">Снятие</a>
+                <a class="btn btn-warning text-uppercase" href="cashout.jsp">
+                    <span class="glyphicon glyphicon-arrow-up" style="color: #fff"></span>
+                    Снятие
+                </a>
             </div>
 
             <%--Кнопка пополнение--%>
             <div class="col-sm-6">
-                <a class="btn btn-info text-uppercase" href="cashin.jsp">Пополнение</a>
+                <a class="btn btn-info text-uppercase" href="cashin.jsp">
+                    <span class="glyphicon glyphicon-arrow-down" style="color: #fff"></span>
+                    Пополнение
+                </a>
             </div>
         </div>
     </div>
