@@ -2,6 +2,10 @@
 
 Проект состоит из трех модулей
 
+# Документация
+
+Документация находится [здесь](https://github.com/allpaykz/documentation/tree/master/public-soap-integration)
+
 ### 1. allpay-public-soap-client
 
 Пример клиента для SOAP API. Простая реализация описана в классе [TransactionManagementV1_0Client](https://github.com/allpaykz/allpay-public/blob/develop/allpay-public-soap/allpay-public-soap-client/src/main/java/kz/allpay/mfs/ws/soap/v1_0/TransactionManagementV1_0Client.java)
@@ -32,6 +36,8 @@
 Команда для запуска билда.
 
 `mvn clean install -P alpha,tomcat`
+
+Таким образом сгенерируется war файл `allpay-public-soap-demo.war`. Его нужно задеплоить в [томкат версии 8](https://tomcat.apache.org/download-80.cgi)
 
 ### Тестовые ключи
 
