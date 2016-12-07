@@ -39,27 +39,29 @@
 </script>
     </jsp:attribute>
     <jsp:body>
-        <div class="panel panel-info col-sm-12 col-md-6 col-md-offset-3" style="margin-top:142px;">
+        <div class="panel panel-info col-xs-12 col-md-6 col-md-offset-3" style="margin-top:142px;">
             <div class="panel-heading">
                 <h2 class="panel-title text-center h2">Совершенные транзакции</h2>
             </div>
             <div class="panel-body">
-                <table class="table table-bordered" id="table">
-                    <thead>
-                    <tr>
-                        <th>Номер транзакции</th>
-                        <th>Статус транзакции</th>
-                        <th>Сумма</th>
-                        <th>Комиссия</th>
-                    </tr>
-                    </thead>
-                </table>
+                <div class="table-responsive">
+                    <table class="table table-bordered" id="table">
+                        <thead>
+                        <tr>
+                            <th>Номер транзакции</th>
+                            <th>Статус транзакции</th>
+                            <th>Сумма</th>
+                            <th>Комиссия</th>
+                        </tr>
+                        </thead>
+                    </table>
+                </div>
 
-                <div class="col-sm-12">
-                    <div class="col-sm-6 text-center">
+                <div class="col-xs-12">
+                    <div class="col-xs-6 text-center">
                         <a class="btn btn-success text-uppercase" href="${pageContext.request.contextPath}/complete.jsp">Подтверждение</a>
                     </div>
-                    <div class="col-sm-6 text-center">
+                    <div class="col-xs-6 text-center">
                         <a class="btn btn-danger text-uppercase" href="${pageContext.request.contextPath}/decline.jsp">Отклонение</a>
                     </div>
                 </div>

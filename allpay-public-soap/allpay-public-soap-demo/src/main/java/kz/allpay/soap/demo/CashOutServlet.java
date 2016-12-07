@@ -2,6 +2,7 @@ package kz.allpay.soap.demo;
 
 import com.sun.org.apache.xerces.internal.jaxp.datatype.XMLGregorianCalendarImpl;
 import kz.allpay.mfs.ws.soap.generated.v1_0.CashOutRequest;
+import kz.allpay.mfs.ws.soap.generated.v1_0.CompleteTransactionResponse;
 import kz.allpay.mfs.ws.soap.generated.v1_0.Language;
 import kz.allpay.mfs.ws.soap.generated.v1_0.OnlineTransactionRequestHeader;
 import kz.allpay.mfs.ws.soap.handlers.SecuritySoapHandlerClient;
@@ -64,9 +65,13 @@ public class CashOutServlet extends HttpServlet {
                                                                                    Arrays.asList(new SecuritySoapHandlerClient())
         );
 
-        final CashOutRequest cashOutRequest = getCashOutRequest(fromUser, token, loginName);
+        final CashOutRequest cashOutRequest = getCashOutRequest(fromUser, token, loginName, amount);
 
-        srv.createCashOutTransaction(cashOutRequest);
+        CompleteTransactionResponse cashOutTransaction = srv.createCashOutTransaction(cashOutRequest);
+
+        logger.info(cashOutTransaction.getTransactionInfo().getTransactionStatus());
+
+        DataBase.getResponseDatabase().put(cashOutTransaction.getTransactionInfo().getTransactionId().toString(), cashOutTransaction);
 
         response.setStatus(HttpServletResponse.SC_OK);
         response.getWriter().write("<html>\n" +
@@ -96,11 +101,12 @@ public class CashOutServlet extends HttpServlet {
      * @param loginName Login of agent
      * @return created instance of request
      */
-    private CashOutRequest getCashOutRequest(String fromUser, String token, String loginName) {
+    private CashOutRequest getCashOutRequest(String fromUser, String token, String loginName, BigDecimal amount) {
         final CashOutRequest cashOutRequest = new CashOutRequest();
         cashOutRequest.setToken(token);
         cashOutRequest.setGUID(UUID.randomUUID().toString());
         cashOutRequest.setFromUserName(fromUser);
+        cashOutRequest.setAmount(amount);
         OnlineTransactionRequestHeader header = new OnlineTransactionRequestHeader();
         header.setLang(Language.RU);
         GregorianCalendar c = new GregorianCalendar();

@@ -16,13 +16,13 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/transaction-validator.js"></script>
     </jsp:attribute>
     <jsp:body>
-        <div class="panel panel-info col-sm-12 col-md-6 col-md-offset-3" style="margin-top:142px;">
+        <div class="panel panel-info col-xs-12 col-md-6 col-md-offset-3" style="margin-top:142px;">
             <div class="panel-heading">
                 <h3 class="panel-title text-center">Отмена транзакции</h3>
             </div>
             <div class="panel-body">
                 <form class="form-horizontal" accept-charset="UTF-8" id="cashin-form"
-                      action="${pageContext.request.contextPath}/rest/api/completeTransaction"
+                      action="${pageContext.request.contextPath}/rest/api/declineTransaction"
                       method="post">
 
                     <div class="form-group">
@@ -41,11 +41,11 @@
                                id="txNumber" name="txNumber" placeholder="Номер транзакции">
                     </div>
 
-                    <div class="col-sm-12">
-                        <div class="col-sm-6 text-center">
+                    <div class="col-xs-12">
+                        <div class="col-xs-6 text-center">
                             <a class="btn btn-danger text-uppercase" href="${pageContext.request.contextPath}/transactions.jsp">Назад</a>
                         </div>
-                        <div class="col-sm-6 text-center text-uppercase">
+                        <div class="col-xs-6 text-center text-uppercase">
                             <button type="submit" class="btn btn-success text-uppercase">Отменить</button>
                         </div>
                     </div>

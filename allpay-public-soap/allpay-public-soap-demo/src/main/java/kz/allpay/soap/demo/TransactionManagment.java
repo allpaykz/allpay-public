@@ -45,7 +45,6 @@ public class TransactionManagment {
 
     @POST
     @Path("completeTransaction")
-    @Produces(MediaType.APPLICATION_JSON)
     public void completeTransaction(@Context HttpServletRequest req, @Context HttpServletResponse resp) throws IOException {
 
         // Parsing login name of user
@@ -111,7 +110,6 @@ public class TransactionManagment {
 
     @POST
     @Path("declineTransaction")
-    @Produces(MediaType.APPLICATION_JSON)
     public void declineTransaction(@Context HttpServletRequest req, @Context HttpServletResponse resp) throws IOException {
         // Parsing login name of user
         // We will authorize request from this user
@@ -174,4 +172,44 @@ public class TransactionManagment {
         resp.getWriter().close();
     }
 
+    @GET
+    @Path("checkUser")
+    @Produces(MediaType.APPLICATION_JSON)
+    public String checkUser(@Context HttpServletRequest req, @Context HttpServletResponse resp) throws IOException {
+
+        // Parsing login name of an agent
+        // We will transfer money from agent to user
+        final String dirtyLoginName = req.getParameter("userLoginName");
+        logger.info("dirtyLoginName\t"+dirtyLoginName);
+        final String loginName = dirtyLoginName.replaceAll("[^0-9]", "");
+        logger.info("loginName\t"+loginName);
+
+        // Parsing login name of user
+        // We will transfer money from this user to agent
+        final String dirtyRequester = req.getParameter("loginName");
+        logger.info("dirtyRequester\t"+dirtyRequester);
+        final String requester = dirtyRequester.replaceAll("[^0-9]", "");
+        logger.info("requester\t"+requester);
+
+        TransactionManagementV1_0 srv = TransactionManagementV1_0Client.getService(PropertiesUtil.getApiUrl(),
+                                                                                   Arrays.asList(new SecuritySoapHandlerClient())
+        );
+
+        final CheckUserRequest request =  new CheckUserRequest();
+        request.setUserName(loginName);
+        final OnlineTransactionRequestHeader header = new OnlineTransactionRequestHeader();
+        header.setLang(Language.RU);
+        header.setRequester(requester);
+        GregorianCalendar c = new GregorianCalendar();
+        c.setTime(new Date());
+        try {
+            header.setTimestamp(DatatypeFactory.newInstance().newXMLGregorianCalendar(c));
+        } catch (DatatypeConfigurationException e) {
+            throw new RuntimeException("Calendar not configured");
+        }
+        request.setHeader(header);
+
+        CheckUserResponse completeTransaction = srv.checkUser(request);
+        return gson.toJson(completeTransaction);
+    }
 }
