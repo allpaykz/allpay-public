@@ -2,6 +2,7 @@ package kz.allpay.soap.demo;
 
 import com.sun.org.apache.xerces.internal.jaxp.datatype.XMLGregorianCalendarImpl;
 import kz.allpay.mfs.ws.soap.generated.v1_0.CashOutRequest;
+import kz.allpay.mfs.ws.soap.generated.v1_0.CompleteTransactionResponse;
 import kz.allpay.mfs.ws.soap.generated.v1_0.Language;
 import kz.allpay.mfs.ws.soap.generated.v1_0.OnlineTransactionRequestHeader;
 import kz.allpay.mfs.ws.soap.handlers.SecuritySoapHandlerClient;
@@ -66,7 +67,11 @@ public class CashOutServlet extends HttpServlet {
 
         final CashOutRequest cashOutRequest = getCashOutRequest(fromUser, token, loginName, amount);
 
-        srv.createCashOutTransaction(cashOutRequest);
+        CompleteTransactionResponse cashOutTransaction = srv.createCashOutTransaction(cashOutRequest);
+
+        logger.info(cashOutTransaction.getTransactionInfo().getTransactionStatus());
+
+        DataBase.getResponseDatabase().put(cashOutTransaction.getTransactionInfo().getTransactionId().toString(), cashOutTransaction);
 
         response.setStatus(HttpServletResponse.SC_OK);
         response.getWriter().write("<html>\n" +
