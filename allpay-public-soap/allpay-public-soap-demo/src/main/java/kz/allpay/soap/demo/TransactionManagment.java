@@ -99,7 +99,7 @@ public class TransactionManagment {
                                            "            var count = div.textContent * 1 - 1;\n" +
                                            "            div.textContent = count;\n" +
                                            "            if (count <= 0) {\n" +
-                                           "                location.href=\"/transactions.jsp\";\n" +
+                                       "                location.href=\"" + req.getContextPath() +"/transactions.jsp\";\n" +
                                            "            }\n" +
                                            "        }, 1000);\n" +
                                            "    </script>\n" +
@@ -112,13 +112,13 @@ public class TransactionManagment {
     @POST
     @Path("declineTransaction")
     @Produces(MediaType.APPLICATION_JSON)
-    public void declineTransaction(@Context HttpServletRequest req) throws MalformedURLException {
+    public void declineTransaction(@Context HttpServletRequest req, @Context HttpServletResponse resp) throws IOException {
         // Parsing login name of user
         // We will authorize request from this user
-        final String dirtyFromUserLoginName = req.getParameter("fromUser");
-        logger.info("dirtyFromUserLoginName\t"+dirtyFromUserLoginName);
-        final String fromUser = dirtyFromUserLoginName.replaceAll("[^0-9]", "");
-        logger.info("fromUser\t"+fromUser);
+        final String dirtyLoginName = req.getParameter("loginName");
+        logger.info("dirtyLoginName\t"+dirtyLoginName);
+        final String loginName = dirtyLoginName.replaceAll("[^0-9]", "");
+        logger.info("loginName\t"+loginName);
 
         // Parsing  transactionId
         // We will complete transaction using this transactionId
@@ -137,7 +137,7 @@ public class TransactionManagment {
         request.setTransactionId(response.getTransactionInfo().getTransactionId());
         final OnlineTransactionRequestHeader header = new OnlineTransactionRequestHeader();
         header.setLang(Language.RU);
-        header.setRequester(fromUser);
+        header.setRequester(loginName);
         GregorianCalendar c = new GregorianCalendar();
         c.setTime(new Date());
         try {
@@ -147,7 +147,31 @@ public class TransactionManagment {
         }
         request.setHeader(header);
 
-        srv.declineTransaction(request);
+        CompleteTransactionResponse completeTransaction = srv.declineTransaction(request);
+
+        logger.info(completeTransaction.getTransactionInfo().getTransactionStatus());
+
+        DataBase.getResponseDatabase().put(completeTransaction.getTransactionInfo().getTransactionId().toString(), completeTransaction);
+
+        resp.setStatus(HttpServletResponse.SC_OK);
+        resp.getWriter().write("<html>\n" +
+                                       "<body>\n" +
+                                       "    <div>Request successfully finished</div>\n" +
+                                       "    <div id=\"counter\">5</div>\n" +
+                                       "    <script>\n" +
+                                       "        setInterval(function() {\n" +
+                                       "            var div = document.querySelector(\"#counter\");\n" +
+                                       "            var count = div.textContent * 1 - 1;\n" +
+                                       "            div.textContent = count;\n" +
+                                       "            if (count <= 0) {\n" +
+                                       "                location.href=\"" + req.getContextPath() +"/transactions.jsp\";\n" +
+                                       "            }\n" +
+                                       "        }, 1000);\n" +
+                                       "    </script>\n" +
+                                       "</body>\n" +
+                                       "</html>");
+        resp.getWriter().flush();
+        resp.getWriter().close();
     }
 
 }

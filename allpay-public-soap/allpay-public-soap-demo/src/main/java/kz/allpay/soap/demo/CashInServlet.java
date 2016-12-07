@@ -78,7 +78,7 @@ public class CashInServlet extends HttpServlet{
                                            "            var count = div.textContent * 1 - 1;\n" +
                                            "            div.textContent = count;\n" +
                                            "            if (count <= 0) {\n" +
-                                           "                location.href=\"/transactions.jsp\";\n" +
+                                           "                location.href=\"" + req.getContextPath() +"/transactions.jsp\";\n" +
                                            "            }\n" +
                                            "        }, 1000);\n" +
                                            "    </script>\n" +

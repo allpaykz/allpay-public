@@ -1,38 +1,13 @@
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="t" tagdir="/WEB-INF/tags" %>
 <%@ page contentType="text/html; charset=UTF-8" %>
-<html>
-<head>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
-          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-</head>
-<body>
-<div class="panel panel-warning col-sm-12 col-md-6 col-md-offset-3" style="margin-top:142px;">
-    <div class="panel-heading">
-        <h2 class="panel-title text-center h2">Совершенные транзакции</h2>
-    </div>
-    <div class="panel-body">
-        <table class="table table-bordered" id="table">
-            <thead>
-            <tr>
-                <th>Номер транзакции</th>
-                <th>Статус транзакции</th>
-                <th>Сумма</th>
-                <th>Комиссия</th>
-            </tr>
-            </thead>
-        </table>
-
-        <div class="col-sm-12">
-            <div class="col-sm-6 text-center">
-                <a class="btn btn-success text-uppercase" href="${pageContext.request.contextPath}/complete.jsp">Подтверждение</a>
-            </div>
-            <div class="col-sm-6 text-center">
-                <a class="btn btn-danger text-uppercase" href="${pageContext.request.contextPath}/decline.jsp">Отклонение</a>
-            </div>
-        </div>
-    </div>
-</div>
-</body>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<t:genericpage>
+    <jsp:attribute name="head">
+    </jsp:attribute>
+    <jsp:attribute name="header">
+        <t:navbar active="transactions"/>
+    </jsp:attribute>
+    <jsp:attribute name="footer">
 <script>
     $.ajax({
         type: "GET",
@@ -62,4 +37,33 @@
         });
     })
 </script>
-</html>
+    </jsp:attribute>
+    <jsp:body>
+        <div class="panel panel-info col-sm-12 col-md-6 col-md-offset-3" style="margin-top:142px;">
+            <div class="panel-heading">
+                <h2 class="panel-title text-center h2">Совершенные транзакции</h2>
+            </div>
+            <div class="panel-body">
+                <table class="table table-bordered" id="table">
+                    <thead>
+                    <tr>
+                        <th>Номер транзакции</th>
+                        <th>Статус транзакции</th>
+                        <th>Сумма</th>
+                        <th>Комиссия</th>
+                    </tr>
+                    </thead>
+                </table>
+
+                <div class="col-sm-12">
+                    <div class="col-sm-6 text-center">
+                        <a class="btn btn-success text-uppercase" href="${pageContext.request.contextPath}/complete.jsp">Подтверждение</a>
+                    </div>
+                    <div class="col-sm-6 text-center">
+                        <a class="btn btn-danger text-uppercase" href="${pageContext.request.contextPath}/decline.jsp">Отклонение</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </jsp:body>
+</t:genericpage>
