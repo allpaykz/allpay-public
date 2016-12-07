@@ -22,7 +22,7 @@
             </div>
             <div class="panel-body">
                 <form class="form-horizontal" accept-charset="UTF-8" id="cashin-form"
-                      action="${pageContext.request.contextPath}/rest/api/completeTransaction"
+                      action="${pageContext.request.contextPath}/rest/api/declineTransaction"
                       method="post">
 
                     <div class="form-group">
