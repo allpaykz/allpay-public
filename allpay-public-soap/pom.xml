@@ -16,10 +16,50 @@
     <modules>
         <module>allpay-public-soap-common</module>
         <module>allpay-public-soap-client</module>
+        <module>allpay-public-soap-demo</module>
     </modules>
+
+    <profiles>
+        <!-- environment group -->
+        <profile>
+            <id>local</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <allpay.api.url>http://localhost:8080/allpay-public-soap/transaction-management/v1.0?wsdl</allpay.api.url>
+            </properties>
+        </profile>
+        <profile>
+            <id>alpha</id>
+            <properties>
+                <allpay.api.url>http://alpha.allpay.kz/allpay-public-soap/transaction-management/v1.0?wsdl</allpay.api.url>
+            </properties>
+        </profile>
+        <profile>
+            <id>beta</id>
+            <properties>
+                <allpay.api.url>http://beta.allpay.kz/allpay-public-soap/transaction-management/v1.0?wsdl</allpay.api.url>
+            </properties>
+        </profile>
+    </profiles>
 
     <dependencies>
 
     </dependencies>
 
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>3.5.1</version>
+                    <configuration>
+                        <source>1.8</source>
+                        <target>1.8</target>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
 </project>
