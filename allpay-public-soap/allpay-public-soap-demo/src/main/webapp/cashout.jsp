@@ -16,7 +16,7 @@
         <script type="text/javascript" src="${pageContext.request.contextPath}/js/cashout-validator.js"></script>
     </jsp:attribute>
     <jsp:body>
-        <div class="panel panel-info col-sm-12 col-md-6 col-md-offset-3" style="margin-top:142px;">
+        <div class="panel panel-info col-xs-12 col-md-6 col-md-offset-3" style="margin-top:142px;">
             <div class="panel-heading">
                 <h3 class="panel-title text-center">Снятие со счета</h3>
             </div>
@@ -62,12 +62,12 @@
                                id="token" name="token" placeholder="Токен авторизации снятия">
                     </div>
 
-                    <div class="col-sm-12">
-                        <div class="col-sm-6 text-center">
+                    <div class="col-xs-12">
+                        <div class="col-xs-6 text-center">
                             <a class="btn btn-danger text-uppercase"
                                href="${pageContext.request.contextPath}/">Назад</a>
                         </div>
-                        <div class="col-sm-6 text-center text-uppercase">
+                        <div class="col-xs-6 text-center text-uppercase">
                             <button type="submit" class="btn btn-success text-uppercase">Снять</button>
                         </div>
                     </div>
