@@ -24,10 +24,12 @@
 3. beta
 
 Профиль `local` нужен для локального тестирования внутри allpay.
+
 Профиль `alpha` настраивает demo проект для работы с сервером  allpay альфа версии - https://alpha.allpay.kz/mfs
+
 Профиль `beta` настраивает demo проект для работы с сервером  allpay бета версии - https://beta.allpay.kz/mfs
 
-Команда для запуска билда. 
+Команда для запуска билда.
 
 `mvn clean install -P alpha,tomcat`
 
