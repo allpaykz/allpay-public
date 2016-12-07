@@ -74,26 +74,6 @@
                 <directory>src/main/resources</directory>
                 <filtering>true</filtering>
             </resource>
-            <resource>
-                <directory>src/main/webapp</directory>
-                <targetPath>META-INF/resources</targetPath>
-            </resource>
-            <resource>
-                <directory>${project.sources}</directory>
-                <filtering>true</filtering>
-                <excludes>
-                    <exclude>**/*.woff</exclude>
-                    <exclude>**/*.ttf</exclude>
-                </excludes>
-            </resource>
-            <resource>
-                <directory>${project.sources}</directory>
-                <filtering>false</filtering>
-                <includes>
-                    <include>**/*.woff</include>
-                    <include>**/*.ttf</include>
-                </includes>
-            </resource>
         </resources>
         <plugins>
             <plugin>
@@ -116,14 +96,10 @@
                             <directory>${basedir}/src/main/webapp/WEB-INF</directory>
                             <targetPath>WEB-INF</targetPath>
                         </resource>
+                        <resource>
+                            <directory>${basedir}/src/main/resources</directory>
+                        </resource>
                     </webResources>
-                </configuration>
-            </plugin>
-            <plugin>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <configuration>
-                    <source>1.8</source>
-                    <target>1.8</target>
                 </configuration>
             </plugin>
         </plugins>
