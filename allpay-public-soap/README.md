@@ -37,6 +37,8 @@
 
 `mvn clean install -P alpha,tomcat`
 
+Таким образом сгенерируется war файл `allpay-public-soap-demo.war`. Его нужно задеплоить в [томкат версии 8](https://tomcat.apache.org/download-80.cgi)
+
 ### Тестовые ключи
 
 Тестовые ключи можно найти [здесь](https://github.com/allpaykz/allpay-public/tree/develop/webshop-integration/webshop-integration-keypair/src/main/resources/mockKeys). При использовании наших хэндлеров не нужно беспокоится о процессе подписания и верификации подписи.
