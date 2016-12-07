@@ -33,6 +33,13 @@ public class CashOutServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse response) throws ServletException, IOException {
 
+        // Parsing login name of an agent
+        // We will transfer money from agent to user
+        final String dirtyLoginName = req.getParameter("loginName");
+        logger.info("dirtyLoginName\t"+dirtyLoginName);
+        final String loginName = dirtyLoginName.replaceAll("[^0-9]", "");
+        logger.info("loginName\t"+loginName);
+
         // Parsing login name of user
         // We will transfer money from this user to agent
         final String dirtyFromUserLoginName = req.getParameter("fromUser");
@@ -57,7 +64,7 @@ public class CashOutServlet extends HttpServlet {
                                                                                    Arrays.asList(new SecuritySoapHandlerClient())
         );
 
-        final CashOutRequest cashOutRequest = getCashOutRequest(fromUser, token);
+        final CashOutRequest cashOutRequest = getCashOutRequest(fromUser, token, loginName);
 
         srv.createCashOutTransaction(cashOutRequest);
 
@@ -86,9 +93,10 @@ public class CashOutServlet extends HttpServlet {
      * Generate CashOutRequest entity by parameters from HTTP form
      * @param fromUser login name of user. from this account money will transfer to agent
      * @param token authorization token. take it from user mobile application
+     * @param loginName Login of agent
      * @return created instance of request
      */
-    private CashOutRequest getCashOutRequest(String fromUser, String token) {
+    private CashOutRequest getCashOutRequest(String fromUser, String token, String loginName) {
         final CashOutRequest cashOutRequest = new CashOutRequest();
         cashOutRequest.setToken(token);
         cashOutRequest.setGUID(UUID.randomUUID().toString());
@@ -106,18 +114,15 @@ public class CashOutServlet extends HttpServlet {
         /**
          * This field is important. Using this field Allpay system will recognize your certificates
          */
-        header.setRequester("55695325"); // This value is given by Allpay, when you start integration
+        if (ValidationUtils.NVL(loginName)) {
+            header.setRequester(loginName); // This value is given by Allpay, when you start integration
+        } else {
+            header.setRequester("55695325"); // This value is given by Allpay, when you start integration
+        }
 
 
         cashOutRequest.setHeader(header);
         return cashOutRequest;
     }
-
-    /**
-     * @param loginName requester
-     * @param toUser    toUserName
-     * @param amount    amount
-     * @return created instance of request
-     */
 }
 

@@ -10,6 +10,20 @@
     <packaging>war</packaging>
     <name>allpay-public-soap-demo</name>
 
+    <properties>
+        <reasteasy.scope>provided</reasteasy.scope>
+    </properties>
+
+    <profiles>
+        <profile>
+            <id>tomcat</id>
+            <properties>
+                <reasteasy.scope>compile</reasteasy.scope>
+            </properties>
+        </profile>
+    </profiles>
+
+
     <dependencies>
         <dependency>
             <groupId>junit</groupId>
@@ -43,13 +57,13 @@
             <groupId>org.jboss.resteasy</groupId>
             <artifactId>resteasy-jaxrs</artifactId>
             <version>3.0.4.Final</version>
-            <scope>provided</scope>
+            <scope>${reasteasy.scope}</scope>
         </dependency>
         <dependency>
             <groupId>org.jboss.resteasy</groupId>
             <artifactId>resteasy-multipart-provider</artifactId>
             <version>3.0.4.Final</version>
-            <scope>provided</scope>
+            <scope>${reasteasy.scope}</scope>
         </dependency>
     </dependencies>
 

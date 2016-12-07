@@ -20,9 +20,18 @@
               action="${pageContext.request.contextPath}/cashout"
               method="post">
 
+            <%--Who is agent--%>
+            <div class="form-group">
+                <label for="loginInput" class="control-label">Логин</label>
+                <input type="text" class="form-control"
+                       spellcheck="false"
+                       value=''
+                       id="loginInput" name="loginName" placeholder="Логин агента">
+            </div>
+
             <%--FROM USER--%>
             <div class="form-group">
-                <label for="fromUser" class="control-label">Введите логин</label>
+                <label for="fromUser" class="control-label">Логин клиента</label>
                 <input type="tel" class="form-control"
                        spellcheck="false"
                        value='' required="true"

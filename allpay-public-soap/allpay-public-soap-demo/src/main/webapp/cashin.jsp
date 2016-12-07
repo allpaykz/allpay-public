@@ -23,7 +23,7 @@
               method="post">
 
             <div class="form-group">
-                <label for="loginInput" class="control-label">Введите логин</label>
+                <label for="loginInput" class="control-label">Логин</label>
                 <input type="text" class="form-control"
                        spellcheck="false"
                        value='' required="true"
@@ -35,11 +35,11 @@
                 <input type="tel" class="form-control"
                        spellcheck="false"
                        value='' required="true"
-                       id="toUser" name="toUser" placeholder="Логин агента">
+                       id="toUser" name="toUser" placeholder="Логин клиента">
             </div>
 
             <div class="form-group">
-                <label for="amount" class="control-label">Кому пополняем</label>
+                <label for="amount" class="control-label">Сумма пополнения</label>
                 <input type="number" class="form-control"
                        spellcheck="false"
                        value='' required="true"
