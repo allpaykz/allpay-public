@@ -20,6 +20,9 @@
 <c:if test="${active.equals('decline')}">
     <c:set var="classDecline" value="active"/>
 </c:if>
+<c:if test="${active.equals('userInfo')}">
+    <c:set var="classUser" value="active"/>
+</c:if>
 <nav class="navbar navbar-default navbar-fixed-top col-md-8 col-md-offset-2 text-center">
     <div class="container-fluid">
         <div class="navbar-header">
@@ -38,6 +41,7 @@
                 <li class="${classCashout}"><a href="${pageContext.request.contextPath}/cashout.jsp">Снять</a></li>
                 <li class="${classComplete}"><a href="${pageContext.request.contextPath}/complete.jsp">Подтвердить</a></li>
                 <li class="${classDecline}"><a href="${pageContext.request.contextPath}/decline.jsp">Отменить</a></li>
+                <li class="${classDecline}"><a href="${pageContext.request.contextPath}/userinfo.jsp">Юзер</a></li>
             </ul>
         </div>
     </div>

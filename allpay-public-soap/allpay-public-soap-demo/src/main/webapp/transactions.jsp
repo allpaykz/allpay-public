@@ -44,16 +44,18 @@
                 <h2 class="panel-title text-center h2">Совершенные транзакции</h2>
             </div>
             <div class="panel-body">
-                <table class="table table-bordered" id="table">
-                    <thead>
-                    <tr>
-                        <th>Номер транзакции</th>
-                        <th>Статус транзакции</th>
-                        <th>Сумма</th>
-                        <th>Комиссия</th>
-                    </tr>
-                    </thead>
-                </table>
+                <div class="table-responsive">
+                    <table class="table table-bordered" id="table">
+                        <thead>
+                        <tr>
+                            <th>Номер транзакции</th>
+                            <th>Статус транзакции</th>
+                            <th>Сумма</th>
+                            <th>Комиссия</th>
+                        </tr>
+                        </thead>
+                    </table>
+                </div>
 
                 <div class="col-xs-12">
                     <div class="col-xs-6 text-center">
