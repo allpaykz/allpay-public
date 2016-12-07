@@ -27,7 +27,7 @@
                 <activeByDefault>true</activeByDefault>
             </activation>
             <properties>
-                <allpay.api.url>http://192.168.1.159:8080/allpay-public-soap/transaction-management/v1.0?wsdl</allpay.api.url>
+                <allpay.api.url>http://localhost:8080/allpay-public-soap/transaction-management/v1.0?wsdl</allpay.api.url>
             </properties>
         </profile>
         <profile>
