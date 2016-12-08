@@ -44,6 +44,9 @@ public class SecuritySoapHandlerServer extends AbstractSecuritySoapHandler {
                 logger.info("securitySoapHandler: sign validated");
             }
             return isValid;
+        } catch (SignatureService.SignatureException e) {
+            e.printStackTrace();
+            generateSOAPErrMessage(context.getMessage(), e.getMessage());
         } catch (Exception e) {
             e.printStackTrace();
             generateSOAPErrMessage(context.getMessage(), "another exception");
