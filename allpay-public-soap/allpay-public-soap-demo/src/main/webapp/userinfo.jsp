@@ -5,7 +5,7 @@
     <jsp:attribute name="head">
     </jsp:attribute>
     <jsp:attribute name="header">
-        <t:navbar active="cashin"/>
+        <t:navbar active="userInfo"/>
     </jsp:attribute>
     <jsp:attribute name="footer">
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
@@ -49,12 +49,12 @@
     <jsp:body>
         <div class="panel panel-info col-xs-12 col-md-6 col-md-offset-3" style="margin-top:142px;">
             <div class="panel-heading">
-                <h3 class="panel-title text-center">Пополнение счета</h3>
+                <h3 class="panel-title text-center">Информация</h3>
             </div>
             <div class="panel-body">
                 <form class="form-horizontal" accept-charset="UTF-8" id="usercheck">
                     <div class="form-group">
-                        <label for="requesterInput" class="control-label">Логин</label>
+                        <label for="requesterInput" class="control-label">Логин агента</label>
                         <input type="text" class="form-control"
                                spellcheck="false"
                                value='' required="true"
@@ -62,7 +62,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="userLoginName" class="control-label">Логи</label>
+                        <label for="userLoginName" class="control-label">Логин клиента</label>
                         <input type="tel" class="form-control"
                                spellcheck="false"
                                value='' required="true"
