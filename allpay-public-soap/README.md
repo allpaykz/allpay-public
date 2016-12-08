@@ -6,6 +6,23 @@
 
 Документация находится [здесь](https://github.com/allpaykz/documentation/tree/master/public-soap-integration)
 
+# Использование
+
+В первую очередь нужно сбилдить весь [проект](https://github.com/allpaykz/allpay-public)
+
+1. `git clone https://github.com/allpaykz/allpay-public.git`
+2. `cd allpay-public`
+3. `mvn clean install -P alpha`
+
+После удачного билда, можете добавить в свой проект зависимость для использования TransactionManagementV1_0Client
+
+        <dependency>
+            <artifactId>allpay-public-soap-client</artifactId>
+            <groupId>kz.allpay.mfs</groupId>
+            <version>2.0.8</version>
+        </dependency>
+
+
 ### 1. allpay-public-soap-client
 
 Пример клиента для SOAP API. Простая реализация описана в классе [TransactionManagementV1_0Client](https://github.com/allpaykz/allpay-public/blob/develop/allpay-public-soap/allpay-public-soap-client/src/main/java/kz/allpay/mfs/ws/soap/v1_0/TransactionManagementV1_0Client.java)
