@@ -41,7 +41,7 @@
                 <li class="${classCashout}"><a href="${pageContext.request.contextPath}/cashout.jsp">Снять</a></li>
                 <li class="${classComplete}"><a href="${pageContext.request.contextPath}/complete.jsp">Подтвердить</a></li>
                 <li class="${classDecline}"><a href="${pageContext.request.contextPath}/decline.jsp">Отменить</a></li>
-                <li class="${classDecline}"><a href="${pageContext.request.contextPath}/userinfo.jsp">Юзер</a></li>
+                <li class="${classUser}"><a href="${pageContext.request.contextPath}/userinfo.jsp">Юзер</a></li>
             </ul>
         </div>
     </div>

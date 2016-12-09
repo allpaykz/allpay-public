@@ -59,19 +59,34 @@ public class TransactionManagment {
         final String dirtyTransactionNumber = req.getParameter("txNumber");
         logger.info("dirtyTransactionNumber\t"+dirtyTransactionNumber);
         final String transactionId = dirtyTransactionNumber.replaceAll("[^0-9]","");
-        logger.info("transactionId\t"+transactionId)
-        ;
+        logger.info("transactionId\t"+transactionId);
+
+        // Создаем соап клиента, по ссылке из проперти файлов.
         TransactionManagementV1_0 srv = TransactionManagementV1_0Client.getService(PropertiesUtil.getApiUrl(),
                                                                                    Arrays.asList(new SecuritySoapHandlerClient())
         );
+
+        // Вытаскиваем транзакцию из вашей локальной БД
         final CompleteTransactionResponse response = DataBase.getResponseDatabase().get(transactionId);
 
+        // ----
+        // Создаем запрос на завершение транзакции
         final CompleteTransactionRequest request =  new CompleteTransactionRequest();
+
+        // Идентификатор транзакции в вашей системе. Должен быть уникален на всегда
         request.setGUID(response.getTransactionInfo().getGUID());
+
+        // Айди транзакции в системе allpay.
         request.setTransactionId(response.getTransactionInfo().getTransactionId());
         final OnlineTransactionRequestHeader header = new OnlineTransactionRequestHeader();
+
+        // Язык, от него зависят язык текстов в ответах от сервера
         header.setLang(Language.RU);
+
+        // Логин агента. От имени этого логина совершается запрос в системе
         header.setRequester(loginName);
+
+        // Дата запроса на стороне запрашивающего
         GregorianCalendar c = new GregorianCalendar();
         c.setTime(new Date());
         try {
@@ -80,11 +95,15 @@ public class TransactionManagment {
             throw new RuntimeException("Calendar not configured");
         }
         request.setHeader(header);
+        // Запрос создан
+        // ----
 
+        // Запускаем запрос
         CompleteTransactionResponse completeTransaction = srv.completeTransaction(request);
 
         logger.info(completeTransaction.getTransactionInfo().getTransactionStatus());
 
+        // Обновляем статус запроса в локальное БД
         DataBase.getResponseDatabase().put(completeTransaction.getTransactionInfo().getTransactionId().toString(), completeTransaction);
 
         resp.setStatus(HttpServletResponse.SC_OK);
@@ -123,19 +142,35 @@ public class TransactionManagment {
         final String dirtyTransactionNumber = req.getParameter("txNumber");
         logger.info("dirtyTransactionNumber\t"+dirtyTransactionNumber);
         final String transactionId = dirtyTransactionNumber.replaceAll("[^0-9]","");
-        logger.info("transactionId\t"+transactionId)
-        ;
+        logger.info("transactionId\t"+transactionId);
+
+        // Создаем соап клиента, по ссылке из проперти файлов.
         TransactionManagementV1_0 srv = TransactionManagementV1_0Client.getService(PropertiesUtil.getApiUrl(),
                                                                                    Arrays.asList(new SecuritySoapHandlerClient())
         );
+
+        // Вытаскиваем транзакцию из вашей локальной БД
         final CompleteTransactionResponse response = DataBase.getResponseDatabase().get(transactionId);
 
+        // ----
+        // Создаем запрос на отмену транзакции
         final DeclineTransactionRequest request = new DeclineTransactionRequest();
+
+        // Идентификатор транзакции в вашей системе. Должен быть уникален на всегда
         request.setGUID(response.getTransactionInfo().getGUID());
+
+        // Айди транзакции в системе allpay.
         request.setTransactionId(response.getTransactionInfo().getTransactionId());
+
         final OnlineTransactionRequestHeader header = new OnlineTransactionRequestHeader();
+
+        // Язык, от него зависят язык текстов в ответах от сервера
         header.setLang(Language.RU);
+
+        // Логин агента. От имени этого логина совершается запрос в системе
         header.setRequester(loginName);
+
+        // Дата запроса на стороне запрашивающего
         GregorianCalendar c = new GregorianCalendar();
         c.setTime(new Date());
         try {
@@ -143,8 +178,12 @@ public class TransactionManagment {
         } catch (DatatypeConfigurationException e) {
             throw new RuntimeException("Calendar not configured");
         }
-        request.setHeader(header);
 
+        request.setHeader(header);
+        // Запрос создан
+        // ----
+
+        // Запускаем запрос
         CompleteTransactionResponse completeTransaction = srv.declineTransaction(request);
 
         logger.info(completeTransaction.getTransactionInfo().getTransactionStatus());
@@ -191,15 +230,27 @@ public class TransactionManagment {
         final String requester = dirtyRequester.replaceAll("[^0-9]", "");
         logger.info("requester\t"+requester);
 
+        // Создаем соап клиента, по ссылке из проперти файлов.
         TransactionManagementV1_0 srv = TransactionManagementV1_0Client.getService(PropertiesUtil.getApiUrl(),
                                                                                    Arrays.asList(new SecuritySoapHandlerClient())
         );
 
+        // ----
+        // Создаем запрос на информацию о клиенте
         final CheckUserRequest request =  new CheckUserRequest();
+
+        // Логин клинтеа, про него мы хотим узнать
         request.setUserName(loginName);
+
         final OnlineTransactionRequestHeader header = new OnlineTransactionRequestHeader();
+
+        // Язык, от него зависят язык текстов в ответах от сервера
         header.setLang(Language.RU);
+
+        // Логин агента. От имени этого логина совершается запрос в системе
         header.setRequester(requester);
+
+        // Дата запроса на стороне запрашивающего
         GregorianCalendar c = new GregorianCalendar();
         c.setTime(new Date());
         try {
@@ -208,7 +259,10 @@ public class TransactionManagment {
             throw new RuntimeException("Calendar not configured");
         }
         request.setHeader(header);
+        // Запрос создан
+        // ----
 
+        // Отправляем запрос
         CheckUserResponse completeTransaction = srv.checkUser(request);
         return gson.toJson(completeTransaction);
     }

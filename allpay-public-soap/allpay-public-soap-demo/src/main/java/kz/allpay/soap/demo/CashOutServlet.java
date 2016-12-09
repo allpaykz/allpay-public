@@ -61,22 +61,33 @@ public class CashOutServlet extends HttpServlet {
         final BigDecimal amount = BigDecimal.valueOf(Long.parseLong(dirtyAmount));
         logger.info("amount\t"+amount);
 
+        // Создаем соап клиента, по ссылке из проперти файлов.
         TransactionManagementV1_0 srv = TransactionManagementV1_0Client.getService(PropertiesUtil.getApiUrl(),
                                                                                    Arrays.asList(new SecuritySoapHandlerClient())
         );
 
+        // Создаем объект запроса
+        // loginName это логин агента, от него идёт запрос в система Allpay
+        // fromUser это логин клиента, с него снимается сумма
+        // token это токен клиента, он генерируется в приложении allpay
+        // amount - сумма запроса
         final CashOutRequest cashOutRequest = getCashOutRequest(fromUser, token, loginName, amount);
 
+        // Посылаем запрос на сервер
         CompleteTransactionResponse cashOutTransaction = srv.createCashOutTransaction(cashOutRequest);
 
         logger.info(cashOutTransaction.getTransactionInfo().getTransactionStatus());
 
-        DataBase.getResponseDatabase().put(cashOutTransaction.getTransactionInfo().getTransactionId().toString(), cashOutTransaction);
+        // Записываем ответ в БД
+        final String transactionId = cashOutTransaction.getTransactionInfo().getTransactionId().toString();
+        DataBase.getResponseDatabase().put(transactionId, cashOutTransaction);
 
         response.setStatus(HttpServletResponse.SC_OK);
         response.getWriter().write("<html>\n" +
                                            "<body>\n" +
                                            "    <div>Request successfully finished</div>\n" +
+                                           "    <div>Transaction number:</div>\n" +
+                                           "    <div>" +transactionId+ "</div>\n" +
                                            "    <div id=\"counter\">5</div>\n" +
                                            "    <script>\n" +
                                            "        setInterval(function() {\n" +
@@ -104,7 +115,10 @@ public class CashOutServlet extends HttpServlet {
     private CashOutRequest getCashOutRequest(String fromUser, String token, String loginName, BigDecimal amount) {
         final CashOutRequest cashOutRequest = new CashOutRequest();
         cashOutRequest.setToken(token);
+
+        // Идентификатор транзакции в вашей системе. Должен быть уникален на всегда
         cashOutRequest.setGUID(UUID.randomUUID().toString());
+
         cashOutRequest.setFromUserName(fromUser);
         cashOutRequest.setAmount(amount);
         OnlineTransactionRequestHeader header = new OnlineTransactionRequestHeader();

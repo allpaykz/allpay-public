@@ -54,23 +54,33 @@ public class CashInServlet extends HttpServlet{
         final BigDecimal amount = BigDecimal.valueOf(Long.parseLong(dirtyAmount));
         logger.info("amount\t"+amount);
 
+        // Создаем соап клиента, по ссылке из проперти файлов.
         TransactionManagementV1_0 srv = TransactionManagementV1_0Client.getService(PropertiesUtil.getApiUrl(),
                                                                                    Arrays.asList(new SecuritySoapHandlerClient())
         );
 
+        // Создаем объект запроса
+        // loginName это логин агента, от него идёт запрос в система Allpay
+        // toUser это логин клиента
+        // amount - сумма запроса
         final CashInRequest cashInRequest = getCashInRequest(loginName, toUser, amount);
 
-
+        // Посылаем запрос на CashIn
         final CompleteTransactionResponse cashInTransaction = srv.createCashInTransaction(cashInRequest);
 
         logger.info(cashInTransaction.getTransactionInfo().getTransactionStatus());
 
-        DataBase.getResponseDatabase().put(cashInTransaction.getTransactionInfo().getTransactionId().toString(), cashInTransaction);
+        // Записываем ответ в БД
+        final String transactionId = cashInTransaction.getTransactionInfo().getTransactionId().toString();
+        DataBase.getResponseDatabase().put(transactionId, cashInTransaction);
 
+        // Редиректим юзера на страницу со списком транзакций
         response.setStatus(HttpServletResponse.SC_OK);
         response.getWriter().write("<html>\n" +
                                            "<body>\n" +
                                            "    <div>Request successfully finished</div>\n" +
+                                           "    <div>Transaction number:</div>\n" +
+                                           "    <div>" +transactionId+ "</div>\n" +
                                            "    <div id=\"counter\">5</div>\n" +
                                            "    <script>\n" +
                                            "        setInterval(function() {\n" +
@@ -90,15 +100,16 @@ public class CashInServlet extends HttpServlet{
 
     /**
      * Generate CashInRequest entity by parameters from HTTP form
-     * @param loginName requester
-     * @param toUser    toUserName
-     * @param amount    amount
+     * @param loginName requester of request
+     * @param toUser    toUserName which user
+     * @param amount    amount how much money
      * @return created instance of request
      */
     private CashInRequest getCashInRequest(String loginName, String toUser, BigDecimal amount) {
         final CashInRequest cashInRequest = new CashInRequest();
         cashInRequest.setAmount(amount);
         cashInRequest.setToUserName(toUser);
+        // Идентификатор транзакции в вашей системе. Должен быть уникален на всегда
         cashInRequest.setGUID(UUID.randomUUID().toString());
         final OnlineTransactionRequestHeader header = new OnlineTransactionRequestHeader();
         header.setLang(Language.RU);
