@@ -1,15 +1,19 @@
 package kz.allpay.mfs.ws.soap.handlers;
 
-import kz.allpay.mfs.signature.keyproviders.KeyProvider;
-import kz.allpay.mfs.signature.keyproviders.StaticTestKeyProvider;
 import kz.allpay.mfs.webshop.signature.SignatureService;
 import kz.allpay.mfs.webshop.signature.SignatureServiceSoapImpl;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.w3c.dom.NodeList;
 
+import javax.xml.soap.SOAPException;
+import javax.xml.soap.SOAPMessage;
 import javax.xml.ws.handler.MessageContext;
 import javax.xml.ws.handler.soap.SOAPMessageContext;
+import java.io.IOException;
 import java.io.StringReader;
+import java.security.PublicKey;
+import java.security.spec.InvalidKeySpecException;
 
 import static kz.allpay.mfs.ws.soap.handlers.HandlerUtils.generateSOAPErrMessage;
 import static kz.allpay.mfs.ws.soap.handlers.HandlerUtils.soapToString;
@@ -24,8 +28,6 @@ public class SecuritySoapHandlerServer extends AbstractSecuritySoapHandler {
 
     private static SignatureService signatureService = new SignatureServiceSoapImpl();
 
-    private static KeyProvider keyProvider = new StaticTestKeyProvider();
-
     @Override
     public boolean handleMessageImpl(SOAPMessageContext context) {
         Boolean isResponse = (Boolean) context.get(MessageContext.MESSAGE_OUTBOUND_PROPERTY);
@@ -36,8 +38,11 @@ public class SecuritySoapHandlerServer extends AbstractSecuritySoapHandler {
             String messageAsString = soapToString(context.getMessage());
             logger.info("got message as string = " + messageAsString);
 
+            Integer certificateNumber = getCertificateNumber(context.getMessage());
+            logger.info("certificate number = " + certificateNumber);
+
             boolean isValid = signatureService.verifySignatureInXML(
-                    new StringReader(messageAsString), keyProvider.getPublicKey("FIXME-merchantId"));
+                    new StringReader(messageAsString), getPublicKey(certificateNumber));
             if (!isValid) {
                 generateSOAPErrMessage(context.getMessage(), "Not valid sign.");
             } else {
@@ -53,5 +58,19 @@ public class SecuritySoapHandlerServer extends AbstractSecuritySoapHandler {
         }
 
         return true;
+    }
+
+    private Integer getCertificateNumber(SOAPMessage message) throws SOAPException {
+        NodeList elementsByTagNameNS = message.getSOAPHeader().getElementsByTagNameNS(NAMESPACE_URI, CERTIFICATE_TAG);
+        if (elementsByTagNameNS.getLength() != 1 ||
+                elementsByTagNameNS.item(0).getChildNodes().getLength() != 1) {
+            throw new SOAPException("Header " + NAMESPACE_URI + " " + CERTIFICATE_TAG + " not provided");
+        }
+        String nodeValue = elementsByTagNameNS.item(0).getChildNodes().item(0).getNodeValue();
+        return Integer.parseInt(nodeValue);
+    }
+
+    protected PublicKey getPublicKey(Integer message) throws IOException, InvalidKeySpecException {
+        throw new RuntimeException("not yet implemented");
     }
 }

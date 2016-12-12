@@ -1,6 +1,6 @@
 package kz.allpay.soap.demo;
 
-import com.sun.org.apache.xerces.internal.jaxp.datatype.XMLGregorianCalendarImpl;
+import kz.allpay.mfs.signature.keyproviders.StaticTestKeyProvider;
 import kz.allpay.mfs.ws.soap.generated.v1_0.CashOutRequest;
 import kz.allpay.mfs.ws.soap.generated.v1_0.CompleteTransactionResponse;
 import kz.allpay.mfs.ws.soap.generated.v1_0.Language;
@@ -19,6 +19,7 @@ import javax.xml.datatype.DatatypeConfigurationException;
 import javax.xml.datatype.DatatypeFactory;
 import java.io.IOException;
 import java.math.BigDecimal;
+import java.security.spec.InvalidKeySpecException;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -62,9 +63,14 @@ public class CashOutServlet extends HttpServlet {
         logger.info("amount\t"+amount);
 
         // Создаем соап клиента, по ссылке из проперти файлов.
-        TransactionManagementV1_0 srv = TransactionManagementV1_0Client.getService(PropertiesUtil.getApiUrl(),
-                                                                                   Arrays.asList(new SecuritySoapHandlerClient())
-        );
+        final TransactionManagementV1_0 srv;
+        try {
+            srv = TransactionManagementV1_0Client.getService(PropertiesUtil.getApiUrl(),
+                    Arrays.asList(new SecuritySoapHandlerClient(123, new StaticTestKeyProvider().getPrivateKey("stub")))
+            );
+        } catch (InvalidKeySpecException e) {
+            throw new RuntimeException(e);
+        }
 
         // Создаем объект запроса
         // loginName это логин агента, от него идёт запрос в система Allpay

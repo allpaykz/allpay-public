@@ -1,17 +1,18 @@
 package kz.allpay.mfs.ws.soap.handlers;
 
-import kz.allpay.mfs.signature.keyproviders.KeyProvider;
-import kz.allpay.mfs.signature.keyproviders.StaticTestKeyProvider;
 import kz.allpay.mfs.webshop.signature.SignatureService;
 import kz.allpay.mfs.webshop.signature.SignatureServiceSoapImpl;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import javax.xml.namespace.QName;
+import javax.xml.soap.SOAPException;
 import javax.xml.soap.SOAPMessage;
 import javax.xml.ws.handler.MessageContext;
 import javax.xml.ws.handler.soap.SOAPMessageContext;
 import java.io.ByteArrayInputStream;
 import java.nio.charset.StandardCharsets;
+import java.security.PrivateKey;
 
 /**
  * @author magzhan.karasayev
@@ -21,7 +22,13 @@ public class SecuritySoapHandlerClient extends AbstractSecuritySoapHandler {
 
     private static final Log logger = LogFactory.getLog(SecuritySoapHandlerClient.class);
     private static SignatureService signatureService = new SignatureServiceSoapImpl();
-    private static KeyProvider keyProvider = new StaticTestKeyProvider();
+    private Integer certificateNumber;
+    private PrivateKey privateKey;
+
+    public SecuritySoapHandlerClient(Integer certificateNumber, PrivateKey privateKey) {
+        this.certificateNumber = certificateNumber;
+        this.privateKey = privateKey; // new StaticTestKeyProvider().getPrivateKey("FIXME");
+    }
 
     @Override
     public boolean handleMessageImpl(SOAPMessageContext context) {
@@ -34,9 +41,12 @@ public class SecuritySoapHandlerClient extends AbstractSecuritySoapHandler {
             if (context.getMessage().getSOAPHeader() == null) {
                 context.getMessage().getSOAPPart().getEnvelope().addHeader();
             }
+
+            addCertificateNumber(context);
+
             String messageAsString = HandlerUtils.soapToString(context.getMessage());
             ByteArrayInputStream is = new ByteArrayInputStream(messageAsString.getBytes(StandardCharsets.UTF_8));
-            String signed = signatureService.signXML(keyProvider.getPrivateKey("FIXME"), is);
+            String signed = signatureService.signXML(privateKey, is);
             SOAPMessage signedMessage = HandlerUtils.createSoapMessageFromString(postProcessMessage(signed));
             if (logger.isDebugEnabled()) {
                 logger.debug("signedMessage = " + HandlerUtils.soapToString(signedMessage));
@@ -47,6 +57,11 @@ public class SecuritySoapHandlerClient extends AbstractSecuritySoapHandler {
             logger.error("could not sign soap message", e);
             return false;
         }
+    }
+
+    private void addCertificateNumber(SOAPMessageContext context) throws SOAPException {
+        QName qNamePassword = new QName(NAMESPACE_URI, CERTIFICATE_TAG);
+        context.getMessage().getSOAPHeader().addChildElement(qNamePassword).addTextNode(certificateNumber.toString());
     }
 
     protected String postProcessMessage(String signed) {

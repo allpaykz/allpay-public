@@ -2,7 +2,7 @@ package kz.allpay.soap.demo;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.sun.org.apache.xerces.internal.jaxp.datatype.XMLGregorianCalendarImpl;
+import kz.allpay.mfs.signature.keyproviders.StaticTestKeyProvider;
 import kz.allpay.mfs.ws.soap.generated.v1_0.*;
 import kz.allpay.mfs.ws.soap.handlers.SecuritySoapHandlerClient;
 import kz.allpay.mfs.ws.soap.v1_0.TransactionManagementV1_0;
@@ -13,14 +13,16 @@ import org.apache.commons.logging.LogFactory;
 import javax.ejb.Stateless;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.ws.rs.*;
+import javax.ws.rs.GET;
+import javax.ws.rs.POST;
+import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.xml.datatype.DatatypeConfigurationException;
 import javax.xml.datatype.DatatypeFactory;
 import java.io.IOException;
-import java.math.BigDecimal;
-import java.net.MalformedURLException;
+import java.security.spec.InvalidKeySpecException;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -45,7 +47,7 @@ public class TransactionManagment {
 
     @POST
     @Path("completeTransaction")
-    public void completeTransaction(@Context HttpServletRequest req, @Context HttpServletResponse resp) throws IOException {
+    public void completeTransaction(@Context HttpServletRequest req, @Context HttpServletResponse resp) throws IOException, InvalidKeySpecException {
 
         // Parsing login name of user
         // We will authorize request from this user
@@ -63,7 +65,7 @@ public class TransactionManagment {
 
         // Создаем соап клиента, по ссылке из проперти файлов.
         TransactionManagementV1_0 srv = TransactionManagementV1_0Client.getService(PropertiesUtil.getApiUrl(),
-                                                                                   Arrays.asList(new SecuritySoapHandlerClient())
+                                                                                   Arrays.asList(new SecuritySoapHandlerClient(123, new StaticTestKeyProvider().getPrivateKey("stub")))
         );
 
         // Вытаскиваем транзакцию из вашей локальной БД
@@ -129,7 +131,7 @@ public class TransactionManagment {
 
     @POST
     @Path("declineTransaction")
-    public void declineTransaction(@Context HttpServletRequest req, @Context HttpServletResponse resp) throws IOException {
+    public void declineTransaction(@Context HttpServletRequest req, @Context HttpServletResponse resp) throws IOException, InvalidKeySpecException {
         // Parsing login name of user
         // We will authorize request from this user
         final String dirtyLoginName = req.getParameter("loginName");
@@ -146,7 +148,7 @@ public class TransactionManagment {
 
         // Создаем соап клиента, по ссылке из проперти файлов.
         TransactionManagementV1_0 srv = TransactionManagementV1_0Client.getService(PropertiesUtil.getApiUrl(),
-                                                                                   Arrays.asList(new SecuritySoapHandlerClient())
+                                                                                   Arrays.asList(new SecuritySoapHandlerClient(123, new StaticTestKeyProvider().getPrivateKey("stub")))
         );
 
         // Вытаскиваем транзакцию из вашей локальной БД
@@ -214,7 +216,7 @@ public class TransactionManagment {
     @GET
     @Path("checkUser")
     @Produces(MediaType.APPLICATION_JSON)
-    public String checkUser(@Context HttpServletRequest req, @Context HttpServletResponse resp) throws IOException {
+    public String checkUser(@Context HttpServletRequest req, @Context HttpServletResponse resp) throws IOException, InvalidKeySpecException {
 
         // Parsing login name of an agent
         // We will transfer money from agent to user
@@ -232,7 +234,7 @@ public class TransactionManagment {
 
         // Создаем соап клиента, по ссылке из проперти файлов.
         TransactionManagementV1_0 srv = TransactionManagementV1_0Client.getService(PropertiesUtil.getApiUrl(),
-                                                                                   Arrays.asList(new SecuritySoapHandlerClient())
+                                                                                   Arrays.asList(new SecuritySoapHandlerClient(123, new StaticTestKeyProvider().getPrivateKey("stub")))
         );
 
         // ----
