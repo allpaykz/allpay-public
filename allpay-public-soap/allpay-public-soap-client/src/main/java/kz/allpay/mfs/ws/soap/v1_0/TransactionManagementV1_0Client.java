@@ -26,7 +26,7 @@ public class TransactionManagementV1_0Client {
     }
 
     public static TransactionManagementV1_0 getService(String serviceUrl) throws IOException, InvalidKeySpecException {
-        Handler securitySoapHandlerClient = new SecuritySoapHandlerClient(123, new StaticTestKeyProvider().getPrivateKey("FIXME"));
+        Handler securitySoapHandlerClient = new SecuritySoapHandlerClient(123, new StaticTestKeyProvider().getPrivateKey(0/*"FIXME"*/));
         List<Handler> handlers = Arrays.asList(securitySoapHandlerClient);
         return getService(serviceUrl, handlers);
     }

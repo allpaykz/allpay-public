@@ -10,6 +10,6 @@ import java.security.spec.InvalidKeySpecException;
  * @since 5/19/16 12:42 AM
  */
 public interface KeyProvider {
-    public PublicKey getPublicKey(String merchantId) throws IOException, InvalidKeySpecException;
-    public PrivateKey getPrivateKey(String merchantId_ignored) throws IOException, InvalidKeySpecException;
+    public PublicKey getPublicKey(Integer certificateNumber) throws IOException, InvalidKeySpecException;
+    public PrivateKey getPrivateKey(Integer certificateNumber) throws IOException, InvalidKeySpecException;
 }

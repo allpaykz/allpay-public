@@ -34,6 +34,23 @@
                                id="loginInput" name="loginName" placeholder="Логин агента">
                     </div>
 
+                    <div class="form-group">
+                        <label class="pemInput">Подпись</label>
+                        <div class="inputGroupContainer">
+                            <div class="input-group"> <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
+                                <textarea class="form-control" name="pemInput" placeholder="Подпись"></textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="certificateIdInput" class="control-label">Номер сертификата</label>
+                        <input type="text" class="form-control"
+                               spellcheck="false"
+                               value='' required="true"
+                               id="certificateIdInput" name="certificateIdInput" placeholder="Номер сертификата">
+                    </div>
+
                         <%--FROM USER--%>
                     <div class="form-group">
                         <label for="fromUser" class="control-label">Логин клиента</label>

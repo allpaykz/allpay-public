@@ -1,6 +1,6 @@
 package kz.allpay.soap.demo;
 
-import kz.allpay.mfs.signature.keyproviders.StaticTestKeyProvider;
+import kz.allpay.mfs.webshop.keys.PrivateKeyReader;
 import kz.allpay.mfs.ws.soap.generated.v1_0.CashInRequest;
 import kz.allpay.mfs.ws.soap.generated.v1_0.CompleteTransactionResponse;
 import kz.allpay.mfs.ws.soap.generated.v1_0.Language;
@@ -17,6 +17,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.xml.datatype.DatatypeConfigurationException;
 import javax.xml.datatype.DatatypeFactory;
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.security.spec.InvalidKeySpecException;
@@ -34,6 +35,16 @@ public class CashInServlet extends HttpServlet{
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse response) throws ServletException, IOException {
+
+        // Pem input
+        final String pem = req.getParameter("pemInput");
+        logger.info("pem\t"+pem);
+
+        // certificateIdInput
+        final String certificateIdInputAsString = req.getParameter("certificateIdInput");
+        Integer certificateIdInput = Integer.parseInt(certificateIdInputAsString);
+        logger.info("certificateIdInput\t"+certificateIdInput);
+
 
         // Parsing login name of an agent
         // We will transfer money from agent to user
@@ -59,7 +70,9 @@ public class CashInServlet extends HttpServlet{
         final TransactionManagementV1_0 srv;
         try {
             srv = TransactionManagementV1_0Client.getService(PropertiesUtil.getApiUrl(),
-                    Arrays.asList(new SecuritySoapHandlerClient(123, new StaticTestKeyProvider().getPrivateKey("stub")))
+                    Arrays.asList(new SecuritySoapHandlerClient(certificateIdInput,
+                            PrivateKeyReader.loadPrivateKeyFromFile(new ByteArrayInputStream(pem.getBytes("UTF-8")))
+                    ))
             );
         } catch (InvalidKeySpecException e) {
             throw new RuntimeException(e);
