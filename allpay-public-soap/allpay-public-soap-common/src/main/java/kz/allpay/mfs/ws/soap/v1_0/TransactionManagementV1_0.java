@@ -22,21 +22,21 @@ public interface TransactionManagementV1_0 {
      * @param echo
      * @return
      */
-    @WebMethod
+    @WebMethod(action = "echo")
     public String echo(@WebParam(name = "Echo") String echo);
 
-    @WebMethod
+    @WebMethod(action = "createCashInTransaction")
     public CompleteTransactionResponse createCashInTransaction(@WebParam(name = "CashInRequest") CashInRequest request);
 
-    @WebMethod
+    @WebMethod(action = "createCashOutTransaction")
     public CompleteTransactionResponse createCashOutTransaction(@WebParam(name = "CashOutRequest") CashOutRequest request);
 
-    @WebMethod
+    @WebMethod(action = "completeTransaction")
     public CompleteTransactionResponse completeTransaction(@WebParam(name = "CompleteTransactionRequest") CompleteTransactionRequest request);
 
-    @WebMethod
+    @WebMethod(action = "declineTransaction")
     public CompleteTransactionResponse declineTransaction(@WebParam(name = "DeclineTransactionRequest") DeclineTransactionRequest request);
 
-    @WebMethod
+    @WebMethod(action = "checkUser")
     public CheckUserResponse checkUser(@WebParam(name = "CheckUserRequest") CheckUserRequest request);
 }
