@@ -19,10 +19,17 @@
 
         var loginName = $('#requesterInput').val();
         var userLoginName = $('#userLoginName').val();
+        var userLoginName = $('#userLoginName').val();
+        var certificateIdInput = $('#certificateIdInput').val();
+        var pemInput = $('#pemInput').val();
+
+
 
         $.ajax({
-            type: "GET",
-            url: "${pageContext.request.contextPath}/rest/api/checkUser?loginName=" + loginName + "&userLoginName=" + userLoginName
+            type: "POST",
+            url: "${pageContext.request.contextPath}/rest/api/checkUser",
+            data: "loginName=" + loginName + "&userLoginName=" + userLoginName
+                    + "&certificateIdInput=" + certificateIdInput + "&pemInput=" + encodeURIComponent(pemInput)
 
         }).done(function (data) {
             console.log(data);
@@ -52,13 +59,32 @@
                 <h3 class="panel-title text-center">Информация</h3>
             </div>
             <div class="panel-body">
-                <form class="form-horizontal" accept-charset="UTF-8" id="usercheck">
+                <form class="form-horizontal" accept-charset="UTF-8" id="usercheck"
+                      method="post"
+                      action="${pageContext.request.contextPath}/rest/api/checkUser">
                     <div class="form-group">
                         <label for="requesterInput" class="control-label">Логин агента</label>
                         <input type="text" class="form-control"
                                spellcheck="false"
                                value='' required="true"
                                id="requesterInput" name="loginName" placeholder="Логин агента">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="pemInput">Подпись</label>
+                        <div class="inputGroupContainer">
+                            <div class="input-group"> <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
+                                <textarea class="form-control" id="pemInput" name="pemInput" placeholder="Подпись"></textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="certificateIdInput" class="control-label">Номер сертификата</label>
+                        <input type="text" class="form-control"
+                               spellcheck="false"
+                               value='' required="true"
+                               id="certificateIdInput" name="certificateIdInput" placeholder="Номер сертификата">
                     </div>
 
                     <div class="form-group">

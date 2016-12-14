@@ -20,6 +20,9 @@ public abstract class AbstractSecuritySoapHandler implements SOAPHandler<SOAPMes
     private static final QName QNAME_WSSE_USERNAME = new QName(WSSE_NS_URI, "Username");
     private static final QName QNAME_WSSE_PASSWORD = new QName(WSSE_NS_URI, "Password");
 
+    protected final String NAMESPACE_URI = "https://allpay.kz";
+    protected final String CERTIFICATE_TAG = "certificateNumber";
+
     private static final Log logger = LogFactory.getLog(AbstractSecuritySoapHandler.class.getName());
 
     private SignatureService signatureService = new SignatureServiceSoapImpl();
