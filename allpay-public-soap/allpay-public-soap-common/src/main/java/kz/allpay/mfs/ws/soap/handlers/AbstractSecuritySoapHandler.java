@@ -22,6 +22,7 @@ public abstract class AbstractSecuritySoapHandler implements SOAPHandler<SOAPMes
 
     protected final String NAMESPACE_URI = "https://allpay.kz";
     protected final String CERTIFICATE_TAG = "certificateNumber";
+    protected final String REQUEST_DSIG_TAG = "requestDsig";
 
     private static final Log logger = LogFactory.getLog(AbstractSecuritySoapHandler.class.getName());
 
