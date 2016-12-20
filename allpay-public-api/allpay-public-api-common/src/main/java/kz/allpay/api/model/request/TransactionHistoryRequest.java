@@ -1,15 +1,13 @@
 package kz.allpay.api.model.request;
 
-import java.util.Date;
-
 /**
  * @author magzhan.karasayev
  * @since 11/16/16 7:13 PM
  */
 public class TransactionHistoryRequest extends AbstractRequest {
     private String loginName;
-    private Date fromDate;
-    private Date toDate;
+    private Long dateFrom;
+    private Long dateTo;
 
     public String getLoginName() {
         return loginName;
@@ -19,19 +17,19 @@ public class TransactionHistoryRequest extends AbstractRequest {
         this.loginName = loginName;
     }
 
-    public Date getFromDate() {
-        return fromDate;
+    public Long getDateFrom() {
+        return dateFrom;
     }
 
-    public void setFromDate(Date fromDate) {
-        this.fromDate = fromDate;
+    public void setDateFrom(Long dateFrom) {
+        this.dateFrom = dateFrom;
     }
 
-    public Date getToDate() {
-        return toDate;
+    public Long getDateTo() {
+        return dateTo;
     }
 
-    public void setToDate(Date toDate) {
-        this.toDate = toDate;
+    public void setDateTo(Long dateTo) {
+        this.dateTo = dateTo;
     }
 }
