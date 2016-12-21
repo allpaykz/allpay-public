@@ -33,10 +33,14 @@ public class SecuritySoapHandlerClient extends AbstractSecuritySoapHandler {
     @Override
     public boolean handleMessageImpl(SOAPMessageContext context) {
         Boolean isResponse = !((Boolean) context.get(MessageContext.MESSAGE_OUTBOUND_PROPERTY));
-        if (isResponse) {
-            return true;
-        }
+        return isResponse ? validateResponse(context) : signRequest(context);
+    }
 
+    private boolean validateResponse(SOAPMessageContext context) {
+        return true;
+    }
+
+    private boolean signRequest(SOAPMessageContext context) {
         try {
             if (context.getMessage().getSOAPHeader() == null) {
                 context.getMessage().getSOAPPart().getEnvelope().addHeader();
