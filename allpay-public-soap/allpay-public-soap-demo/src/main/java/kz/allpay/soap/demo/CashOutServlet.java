@@ -1,6 +1,7 @@
 package kz.allpay.soap.demo;
 
 import kz.allpay.mfs.webshop.keys.PrivateKeyReader;
+import kz.allpay.mfs.webshop.keys.PublicKeyReader;
 import kz.allpay.mfs.ws.soap.generated.v1_0.CashOutRequest;
 import kz.allpay.mfs.ws.soap.generated.v1_0.CompleteTransactionResponse;
 import kz.allpay.mfs.ws.soap.generated.v1_0.Language;
@@ -40,6 +41,10 @@ public class CashOutServlet extends HttpServlet {
         final String pem = req.getParameter("pemInput");
         logger.info("pem\t"+pem);
 
+        // Pem input response
+        final String pemInputResponse = req.getParameter("pemInputResponse");
+        logger.info("pemInputResponse\t"+pem);
+
         // certificateIdInput
         final String certificateIdInputAsString = req.getParameter("certificateIdInput");
         Integer certificateIdInput = Integer.parseInt(certificateIdInputAsString);
@@ -78,7 +83,8 @@ public class CashOutServlet extends HttpServlet {
         try {
             srv = TransactionManagementV1_0Client.getService(PropertiesUtil.getApiUrl(),
                     Arrays.asList(new SecuritySoapHandlerClient(certificateIdInput,
-                            PrivateKeyReader.loadPrivateKeyFromFile(new ByteArrayInputStream(pem.getBytes("UTF-8")))
+                            PrivateKeyReader.loadPrivateKeyFromFile(new ByteArrayInputStream(pem.getBytes("UTF-8"))),
+                            PublicKeyReader.loadPublicKeyFromFile(new ByteArrayInputStream(pemInputResponse.getBytes("UTF-8")))
                     ))
             );
         } catch (InvalidKeySpecException e) {

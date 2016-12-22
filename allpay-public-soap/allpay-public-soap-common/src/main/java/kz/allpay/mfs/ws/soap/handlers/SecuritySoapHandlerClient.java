@@ -11,8 +11,13 @@ import javax.xml.soap.SOAPMessage;
 import javax.xml.ws.handler.MessageContext;
 import javax.xml.ws.handler.soap.SOAPMessageContext;
 import java.io.ByteArrayInputStream;
+import java.io.StringReader;
 import java.nio.charset.StandardCharsets;
 import java.security.PrivateKey;
+import java.security.PublicKey;
+
+import static kz.allpay.mfs.ws.soap.handlers.HandlerUtils.generateSOAPErrMessage;
+import static kz.allpay.mfs.ws.soap.handlers.HandlerUtils.soapToString;
 
 /**
  * @author magzhan.karasayev
@@ -24,10 +29,12 @@ public class SecuritySoapHandlerClient extends AbstractSecuritySoapHandler {
     private static SignatureService signatureService = new SignatureServiceSoapImpl();
     private Integer certificateNumber;
     private PrivateKey privateKey;
+    private PublicKey publicKey;
 
-    public SecuritySoapHandlerClient(Integer certificateNumber, PrivateKey privateKey) {
+    public SecuritySoapHandlerClient(Integer certificateNumber, PrivateKey privateKey, PublicKey publicKey) {
         this.certificateNumber = certificateNumber;
         this.privateKey = privateKey; // new StaticTestKeyProvider().getPrivateKey("FIXME");
+        this.publicKey = publicKey; // new StaticTestKeyProvider().getPrivateKey("FIXME");
     }
 
     @Override
@@ -37,7 +44,21 @@ public class SecuritySoapHandlerClient extends AbstractSecuritySoapHandler {
     }
 
     private boolean validateResponse(SOAPMessageContext context) {
-        return true;
+        try {
+            String messageAsString = soapToString(context.getMessage());
+            logger.info("got message as string = " + messageAsString);
+
+            boolean isValid = signatureService.verifySignatureInXML(new StringReader(messageAsString), publicKey);
+            if (!isValid) {
+                generateSOAPErrMessage(context.getMessage(), "Not valid sign.");
+            } else {
+                logger.info("securitySoapHandler: sign validated");
+            }
+            return isValid;
+        } catch (Exception e) {
+            logger.warn("response was not validated", e);
+            return false;
+        }
     }
 
     private boolean signRequest(SOAPMessageContext context) {
