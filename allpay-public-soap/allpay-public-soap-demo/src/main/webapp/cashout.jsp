@@ -44,6 +44,15 @@
                     </div>
 
                     <div class="form-group">
+                        <label class="pemInputResponse">Подпись(ответ)</label>
+                        <div class="inputGroupContainer">
+                            <div class="input-group"> <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
+                                <textarea class="form-control" name="pemInputResponse" placeholder="Подпись(ответ)"></textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
                         <label for="certificateIdInput" class="control-label">Номер сертификата</label>
                         <input type="text" class="form-control"
                                spellcheck="false"
