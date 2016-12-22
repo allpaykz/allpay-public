@@ -2,6 +2,8 @@ package kz.allpay.mfs.ws.soap.handlers;
 
 import kz.allpay.mfs.webshop.signature.SignatureService;
 import kz.allpay.mfs.webshop.signature.SignatureServiceSoapImpl;
+import kz.allpay.mfs.ws.soap.util.SoapUtils;
+import kz.allpay.mfs.ws.soap.v1_0.TransactionManagementV1_0;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -56,8 +58,8 @@ public class SecuritySoapHandlerClient extends AbstractSecuritySoapHandler {
             }
             return isValid;
         } catch (Exception e) {
-            logger.warn("response was not validated", e);
-            return false;
+            logger.info(e);
+            throw SoapUtils.createSoapFaultException(TransactionManagementV1_0.TARGET_NAMESPACE, e);
         }
     }
 
