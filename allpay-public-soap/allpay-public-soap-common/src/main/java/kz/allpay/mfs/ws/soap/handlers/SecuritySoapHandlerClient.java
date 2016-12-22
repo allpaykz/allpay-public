@@ -33,6 +33,27 @@ public class SecuritySoapHandlerClient extends AbstractSecuritySoapHandler {
     private PrivateKey privateKey;
     private PublicKey publicKey;
 
+    private static final ThreadLocal<RequestModel> requestModel = new ThreadLocal<>();
+
+    protected static class RequestModel {
+        private final String requestDsig;
+
+        public RequestModel(String requestDsig) {
+            this.requestDsig = requestDsig;
+        }
+    }
+
+    protected RequestModel popRequestModel() {
+        RequestModel requestModel = this.requestModel.get();
+        this.requestModel.set(null);
+        return requestModel;
+    }
+
+    private void setRequestModel(RequestModel value) {
+        requestModel.set(value);
+    }
+
+
     public SecuritySoapHandlerClient(Integer certificateNumber, PrivateKey privateKey, PublicKey publicKey) {
         this.certificateNumber = certificateNumber;
         this.privateKey = privateKey; // new StaticTestKeyProvider().getPrivateKey("FIXME");
@@ -49,6 +70,11 @@ public class SecuritySoapHandlerClient extends AbstractSecuritySoapHandler {
         try {
             String messageAsString = soapToString(context.getMessage());
             logger.info("got message as string = " + messageAsString);
+
+            String actualRequestDsig = getByXPath(messageAsString, "//soap:Header/AP:requestDsig");
+            if (actualRequestDsig == null || !actualRequestDsig.equals(popRequestModel().requestDsig)) {
+                generateSOAPErrMessage(context.getMessage(), "Not valid sign. - requester dsig");
+            }
 
             boolean isValid = signatureService.verifySignatureInXML(new StringReader(messageAsString), publicKey);
             if (!isValid) {
@@ -74,6 +100,7 @@ public class SecuritySoapHandlerClient extends AbstractSecuritySoapHandler {
             String messageAsString = HandlerUtils.soapToString(context.getMessage());
             ByteArrayInputStream is = new ByteArrayInputStream(messageAsString.getBytes(StandardCharsets.UTF_8));
             String signed = signatureService.signXML(privateKey, is);
+            setRequestModel(new RequestModel(getDsig(signed)));
             SOAPMessage signedMessage = HandlerUtils.createSoapMessageFromString(postProcessMessage(signed));
             if (logger.isDebugEnabled()) {
                 logger.debug("signedMessage = " + HandlerUtils.soapToString(signedMessage));
