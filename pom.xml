@@ -26,8 +26,24 @@
     </licenses>
 
     <scm>
+        <url>https://github.com/allpaykz/allpay-public</url>
         <connection>scm:git:git@github.com:allpaykz/allpay-public.git</connection>
     </scm>
+
+    <developers>
+        <developer>
+            <id>markjay</id>
+            <name>Magzhan Karassayev</name>
+            <email>magzhan.karasayev@allpay.kz</email>
+            <organization>allpay.kz</organization>
+            <organizationUrl>http://www.allpay.kz</organizationUrl>
+            <roles>
+                <role>Project-Administrator</role>
+                <role>Developer</role>
+            </roles>
+            <timezone>+6</timezone>
+        </developer>
+    </developers>
 
     <modules>
         <module>webshop-integration</module>
