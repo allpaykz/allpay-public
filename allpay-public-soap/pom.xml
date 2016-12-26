@@ -19,31 +19,6 @@
         <module>allpay-public-soap-demo</module>
     </modules>
 
-    <profiles>
-        <!-- environment group -->
-        <profile>
-            <id>local</id>
-            <activation>
-                <activeByDefault>true</activeByDefault>
-            </activation>
-            <properties>
-                <allpay.api.url>http://localhost:8080/allpay-public-soap/transaction-management/v1.0?wsdl</allpay.api.url>
-            </properties>
-        </profile>
-        <profile>
-            <id>alpha</id>
-            <properties>
-                <allpay.api.url>http://alpha.allpay.kz/allpay-public-soap/transaction-management/v1.0?wsdl</allpay.api.url>
-            </properties>
-        </profile>
-        <profile>
-            <id>beta</id>
-            <properties>
-                <allpay.api.url>http://beta.allpay.kz/allpay-public-soap/transaction-management/v1.0?wsdl</allpay.api.url>
-            </properties>
-        </profile>
-    </profiles>
-
     <dependencies>
 
     </dependencies>

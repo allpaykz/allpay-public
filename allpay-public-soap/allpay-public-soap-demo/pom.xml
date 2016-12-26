@@ -12,6 +12,7 @@
 
     <properties>
         <reasteasy.scope>provided</reasteasy.scope>
+        <maven.deploy.skip>true</maven.deploy.skip>
     </properties>
 
     <profiles>
@@ -19,6 +20,29 @@
             <id>tomcat</id>
             <properties>
                 <reasteasy.scope>compile</reasteasy.scope>
+            </properties>
+        </profile>
+
+        <!-- environment group -->
+        <profile>
+            <id>local</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <allpay.api.url>http://localhost:8080/allpay-public-soap/transaction-management/v1.0?wsdl</allpay.api.url>
+            </properties>
+        </profile>
+        <profile>
+            <id>alpha</id>
+            <properties>
+                <allpay.api.url>http://alpha.allpay.kz/allpay-public-soap/transaction-management/v1.0?wsdl</allpay.api.url>
+            </properties>
+        </profile>
+        <profile>
+            <id>beta</id>
+            <properties>
+                <allpay.api.url>http://beta.allpay.kz/allpay-public-soap/transaction-management/v1.0?wsdl</allpay.api.url>
             </properties>
         </profile>
     </profiles>
@@ -82,6 +106,7 @@
             </resource>
         </resources>
         <plugins>
+
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -91,6 +116,7 @@
                     <target>1.8</target>
                 </configuration>
             </plugin>
+
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-war-plugin</artifactId>
@@ -108,6 +134,7 @@
                     </webResources>
                 </configuration>
             </plugin>
+
         </plugins>
     </build>
 
