@@ -14,7 +14,7 @@ $(document).ready(function() {
             pemInput: {
                 validators: {
                     notEmpty: {
-                        message: 'Пожалуйста, введите подпись'
+                        message: 'Пожалуйста, введите Приватный ключ(для подписи запроса)'
                     }
                 }
             },

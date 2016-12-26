@@ -3,6 +3,7 @@ package kz.allpay.soap.demo;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import kz.allpay.mfs.webshop.keys.PrivateKeyReader;
+import kz.allpay.mfs.webshop.keys.PublicKeyReader;
 import kz.allpay.mfs.ws.soap.generated.v1_0.*;
 import kz.allpay.mfs.ws.soap.handlers.SecuritySoapHandlerClient;
 import kz.allpay.mfs.ws.soap.v1_0.TransactionManagementV1_0;
@@ -54,6 +55,10 @@ public class TransactionManagment {
         final String pem = req.getParameter("pemInput");
         logger.info("pem\t"+pem);
 
+        // Pem input response
+        final String pemInputResponse = req.getParameter("pemInputResponse");
+        logger.info("pemInputResponse\t"+pem);
+
         // certificateIdInput
         final String certificateIdInputAsString = req.getParameter("certificateIdInput");
         Integer certificateIdInput = Integer.parseInt(certificateIdInputAsString);
@@ -78,7 +83,8 @@ public class TransactionManagment {
         TransactionManagementV1_0 srv = TransactionManagementV1_0Client.getService(
                 PropertiesUtil.getApiUrl(),
                 Arrays.asList(new SecuritySoapHandlerClient(certificateIdInput,
-                        PrivateKeyReader.loadPrivateKeyFromFile(new ByteArrayInputStream(pem.getBytes("UTF-8")))
+                        PrivateKeyReader.loadPrivateKeyFromFile(new ByteArrayInputStream(pem.getBytes("UTF-8"))),
+                        PublicKeyReader.loadPublicKeyFromFile(new ByteArrayInputStream(pemInputResponse.getBytes("UTF-8")))
                 ))
         );
 
@@ -150,6 +156,10 @@ public class TransactionManagment {
         final String pem = req.getParameter("pemInput");
         logger.info("pem\t"+pem);
 
+        // Pem input response
+        final String pemInputResponse = req.getParameter("pemInputResponse");
+        logger.info("pemInputResponse\t"+pem);
+
         // certificateIdInput
         final String certificateIdInputAsString = req.getParameter("certificateIdInput");
         Integer certificateIdInput = Integer.parseInt(certificateIdInputAsString);
@@ -174,7 +184,8 @@ public class TransactionManagment {
         TransactionManagementV1_0 srv = TransactionManagementV1_0Client.getService(
                 PropertiesUtil.getApiUrl(),
                 Arrays.asList(new SecuritySoapHandlerClient(certificateIdInput,
-                        PrivateKeyReader.loadPrivateKeyFromFile(new ByteArrayInputStream(pem.getBytes("UTF-8")))
+                        PrivateKeyReader.loadPrivateKeyFromFile(new ByteArrayInputStream(pem.getBytes("UTF-8"))),
+                        PublicKeyReader.loadPublicKeyFromFile(new ByteArrayInputStream(pemInputResponse.getBytes("UTF-8")))
                 ))
         );
 
@@ -248,6 +259,10 @@ public class TransactionManagment {
         final String pem = req.getParameter("pemInput");
         logger.info("pem\t"+pem);
 
+        // Pem input response
+        final String pemInputResponse = req.getParameter("pemInputResponse");
+        logger.info("pemInputResponse\t"+pem);
+
         // certificateIdInput
         final String certificateIdInputAsString = req.getParameter("certificateIdInput");
         Integer certificateIdInput = Integer.parseInt(certificateIdInputAsString);
@@ -272,7 +287,8 @@ public class TransactionManagment {
         TransactionManagementV1_0 srv = TransactionManagementV1_0Client.getService(
                 PropertiesUtil.getApiUrl(),
                 Arrays.asList(new SecuritySoapHandlerClient(certificateIdInput,
-                        PrivateKeyReader.loadPrivateKeyFromFile(new ByteArrayInputStream(pem.getBytes("UTF-8")))
+                        PrivateKeyReader.loadPrivateKeyFromFile(new ByteArrayInputStream(pem.getBytes("UTF-8"))),
+                        PublicKeyReader.loadPublicKeyFromFile(new ByteArrayInputStream(pemInputResponse.getBytes("UTF-8")))
                 ))
         );
 

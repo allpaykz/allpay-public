@@ -22,6 +22,7 @@
         var userLoginName = $('#userLoginName').val();
         var certificateIdInput = $('#certificateIdInput').val();
         var pemInput = $('#pemInput').val();
+        var pemInputResponse = $('#pemInputResponse').val();
 
 
 
@@ -29,7 +30,7 @@
             type: "POST",
             url: "${pageContext.request.contextPath}/rest/api/checkUser",
             data: "loginName=" + loginName + "&userLoginName=" + userLoginName
-                    + "&certificateIdInput=" + certificateIdInput + "&pemInput=" + encodeURIComponent(pemInput)
+                    + "&certificateIdInput=" + certificateIdInput + "&pemInput=" + encodeURIComponent(pemInput) + "&pemInputResponse=" + encodeURIComponent(pemInputResponse)
 
         }).done(function (data) {
             console.log(data);
@@ -71,10 +72,19 @@
                     </div>
 
                     <div class="form-group">
-                        <label class="pemInput">Подпись</label>
+                        <label class="pemInput">Приватный ключ(для подписи запроса)</label>
                         <div class="inputGroupContainer">
                             <div class="input-group"> <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
-                                <textarea class="form-control" id="pemInput" name="pemInput" placeholder="Подпись"></textarea>
+                                <textarea class="form-control" id="pemInput" name="pemInput" placeholder="Приватный ключ(для подписи запроса)"></textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="pemInputResponse">Публичный ключ(для проверки подписи ответа)</label>
+                        <div class="inputGroupContainer">
+                            <div class="input-group"> <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
+                                <textarea class="form-control" id="pemInputResponse" name="pemInputResponse" placeholder="Публичный ключ(для проверки подписи ответа)"></textarea>
                             </div>
                         </div>
                     </div>

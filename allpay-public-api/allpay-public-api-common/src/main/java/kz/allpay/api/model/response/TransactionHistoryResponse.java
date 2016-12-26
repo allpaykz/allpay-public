@@ -9,6 +9,13 @@ import java.util.List;
  * @since 11/16/16 7:13 PM
  */
 public class TransactionHistoryResponse extends AbstractResponse {
+
+    public TransactionHistoryResponse(List<TransactionInfo> transactionInfos) {
+        this.transactionInfos = transactionInfos;
+        setUserMessage("");
+        setDeveloperMessage("");
+    }
+
     private List<TransactionInfo> transactionInfos;
 
     public List<TransactionInfo> getTransactionInfos() {
