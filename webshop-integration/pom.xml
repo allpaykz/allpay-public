@@ -12,32 +12,10 @@
         <artifactId>allpay-public</artifactId>
     </parent>
 
-    <url>http://allpay.kz</url>
-    <licenses>
-        <license>
-            <name>Apache License, Version 2.0</name>
-            <distribution>repo</distribution>
-            <url>http://www.apache.org/licenses/LICENSE-2.0.html</url>
-        </license>
-    </licenses>
-
-    <scm>
-        <!-- for buildNumber property in netteller-administration.war -->
-        <connection>scm:git:git@github.com:allpaykz/webshop-service-examples.git</connection>
-    </scm>
-
     <properties>
         <jersey-version>1.19.1</jersey-version>
         <maven.deploy.skip>true</maven.deploy.skip>
     </properties>
-
-    <distributionManagement>
-        <repository>
-            <id>erp-central</id>
-            <!--<url>http://jira.innoforce.kz:8081/artifactory/simple/libs-release-local</url>-->
-            <url>http://jira.innoforce.kz:8081/artifactory/repo</url>
-        </repository>
-    </distributionManagement>
 
     <modules>
         <module>webshop-integration-keypair</module>
