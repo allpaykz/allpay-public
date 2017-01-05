@@ -6,6 +6,7 @@ import kz.allpay.mfs.ws.soap.util.SoapUtils;
 import kz.allpay.mfs.ws.soap.v1_0.TransactionManagementV1_0;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.apache.xml.security.c14n.Canonicalizer;
 
 import javax.xml.namespace.QName;
 import javax.xml.soap.SOAPException;
@@ -32,6 +33,10 @@ public class SecuritySoapHandlerClient extends AbstractSecuritySoapHandler {
     private Integer certificateNumber;
     private PrivateKey privateKey;
     private PublicKey publicKey;
+
+    static {
+        org.apache.xml.security.Init.init();
+    }
 
     private static final ThreadLocal<RequestModel> requestModel = new ThreadLocal<>();
 
@@ -75,8 +80,10 @@ public class SecuritySoapHandlerClient extends AbstractSecuritySoapHandler {
             if (actualRequestDsig == null || !actualRequestDsig.equals(popRequestModel().requestDsig)) {
                 generateSOAPErrMessage(context.getMessage(), "Not valid sign. - requester dsig");
             }
+            final Canonicalizer canon = Canonicalizer.getInstance(Canonicalizer.ALGO_ID_C14N_EXCL_WITH_COMMENTS);
+            final byte canonXmlBytes[] = canon.canonicalize(messageAsString.getBytes());
 
-            boolean isValid = signatureService.verifySignatureInXML(new StringReader(messageAsString), publicKey);
+            boolean isValid = signatureService.verifySignatureInXML(new StringReader( new String(canonXmlBytes)), publicKey);
             if (!isValid) {
                 generateSOAPErrMessage(context.getMessage(), "Not valid sign.");
             } else {
