@@ -2,6 +2,7 @@ package kz.allpay.mfs.ws.soap.handlers;
 
 import kz.allpay.mfs.webshop.signature.SignatureService;
 import kz.allpay.mfs.webshop.signature.SignatureServiceSoapImpl;
+import kz.allpay.mfs.webshop.signature.SignatureUtils;
 import kz.allpay.mfs.ws.soap.util.SoapUtils;
 import kz.allpay.mfs.ws.soap.v1_0.TransactionManagementV1_0;
 import org.apache.commons.logging.Log;
@@ -73,17 +74,15 @@ public class SecuritySoapHandlerClient extends AbstractSecuritySoapHandler {
 
     private boolean validateResponse(SOAPMessageContext context) {
         try {
-            String messageAsString = soapToString(context.getMessage());
+            final String messageAsString = SignatureUtils.canonicalizedString(soapToString(context.getMessage()));
             logger.info("got message as string = " + messageAsString);
 
             String actualRequestDsig = getByXPath(messageAsString, "//soap:Header/AP:requestDsig");
             if (actualRequestDsig == null || !actualRequestDsig.equals(popRequestModel().requestDsig)) {
                 generateSOAPErrMessage(context.getMessage(), "Not valid sign. - requester dsig");
             }
-            final Canonicalizer canon = Canonicalizer.getInstance(Canonicalizer.ALGO_ID_C14N_EXCL_WITH_COMMENTS);
-            final byte canonXmlBytes[] = canon.canonicalize(messageAsString.getBytes());
 
-            boolean isValid = signatureService.verifySignatureInXML(new StringReader( new String(canonXmlBytes)), publicKey);
+            boolean isValid = signatureService.verifySignatureInXML(new StringReader(messageAsString), publicKey);
             if (!isValid) {
                 generateSOAPErrMessage(context.getMessage(), "Not valid sign.");
             } else {
@@ -104,8 +103,9 @@ public class SecuritySoapHandlerClient extends AbstractSecuritySoapHandler {
 
             addCertificateNumber(context);
 
-            String messageAsString = HandlerUtils.soapToString(context.getMessage());
-            ByteArrayInputStream is = new ByteArrayInputStream(messageAsString.getBytes(StandardCharsets.UTF_8));
+            final String messageAsString = HandlerUtils.soapToString(context.getMessage());
+
+            ByteArrayInputStream is = new ByteArrayInputStream(SignatureUtils.canonicalizedByteArray(messageAsString));
             String signed = signatureService.signXML(privateKey, is);
             setRequestModel(new RequestModel(getDsig(signed)));
             SOAPMessage signedMessage = HandlerUtils.createSoapMessageFromString(postProcessMessage(signed));

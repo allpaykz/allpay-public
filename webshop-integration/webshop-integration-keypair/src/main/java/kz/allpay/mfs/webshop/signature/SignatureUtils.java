@@ -17,6 +17,9 @@ package kz.allpay.mfs.webshop.signature; /**
  * under the License.
  */
 
+import org.apache.xml.security.c14n.CanonicalizationException;
+import org.apache.xml.security.c14n.Canonicalizer;
+import org.apache.xml.security.c14n.InvalidCanonicalizerException;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
@@ -42,6 +45,7 @@ import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathExpression;
 import javax.xml.xpath.XPathExpressionException;
 import java.io.*;
+import java.nio.charset.StandardCharsets;
 import java.security.*;
 import java.util.Iterator;
 import java.util.List;
@@ -85,7 +89,7 @@ public class SignatureUtils {
                 null,
                 null);
         final SignedInfo signedInfo = fac.newSignedInfo(
-                fac.newCanonicalizationMethod(CanonicalizationMethod.INCLUSIVE_WITH_COMMENTS,
+                fac.newCanonicalizationMethod(CanonicalizationMethod.EXCLUSIVE_WITH_COMMENTS,
                         (C14NMethodParameterSpec) null),
                 fac.newSignatureMethod(SignatureMethod.RSA_SHA1, null), singletonList(ref));
 
@@ -264,6 +268,28 @@ public class SignatureUtils {
                 return false;
             }
         }
+    }
+
+    /**
+     * XML Canonicalization using ALGO_ID_C14N_EXCL_WITH_COMMENTS
+     */
+    public static byte[] canonicalizedByteArray(final String toCanonicalize) {
+        final Canonicalizer canon;
+        try {
+            canon = Canonicalizer.getInstance(Canonicalizer.ALGO_ID_C14N_EXCL_WITH_COMMENTS);
+            final byte canonXmlBytes[] = canon.canonicalize(toCanonicalize.getBytes());
+            return canonXmlBytes;
+        } catch (InvalidCanonicalizerException | CanonicalizationException | SAXException | ParserConfigurationException | IOException e) {
+            e.printStackTrace();
+            throw new RuntimeException("Manual canonicalization failed. Check that you have proper libraries installed. Normally this should never happen");
+        }
+    }
+
+    /**
+     * XML Canonicalization using ALGO_ID_C14N_EXCL_WITH_COMMENTS
+     */
+    public static String canonicalizedString(final String toCanonicalize) {
+        return new String(canonicalizedByteArray(toCanonicalize), StandardCharsets.UTF_8);
     }
 
     private static class SimpleKeySelectorResult implements KeySelectorResult {
