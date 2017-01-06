@@ -34,6 +34,33 @@
                     </div>
 
                     <div class="form-group">
+                        <label class="pemInput">Приватный ключ(для подписи запроса)</label>
+                        <div class="inputGroupContainer">
+                            <div class="input-group"> <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
+                                <textarea class="form-control" name="pemInput" placeholder="Приватный ключ(для подписи запроса)"></textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="pemInputResponse">Публичный ключ(для проверки подписи ответа)</label>
+                        <div class="inputGroupContainer">
+                            <div class="input-group"> <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
+                                <textarea class="form-control" name="pemInputResponse" placeholder="Публичный ключ(для проверки подписи ответа)"></textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="certificateIdInput" class="control-label">Номер сертификата</label>
+                        <input type="text" class="form-control"
+                               spellcheck="false"
+                               value='' required="true"
+                               id="certificateIdInput" name="certificateIdInput" placeholder="Номер сертификата">
+                    </div>
+
+
+                    <div class="form-group">
                         <label for="toUser" class="control-label">Кому пополняем</label>
                         <input type="tel" class="form-control"
                                spellcheck="false"

@@ -7,6 +7,6 @@ public class StaticTestKeyProviderTest {
 
     @Test
     public void testGetPublicKey() throws Exception {
-        Assert.assertNotNull(new StaticTestKeyProvider().getPublicKey(null));
+        Assert.assertNotNull(new StaticTestKeyProvider().getPublicKey());
     }
 }

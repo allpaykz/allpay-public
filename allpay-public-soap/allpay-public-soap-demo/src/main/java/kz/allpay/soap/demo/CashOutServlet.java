@@ -1,6 +1,7 @@
 package kz.allpay.soap.demo;
 
-import com.sun.org.apache.xerces.internal.jaxp.datatype.XMLGregorianCalendarImpl;
+import kz.allpay.mfs.webshop.keys.PrivateKeyReader;
+import kz.allpay.mfs.webshop.keys.PublicKeyReader;
 import kz.allpay.mfs.ws.soap.generated.v1_0.CashOutRequest;
 import kz.allpay.mfs.ws.soap.generated.v1_0.CompleteTransactionResponse;
 import kz.allpay.mfs.ws.soap.generated.v1_0.Language;
@@ -17,8 +18,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.xml.datatype.DatatypeConfigurationException;
 import javax.xml.datatype.DatatypeFactory;
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.math.BigDecimal;
+import java.security.spec.InvalidKeySpecException;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -33,6 +36,20 @@ public class CashOutServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse response) throws ServletException, IOException {
+
+        // Pem input
+        final String pem = req.getParameter("pemInput");
+        logger.info("pem\t"+pem);
+
+        // Pem input response
+        final String pemInputResponse = req.getParameter("pemInputResponse");
+        logger.info("pemInputResponse\t"+pem);
+
+        // certificateIdInput
+        final String certificateIdInputAsString = req.getParameter("certificateIdInput");
+        Integer certificateIdInput = Integer.parseInt(certificateIdInputAsString);
+        logger.info("certificateIdInput\t"+certificateIdInput);
+
 
         // Parsing login name of an agent
         // We will transfer money from agent to user
@@ -61,22 +78,41 @@ public class CashOutServlet extends HttpServlet {
         final BigDecimal amount = BigDecimal.valueOf(Long.parseLong(dirtyAmount));
         logger.info("amount\t"+amount);
 
-        TransactionManagementV1_0 srv = TransactionManagementV1_0Client.getService(PropertiesUtil.getApiUrl(),
-                                                                                   Arrays.asList(new SecuritySoapHandlerClient())
-        );
+        // Создаем соап клиента, по ссылке из проперти файлов.
+        final TransactionManagementV1_0 srv;
+        try {
+            srv = TransactionManagementV1_0Client.getService(PropertiesUtil.getApiUrl(),
+                    Arrays.asList(new SecuritySoapHandlerClient(certificateIdInput,
+                            PrivateKeyReader.loadPrivateKeyFromFile(new ByteArrayInputStream(pem.getBytes("UTF-8"))),
+                            PublicKeyReader.loadPublicKeyFromFile(new ByteArrayInputStream(pemInputResponse.getBytes("UTF-8")))
+                    ))
+            );
+        } catch (InvalidKeySpecException e) {
+            throw new RuntimeException(e);
+        }
 
+        // Создаем объект запроса
+        // loginName это логин агента, от него идёт запрос в система Allpay
+        // fromUser это логин клиента, с него снимается сумма
+        // token это токен клиента, он генерируется в приложении allpay
+        // amount - сумма запроса
         final CashOutRequest cashOutRequest = getCashOutRequest(fromUser, token, loginName, amount);
 
+        // Посылаем запрос на сервер
         CompleteTransactionResponse cashOutTransaction = srv.createCashOutTransaction(cashOutRequest);
 
         logger.info(cashOutTransaction.getTransactionInfo().getTransactionStatus());
 
-        DataBase.getResponseDatabase().put(cashOutTransaction.getTransactionInfo().getTransactionId().toString(), cashOutTransaction);
+        // Записываем ответ в БД
+        final String transactionId = cashOutTransaction.getTransactionInfo().getTransactionId().toString();
+        DataBase.getResponseDatabase().put(transactionId, cashOutTransaction);
 
         response.setStatus(HttpServletResponse.SC_OK);
         response.getWriter().write("<html>\n" +
                                            "<body>\n" +
                                            "    <div>Request successfully finished</div>\n" +
+                                           "    <div>Transaction number:</div>\n" +
+                                           "    <div>" +transactionId+ "</div>\n" +
                                            "    <div id=\"counter\">5</div>\n" +
                                            "    <script>\n" +
                                            "        setInterval(function() {\n" +
@@ -104,7 +140,10 @@ public class CashOutServlet extends HttpServlet {
     private CashOutRequest getCashOutRequest(String fromUser, String token, String loginName, BigDecimal amount) {
         final CashOutRequest cashOutRequest = new CashOutRequest();
         cashOutRequest.setToken(token);
+
+        // Идентификатор транзакции в вашей системе. Должен быть уникален на всегда
         cashOutRequest.setGUID(UUID.randomUUID().toString());
+
         cashOutRequest.setFromUserName(fromUser);
         cashOutRequest.setAmount(amount);
         OnlineTransactionRequestHeader header = new OnlineTransactionRequestHeader();

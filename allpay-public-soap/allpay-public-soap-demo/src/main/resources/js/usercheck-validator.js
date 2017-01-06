@@ -11,6 +11,21 @@ $(document).ready(function() {
             validating: 'glyphicon glyphicon-refresh'
         },
         fields: {
+            pemInput: {
+                validators: {
+                    notEmpty: {
+                        message: 'Пожалуйста, введите Приватный ключ(для подписи запроса)'
+                    }
+                }
+            },
+            certificateIdInput: {
+                validators: {
+                    notEmpty: {
+                        message: 'Пожалуйста, введите номер сертификата'
+                    }
+                }
+            },
+
             loginName: {
                 validators: {
                     stringLength: {

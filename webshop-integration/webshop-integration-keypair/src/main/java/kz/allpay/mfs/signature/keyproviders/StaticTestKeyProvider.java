@@ -14,17 +14,15 @@ import java.security.spec.InvalidKeySpecException;
  * @author magzhan.karasayev
  * @since 5/19/16 12:55 AM
  */
-public class StaticTestKeyProvider implements KeyProvider {
+public class StaticTestKeyProvider {
 
-    @Override
-    public PublicKey getPublicKey(String merchantId_ignored) throws IOException, InvalidKeySpecException {
+    public PublicKey getPublicKey() throws IOException, InvalidKeySpecException {
         InputStream publicKeyStream = getClass().getClassLoader().getResourceAsStream("mockKeys/TEST.pub.pem");
         PublicKey publicKey = PublicKeyReader.loadPublicKeyFromFile(publicKeyStream);
         return publicKey ;
     }
 
-    @Override
-    public PrivateKey getPrivateKey(String merchantId_ignored) throws IOException, InvalidKeySpecException {
+    public PrivateKey getPrivateKey() throws IOException, InvalidKeySpecException {
         InputStream privateKeyStream = getClass().getClassLoader().getResourceAsStream("mockKeys/TEST.priv.pem");
         PrivateKey privateKey = PrivateKeyReader.loadPrivateKeyFromFile(privateKeyStream);
         return privateKey;

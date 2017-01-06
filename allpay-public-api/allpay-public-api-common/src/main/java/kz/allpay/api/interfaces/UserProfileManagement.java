@@ -2,6 +2,7 @@ package kz.allpay.api.interfaces;
 
 import kz.allpay.api.model.request.ChangeAlertRequest;
 import kz.allpay.api.model.request.ChangePinRequest;
+import kz.allpay.api.model.request.SessionLogoutRequest;
 import kz.allpay.api.model.request.UserProfileRequest;
 import kz.allpay.api.model.response.DefaultResponse;
 
@@ -28,4 +29,8 @@ public interface UserProfileManagement {
      */
     public DefaultResponse changePin(ChangePinRequest request);
 
+    /**
+     * Логаут сессии
+     */
+    public Response sessionLogout(SessionLogoutRequest request);
 }

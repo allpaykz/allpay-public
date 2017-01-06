@@ -8,112 +8,19 @@
 
     <parent>
         <groupId>kz.allpay.mfs</groupId>
-        <version>2.0.8</version>
+        <version>2.0.8.2-SNAPSHOT</version>
         <artifactId>allpay-public</artifactId>
     </parent>
-
-    <url>http://allpay.kz</url>
-    <licenses>
-        <license>
-            <name>Apache License, Version 2.0</name>
-            <distribution>repo</distribution>
-            <url>http://www.apache.org/licenses/LICENSE-2.0.html</url>
-        </license>
-    </licenses>
-
-    <scm>
-        <!-- for buildNumber property in netteller-administration.war -->
-        <connection>scm:git:git@github.com:allpaykz/webshop-service-examples.git</connection>
-    </scm>
 
     <properties>
         <jersey-version>1.19.1</jersey-version>
         <maven.deploy.skip>true</maven.deploy.skip>
     </properties>
 
-    <distributionManagement>
-        <repository>
-            <id>erp-central</id>
-            <!--<url>http://jira.innoforce.kz:8081/artifactory/simple/libs-release-local</url>-->
-            <url>http://jira.innoforce.kz:8081/artifactory/repo</url>
-        </repository>
-    </distributionManagement>
-
     <modules>
         <module>webshop-integration-keypair</module>
         <module>webshop-integration-demo</module>
     </modules>
 
-    <profiles>
-        <!-- environment group -->
-        <profile>
-            <id>demo_for_github</id>
-            <activation>
-                <activeByDefault>true</activeByDefault>
-            </activation>
-            <properties>
-                <webshop.services.ip>test.all-pay.kz</webshop.services.ip>
-                <where.to.redirect>test.all-pay.kz</where.to.redirect>
-            </properties>
-        </profile>
-        <profile>
-            <id>local</id>
-            <activation>
-                <activeByDefault>true</activeByDefault>
-            </activation>
-            <properties>
-                <webshop.services.ip>127.0.0.1:8080</webshop.services.ip>
-                <where.to.redirect>127.0.0.1:8080</where.to.redirect>
-                <webshop.services.port></webshop.services.port>
-            </properties>
-        </profile>
-        <profile>
-            <id>alpha</id>
-            <properties>
-                <webshop.services.ip>alpha.allpay.kz</webshop.services.ip>
-                <where.to.redirect>alpha.allpay.kz</where.to.redirect>
-                <webshop.services.port>:8080</webshop.services.port>
-            </properties>
-        </profile>
-        <profile>
-            <id>beta</id>
-            <properties>
-                <webshop.services.ip>beta.allpay.kz</webshop.services.ip>
-                <where.to.redirect>beta.allpay.kz</where.to.redirect>
-                <webshop.services.port>:8080</webshop.services.port>
-            </properties>
-        </profile>
-        <profile>
-            <id>uat</id>
-            <properties>
-                <webshop.services.ip>test.all-pay.kz</webshop.services.ip>
-                <where.to.redirect>test.all-pay.kz</where.to.redirect>
-                <webshop.services.port></webshop.services.port>
-            </properties>
-        </profile>
-        <profile>
-            <id>159</id>
-            <properties>
-                <webshop.services.ip>192.168.1.159:8080</webshop.services.ip>
-                <where.to.redirect>192.168.1.159:8080</where.to.redirect>
-                <webshop.services.port></webshop.services.port>
-            </properties>
-        </profile>
-        <profile>
-            <id>ci</id>
-            <properties>
-                <webshop.services.ip>mfsci.innoforce.kz:8080</webshop.services.ip>
-                <where.to.redirect>mfsci.innoforce.kz:8080</where.to.redirect>
-                <webshop.services.port></webshop.services.port>
-            </properties>
-        </profile>
-        <profile>
-            <id>dmitry</id>
-            <properties>
-                <webshop.services.ip>192.168.6.49:8080</webshop.services.ip>
-                <where.to.redirect>192.168.6.49:8080</where.to.redirect>
-                <webshop.services.port></webshop.services.port>
-            </properties>
-        </profile>
-    </profiles>
+
 </project>

@@ -1,0 +1,15 @@
+language: java
+jdk:
+- oraclejdk8
+notifications:
+  email:
+    recipients:
+    - magzhan.karasayev@allpay.kz
+    - sanzhar.aubakirov@innoforce.kz
+    on_success: change
+    on_failure: always
+env:
+  global:
+  - SONATYPE_USERNAME=allpaykzCI
+  - secure: DAbmL2Drl+g0Mdw1VmaTDeTQ0vO5rcqsxPQ5Z6peGrdidRe96zFuzeldNSxZjmlnEg4mJUhFr+3LBLkhlhF9gnH3PK2jeE/YA/qANvb5OVUmNwp/26nvjjNHKlzseaapSzBH3Vybt+tchf/d/FgXxWepK4vu6dsC3rqzNmjXVgRs9+4D+2h3A+ffny2Eq8/zqxGysAADQUJKAlR6CjhUIFLVJFw96THOQA6Xu8rif105Q54/D8Vk59bOESE9Zb5R6sUOmkBFVSv+MvTKe+z/qt2lqix+zhj13ctGNf44KIseo6/QFzZoQ98hkrhW5Q0W8gwvmUY1aDLr+3wGp7d7cxp3kGES2pdU0yiX7Ki9f3sxrgS76RKaFw3Bc+I2otCrQCf0Ib2xrsuU9Wv+fWUHKftKs7GIgXN6MfNhADIg2IJgFgISzhQ3n99OXaO+LH3I7Z6FsEz6d18UPBCMaE3oJdbwptL41N4HEqDilf9PkfmRJvyMgUtcEaTUgB/5qTVtzIKF6NcrfGfyqlH4VbpiKWnAiV2Cs7k0kfixMxzxtNmSPhl/5l2rDkMFwxo2j3boau98YsHS+2PGhEh/tbMU8eyvgj4ArO17FyB2b1JhaVKqrpOZG1YsQ1W0a0/pku8DrNlbWdf65oetS3wbjYOFHt+2CjUbKDoF3bFJIf5o3IM=
+script: "./deploy.sh"

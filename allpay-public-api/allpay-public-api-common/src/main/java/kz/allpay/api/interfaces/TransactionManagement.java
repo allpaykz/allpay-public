@@ -1,5 +1,7 @@
 package kz.allpay.api.interfaces;
 
+import kz.allpay.api.exception.GeneralException;
+import kz.allpay.api.exception.LoginNotValidException;
 import kz.allpay.api.model.request.CreatePendingTransactionForP2PPayByMerchantId;
 import kz.allpay.api.model.request.CreatePendingTransactionForP2PSendRequest;
 import kz.allpay.api.model.request.TransactionHistoryRequest;
@@ -13,7 +15,7 @@ import kz.allpay.api.model.response.TransactionHistoryResponse;
  * User: Sanzhar Aubakirov
  * Date: 11/16/16
  */
-public interface TransactionManagment {
+public interface TransactionManagement {
 
     /**
      * Получение информации о транзакции по ее номеру
@@ -23,7 +25,7 @@ public interface TransactionManagment {
     /**
      * Получение списка транзакций по фильтрующим критериям.
      */
-    public TransactionHistoryResponse getTransactionHistory(TransactionHistoryRequest request);
+    public TransactionHistoryResponse getTransactionHistory(TransactionHistoryRequest request) throws LoginNotValidException, GeneralException;
 
     /**
      * Проверка доступности наличных, прав и тд без фактического создания транзакций

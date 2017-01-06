@@ -5,7 +5,7 @@
     <jsp:attribute name="head">
     </jsp:attribute>
     <jsp:attribute name="header">
-        <t:navbar active="cashin"/>
+        <t:navbar active="userInfo"/>
     </jsp:attribute>
     <jsp:attribute name="footer">
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
@@ -19,10 +19,18 @@
 
         var loginName = $('#requesterInput').val();
         var userLoginName = $('#userLoginName').val();
+        var userLoginName = $('#userLoginName').val();
+        var certificateIdInput = $('#certificateIdInput').val();
+        var pemInput = $('#pemInput').val();
+        var pemInputResponse = $('#pemInputResponse').val();
+
+
 
         $.ajax({
-            type: "GET",
-            url: "${pageContext.request.contextPath}/rest/api/checkUser?loginName=" + loginName + "&userLoginName=" + userLoginName
+            type: "POST",
+            url: "${pageContext.request.contextPath}/rest/api/checkUser",
+            data: "loginName=" + loginName + "&userLoginName=" + userLoginName
+                    + "&certificateIdInput=" + certificateIdInput + "&pemInput=" + encodeURIComponent(pemInput) + "&pemInputResponse=" + encodeURIComponent(pemInputResponse)
 
         }).done(function (data) {
             console.log(data);
@@ -49,12 +57,14 @@
     <jsp:body>
         <div class="panel panel-info col-xs-12 col-md-6 col-md-offset-3" style="margin-top:142px;">
             <div class="panel-heading">
-                <h3 class="panel-title text-center">Пополнение счета</h3>
+                <h3 class="panel-title text-center">Информация</h3>
             </div>
             <div class="panel-body">
-                <form class="form-horizontal" accept-charset="UTF-8" id="usercheck">
+                <form class="form-horizontal" accept-charset="UTF-8" id="usercheck"
+                      method="post"
+                      action="${pageContext.request.contextPath}/rest/api/checkUser">
                     <div class="form-group">
-                        <label for="requesterInput" class="control-label">Логин</label>
+                        <label for="requesterInput" class="control-label">Логин агента</label>
                         <input type="text" class="form-control"
                                spellcheck="false"
                                value='' required="true"
@@ -62,7 +72,33 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="userLoginName" class="control-label">Логи</label>
+                        <label class="pemInput">Приватный ключ(для подписи запроса)</label>
+                        <div class="inputGroupContainer">
+                            <div class="input-group"> <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
+                                <textarea class="form-control" id="pemInput" name="pemInput" placeholder="Приватный ключ(для подписи запроса)"></textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="pemInputResponse">Публичный ключ(для проверки подписи ответа)</label>
+                        <div class="inputGroupContainer">
+                            <div class="input-group"> <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
+                                <textarea class="form-control" id="pemInputResponse" name="pemInputResponse" placeholder="Публичный ключ(для проверки подписи ответа)"></textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="certificateIdInput" class="control-label">Номер сертификата</label>
+                        <input type="text" class="form-control"
+                               spellcheck="false"
+                               value='' required="true"
+                               id="certificateIdInput" name="certificateIdInput" placeholder="Номер сертификата">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="userLoginName" class="control-label">Логин клиента</label>
                         <input type="tel" class="form-control"
                                spellcheck="false"
                                value='' required="true"
