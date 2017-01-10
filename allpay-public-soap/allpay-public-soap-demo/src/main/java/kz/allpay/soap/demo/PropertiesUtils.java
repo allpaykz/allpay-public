@@ -8,7 +8,7 @@ import java.util.Properties;
  * User: Sanzhar Aubakirov
  * Date: 12/6/16
  */
-public class PropertiesUtil {
+public class PropertiesUtils {
     private static Properties properties = null;
 
     /**
@@ -18,7 +18,7 @@ public class PropertiesUtil {
     private static Properties getProps() {
         if (properties == null) {
             Properties props = new Properties();
-            try (InputStream in = PropertiesUtil.class.getClassLoader().getResourceAsStream("demo.properties")) {
+            try (InputStream in = PropertiesUtils.class.getClassLoader().getResourceAsStream("demo.properties")) {
                 props.load(in);
                 properties = props;
             } catch (IOException e) {
