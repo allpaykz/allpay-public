@@ -81,7 +81,7 @@ public class CashOutServlet extends HttpServlet {
         // Создаем соап клиента, по ссылке из проперти файлов.
         final TransactionManagementV1_0 srv;
         try {
-            srv = TransactionManagementV1_0Client.getService(PropertiesUtil.getApiUrl(),
+            srv = TransactionManagementV1_0Client.getService(PropertiesUtils.getApiUrl(),
                     Arrays.asList(new SecuritySoapHandlerClient(certificateIdInput,
                             PrivateKeyReader.loadPrivateKeyFromFile(new ByteArrayInputStream(pem.getBytes("UTF-8"))),
                             PublicKeyReader.loadPublicKeyFromFile(new ByteArrayInputStream(pemInputResponse.getBytes("UTF-8")))
@@ -99,7 +99,13 @@ public class CashOutServlet extends HttpServlet {
         final CashOutRequest cashOutRequest = getCashOutRequest(fromUser, token, loginName, amount);
 
         // Посылаем запрос на сервер
-        CompleteTransactionResponse cashOutTransaction = srv.createCashOutTransaction(cashOutRequest);
+        final CompleteTransactionResponse cashOutTransaction;
+        try {
+            cashOutTransaction = srv.createCashOutTransaction(cashOutRequest);
+        } catch (Exception e) {
+            ExceptionHandler.handleException(req, response, e);
+            return;
+        }
 
         logger.info(cashOutTransaction.getTransactionInfo().getTransactionStatus());
 

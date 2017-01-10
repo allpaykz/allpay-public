@@ -164,7 +164,13 @@
                 <artifactId>webshop-integration-keypair</artifactId>
                 <version>${project.version}</version>
             </dependency>
+            <dependency>
+                <groupId>org.testng</groupId>
+                <artifactId>testng</artifactId>
+                <version>6.9.8</version>
+            </dependency>
         </dependencies>
+
     </dependencyManagement>
 
     <build>

@@ -74,7 +74,7 @@ public class CashInServlet extends HttpServlet{
         // Создаем соап клиента, по ссылке из проперти файлов.
         final TransactionManagementV1_0 srv;
         try {
-            srv = TransactionManagementV1_0Client.getService(PropertiesUtil.getApiUrl(),
+            srv = TransactionManagementV1_0Client.getService(PropertiesUtils.getApiUrl(),
                     Arrays.asList(new SecuritySoapHandlerClient(certificateIdInput,
                             PrivateKeyReader.loadPrivateKeyFromFile(new ByteArrayInputStream(pem.getBytes("UTF-8"))),
                             PublicKeyReader.loadPublicKeyFromFile(new ByteArrayInputStream(pemInputResponse.getBytes("UTF-8")))
@@ -91,7 +91,13 @@ public class CashInServlet extends HttpServlet{
         final CashInRequest cashInRequest = getCashInRequest(loginName, toUser, amount);
 
         // Посылаем запрос на CashIn
-        final CompleteTransactionResponse cashInTransaction = srv.createCashInTransaction(cashInRequest);
+        final CompleteTransactionResponse cashInTransaction;
+        try {
+            cashInTransaction = srv.createCashInTransaction(cashInRequest);
+        } catch (Exception e) {
+            ExceptionHandler.handleException(req, response, e);
+            return;
+        }
 
         logger.info(cashInTransaction.getTransactionInfo().getTransactionStatus());
 

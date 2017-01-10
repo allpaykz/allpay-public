@@ -81,7 +81,7 @@ public class TransactionManagment {
 
         // Создаем соап клиента, по ссылке из проперти файлов.
         TransactionManagementV1_0 srv = TransactionManagementV1_0Client.getService(
-                PropertiesUtil.getApiUrl(),
+                PropertiesUtils.getApiUrl(),
                 Arrays.asList(new SecuritySoapHandlerClient(certificateIdInput,
                         PrivateKeyReader.loadPrivateKeyFromFile(new ByteArrayInputStream(pem.getBytes("UTF-8"))),
                         PublicKeyReader.loadPublicKeyFromFile(new ByteArrayInputStream(pemInputResponse.getBytes("UTF-8")))
@@ -121,7 +121,13 @@ public class TransactionManagment {
         // ----
 
         // Запускаем запрос
-        CompleteTransactionResponse completeTransaction = srv.completeTransaction(request);
+        final CompleteTransactionResponse completeTransaction;
+        try {
+            completeTransaction = srv.completeTransaction(request);
+        } catch (Exception e) {
+            ExceptionHandler.handleException(req, resp, e);
+            return;
+        }
 
         logger.info(completeTransaction.getTransactionInfo().getTransactionStatus());
 
@@ -182,7 +188,7 @@ public class TransactionManagment {
 
         // Создаем соап клиента, по ссылке из проперти файлов.
         TransactionManagementV1_0 srv = TransactionManagementV1_0Client.getService(
-                PropertiesUtil.getApiUrl(),
+                PropertiesUtils.getApiUrl(),
                 Arrays.asList(new SecuritySoapHandlerClient(certificateIdInput,
                         PrivateKeyReader.loadPrivateKeyFromFile(new ByteArrayInputStream(pem.getBytes("UTF-8"))),
                         PublicKeyReader.loadPublicKeyFromFile(new ByteArrayInputStream(pemInputResponse.getBytes("UTF-8")))
@@ -224,7 +230,13 @@ public class TransactionManagment {
         // ----
 
         // Запускаем запрос
-        CompleteTransactionResponse completeTransaction = srv.declineTransaction(request);
+        final CompleteTransactionResponse completeTransaction;
+        try {
+            completeTransaction = srv.declineTransaction(request);
+        } catch (Exception e) {
+            ExceptionHandler.handleException(req, resp, e);
+            return;
+        }
 
         logger.info(completeTransaction.getTransactionInfo().getTransactionStatus());
 
@@ -285,7 +297,7 @@ public class TransactionManagment {
 
         // Создаем соап клиента, по ссылке из проперти файлов.
         TransactionManagementV1_0 srv = TransactionManagementV1_0Client.getService(
-                PropertiesUtil.getApiUrl(),
+                PropertiesUtils.getApiUrl(),
                 Arrays.asList(new SecuritySoapHandlerClient(certificateIdInput,
                         PrivateKeyReader.loadPrivateKeyFromFile(new ByteArrayInputStream(pem.getBytes("UTF-8"))),
                         PublicKeyReader.loadPublicKeyFromFile(new ByteArrayInputStream(pemInputResponse.getBytes("UTF-8")))
@@ -320,7 +332,12 @@ public class TransactionManagment {
         // ----
 
         // Отправляем запрос
-        CheckUserResponse completeTransaction = srv.checkUser(request);
+        final CheckUserResponse completeTransaction;
+        try {
+            completeTransaction = srv.checkUser(request);
+        } catch (Exception e) {
+            return ExceptionHandler.handleExceptionAsJson(req, resp, e);
+        }
         return gson.toJson(completeTransaction);
     }
 }
