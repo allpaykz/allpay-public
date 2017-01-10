@@ -19,7 +19,7 @@ public interface UserProfileManagement {
     /**
      * Изменения метода уведомления
      */
-    public DefaultResponse changeAlertMethod(ChangeAlertRequest request);
+    public Response changeAlertMethod(ChangeAlertRequest request);
 
     /**
      * Изменение пина
