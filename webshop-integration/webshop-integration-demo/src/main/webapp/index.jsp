@@ -27,7 +27,6 @@
                    spellcheck="false"
                    value='' required="true"
                    id="shopNameInput" name="shopName" placeholder="Название магазина">
-            <p class="help-block">Введите название магазина</p>
         </div>
 
         <div class="form-group col-xs-10 col-md-10" id="invoiceNumber">
@@ -36,7 +35,6 @@
                    autocomplete="off" spellcheck="false"
                    value='' required="true"
                    id="invoiceNumberInput" name="invoiceNumber" placeholder="Номер заказа/инвойса">
-            <p class="help-block">Введите номер заказа</p>
         </div>
 
         <div class="form-group col-xs-10 col-md-10" id="amount">
@@ -45,7 +43,6 @@
                    autocomplete="off" spellcheck="false"
                    value="" required="true"
                    id="amountInput" name="amount" placeholder="Сумма в тенге">
-            <p class="help-block">Введите сумму</p>
         </div>
 
         <div class="form-group col-xs-10 col-md-10" id="terminalId">
@@ -53,8 +50,7 @@
             <input type="text" class="form-control"
                    spellcheck="false"
                    value="" required="true"
-                   id="terminalIdInput" name="terminalId" placeholder="На юзера">
-            <p class="help-block">Введите ID терминала</p>
+                   id="terminalIdInput" name="terminalId" placeholder="Введите ID терминала">
         </div>
 
         <%--This fields only for test purposes--%>

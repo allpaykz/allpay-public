@@ -55,30 +55,6 @@
             </properties>
         </profile>
         <profile>
-            <id>uat</id>
-            <properties>
-                <webshop.services.ip>test.all-pay.kz</webshop.services.ip>
-                <where.to.redirect>test.all-pay.kz</where.to.redirect>
-                <webshop.services.port></webshop.services.port>
-            </properties>
-        </profile>
-        <profile>
-            <id>159</id>
-            <properties>
-                <webshop.services.ip>192.168.1.159:8080</webshop.services.ip>
-                <where.to.redirect>192.168.1.159:8080</where.to.redirect>
-                <webshop.services.port></webshop.services.port>
-            </properties>
-        </profile>
-        <profile>
-            <id>ci</id>
-            <properties>
-                <webshop.services.ip>mfsci.innoforce.kz:8080</webshop.services.ip>
-                <where.to.redirect>mfsci.innoforce.kz:8080</where.to.redirect>
-                <webshop.services.port></webshop.services.port>
-            </properties>
-        </profile>
-        <profile>
             <id>dmitry</id>
             <properties>
                 <webshop.services.ip>192.168.6.49:8080</webshop.services.ip>
@@ -89,22 +65,6 @@
     </profiles>
 
     <dependencies>
-<!--        <dependency>
-            <groupId>com.sun.jersey</groupId>
-            <artifactId>jersey-servlet</artifactId>
-            <version>${jersey-version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.sun.jersey</groupId>
-            <artifactId>jersey-json</artifactId>
-            <version>${jersey-version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.glassfish</groupId>
-            <artifactId>javax.ejb</artifactId>
-            <version>3.1</version>
-            <scope>provided</scope>
-        </dependency>-->
         <dependency>
             <groupId>javax</groupId>
             <artifactId>javaee-api</artifactId>

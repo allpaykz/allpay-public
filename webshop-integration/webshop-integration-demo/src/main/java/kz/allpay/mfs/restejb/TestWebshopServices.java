@@ -35,11 +35,9 @@ import static kz.allpay.mfs.webshop.Constants.*;
 @Path("test")
 public class TestWebshopServices {
     private static final String TARGET_IP = TestPropertiesUtils.getServicesIp();
-    private static final String PORT = TestPropertiesUtils.getServicesPort();
     private static final String TEST_SUCCES_LINK = "http://" + TARGET_IP + "/webshop-integration-rest/transactions.jsp";
     private static final String TEST_FAILURE_LINK = "http://" + TARGET_IP + "/webshop-integration-rest/failure.jsp";
-    private static final String TEST_RESPONSE_URL = "http://" + TARGET_IP + PORT + "/webshop-integration-rest/webresources/test/webshopResponse/";
-    public static final int TIMEOUT_IN_SECONDS = 60;
+    private static final String TEST_RESPONSE_URL = "http://" + TARGET_IP + "/webshop-integration-rest/webresources/test/webshopResponse/";
     private final static Map<String, String> mockInvoiceDatabase = new HashMap<>();
     private Logger logger = Logger.getLogger(TestWebshopServices.class.toString());
 
