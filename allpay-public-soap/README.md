@@ -19,6 +19,7 @@
         <dependency>
             <artifactId>allpay-public-soap-client</artifactId>
             <groupId>kz.allpay.mfs</groupId>
+            <!-- соответствующая версия проекта - версия указанная в pom.xml в этом проекте -->
             <version>2.0.8</version>
         </dependency>
 

@@ -52,6 +52,7 @@ pom.xml:
         <dependency>
             <artifactId>webshop-integration-keypair</artifactId>
             <groupId>kz.allpay.mfs</groupId>
+            <!-- соответствующая версия проекта - версия указанная в pom.xml в этом проекте -->
             <version>2.0.8.2-SNAPSHOT</version>
         </dependency>
 ```
@@ -62,6 +63,7 @@ pom.xml:
         <dependency>
             <artifactId>webshop-integration-keypair</artifactId>
             <groupId>kz.allpay.mfs</groupId>
+            <!-- соответствующая версия проекта - версия указанная в pom.xml в этом проекте -->
             <version>2.0.8.2</version>
         </dependency>
 ```
