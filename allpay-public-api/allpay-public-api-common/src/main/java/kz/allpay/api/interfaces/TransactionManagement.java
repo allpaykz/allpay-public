@@ -20,7 +20,7 @@ public interface TransactionManagement {
     /**
      * Получение информации о транзакции по ее номеру
      */
-    public TransactionInfoResponse getTransaction(TransactionInfoRequest request);
+    public TransactionInfoResponse getTransaction(TransactionInfoRequest request) throws GeneralException;
 
     /**
      * Получение списка транзакций по фильтрующим критериям.

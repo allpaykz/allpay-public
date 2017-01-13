@@ -1,6 +1,7 @@
 package kz.allpay.api.model.response;
 
 import kz.allpay.api.model.TransactionInfo;
+import kz.allpay.api.model.TransactionInformation;
 
 /**
  * Contains nothing
@@ -8,13 +9,23 @@ import kz.allpay.api.model.TransactionInfo;
  * @since 11/16/16 7:13 PM
  */
 public class TransactionInfoResponse extends AbstractResponse {
-    private TransactionInfo transactionInfo;
+    private TransactionInformation transactionInformation;
 
-    public TransactionInfo getTransactionInfo() {
-        return transactionInfo;
+    public TransactionInfoResponse() {
+
     }
 
-    public void setTransactionInfo(TransactionInfo transactionInfo) {
-        this.transactionInfo = transactionInfo;
+    public TransactionInfoResponse(TransactionInformation transactionInformation, String userMessage, String developerMessage){
+        this.transactionInformation = transactionInformation;
+        this.setUserMessage(userMessage);
+        this.setDeveloperMessage(developerMessage);
+    }
+
+    public TransactionInformation getTransactionInformation() {
+        return transactionInformation;
+    }
+
+    public void setTransactionInformation(TransactionInformation transactionInformation) {
+        this.transactionInformation = transactionInformation;
     }
 }
