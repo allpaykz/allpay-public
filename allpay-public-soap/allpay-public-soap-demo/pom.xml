@@ -42,7 +42,7 @@
         <profile>
             <id>beta</id>
             <properties>
-                <allpay.api.url>https://beta.allpay.kz/allpay-public-soap/transaction-management/v1.0?wsdl</allpay.api.url>
+                <allpay.api.url>http://beta.allpay.kz/allpay-public-soap/transaction-management/v1.0?wsdl</allpay.api.url>
             </properties>
         </profile>
     </profiles>
