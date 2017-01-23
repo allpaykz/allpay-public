@@ -37,6 +37,8 @@ public class SoapUtils {
     }
 
     public static SOAPFaultException createSoapFaultException(String targetNamespace, Exception e) {
-        return createSoapFaultException(targetNamespace, e.getClass().getCanonicalName(), e.getMessage());
+        return createSoapFaultException(targetNamespace, e.getClass().getCanonicalName(),
+                e.getMessage() != null ? e.getMessage() : e.getClass().getCanonicalName()
+        );
     }
 }
