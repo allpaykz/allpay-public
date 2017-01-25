@@ -1,0 +1,22 @@
+<jboss-deployment-structure>
+    <!-- source https://docs.jboss.org/author/display/AS7/Class+Loading+in+AS7 -->
+    <!-- Make sub deployments isolated by default, so they cannot see each others classes without a Class-Path entry -->
+    <!--<ear-subdeployments-isolated>true</ear-subdeployments-isolated>-->
+
+    <!-- This corresponds to the top level deployment. For a war this is the war's module, for an ear -->
+    <!-- This is the top level ear module, which contains all the classes in the EAR's lib folder     -->
+    <deployment>
+        <exclusions>
+            <module name="org.jboss.resteasy.resteasy-crypto"/>
+        </exclusions>
+        <dependencies>
+            <module name="org.jboss.resteasy.resteasy-crypto" >
+                <imports>
+                    <exclude-set>
+                        <path name="org/bouncycastle"/>
+                    </exclude-set>
+                </imports>
+            </module>
+        </dependencies>
+    </deployment>
+</jboss-deployment-structure>
