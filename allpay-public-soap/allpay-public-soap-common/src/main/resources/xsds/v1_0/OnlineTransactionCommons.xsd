@@ -63,6 +63,7 @@
             <xs:element name="transactionId" type="xs:integer"/>
             <xs:element name="transactionStatus" type="transactionStatus"/>
             <xs:element name="commission" type="commission"/>
+            <xs:element name="commissionTo" type="commission"/>
         </xs:sequence>
     </xs:complexType>
 
