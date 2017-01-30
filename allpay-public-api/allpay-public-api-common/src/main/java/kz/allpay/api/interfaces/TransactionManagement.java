@@ -31,38 +31,38 @@ public interface TransactionManagement {
      * Проверка доступности наличных, прав и тд без фактического создания транзакций
      */
     public TransactionInfoResponse validateTransactionForP2PSend(
-            final TransactionInfoRequest request);
+            final CreatePendingTransactionForP2PSendRequest request) throws GeneralException;
 
     /**
      * Создание и завершение транзакции перевода денег. Результатом будет либо завершенная транзакция, либо сообщение об ошибке.
      * Холдирование не поддерживается
      */
     public TransactionInfoResponse createTransactionForP2PSend(
-            final CreatePendingTransactionForP2PSendRequest request);
+            final CreatePendingTransactionForP2PSendRequest request) throws GeneralException;
 
     /**
      * Проверка доступности наличных, прав и тд без фактического создания транзакций
      */
     public TransactionInfoResponse validateTransactionForPayByMerchantId(
-            final CreatePendingTransactionForP2PPayByMerchantId request);
+            final CreatePendingTransactionForP2PPayByMerchantId request) throws GeneralException;
 
     /**
      * Создание и завершение транзакции перевода денег. Результатом будет либо завершенная транзакция, либо сообщение об ошибке
      * Холдирование не поддерживается
      */
     public TransactionInfoResponse createTransactionForPayByMerchantId(
-            final CreatePendingTransactionForP2PPayByMerchantId request);
+            final CreatePendingTransactionForP2PPayByMerchantId request) throws GeneralException;
 
     /**
      * Функция для транзакций поддерживающих холдирование. Завершение транзакции
      */
     public TransactionInfoResponse completeTransaction(
-            final TransactionInfoRequest request);
+            final TransactionInfoRequest request) throws GeneralException;
 
     /**
      * Функция для транзакций поддерживающих холдирование. Отклонение транзакции
      */
     public TransactionInfoResponse declineTransaction(
-            final TransactionInfoRequest request);
+            final TransactionInfoRequest request) throws GeneralException;
 
 }

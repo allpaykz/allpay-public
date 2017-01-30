@@ -12,7 +12,10 @@ public class TransactionInfoResponse extends AbstractResponse {
     private TransactionInformation transactionInformation;
 
     public TransactionInfoResponse() {
+    }
 
+    public TransactionInfoResponse(TransactionInformation transactionInformation){
+        this.transactionInformation = transactionInformation;
     }
 
     public TransactionInfoResponse(TransactionInformation transactionInformation, String userMessage, String developerMessage){
