@@ -1,5 +1,7 @@
 package kz.allpay.api.interfaces;
 
+import kz.allpay.api.exception.GeneralException;
+import kz.allpay.api.exception.LoginNotValidException;
 import kz.allpay.api.model.request.*;
 import kz.allpay.api.model.response.DefaultResponse;
 
@@ -19,12 +21,12 @@ public interface UserProfileManagement {
     /**
      * Изменения метода уведомления
      */
-    public Response changeAlertMethod(ChangeAlertRequest request);
+    public Response changeAlertMethod(ChangeAlertRequest request) throws GeneralException;
 
     /**
      * Изменение пина
      */
-    public DefaultResponse changePin(ChangePinRequest request);
+    public Response changePin(ChangePinRequest request) throws LoginNotValidException, GeneralException;
 
     /**
      * Логаут сессии

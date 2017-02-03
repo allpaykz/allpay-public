@@ -6,16 +6,8 @@ package kz.allpay.api.model.request;
  */
 public class ChangeAlertRequest extends AbstractRequest {
 
-    private String loginName;
     private String notificationMethod;
 
-    public String getLoginName() {
-        return loginName;
-    }
-
-    public void setLoginName(String loginName) {
-        this.loginName = loginName;
-    }
 
     public String getNotificationMethod() {
         return notificationMethod;
