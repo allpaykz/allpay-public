@@ -37,4 +37,9 @@ public interface UserProfileManagement {
      * Отвязка устройства
      */
     public Response unbindDevice(UnbindDeviceRequest request);
+
+    /**
+     * Получить кошельки текущего юзера
+     */
+    public Response getUserWallet();
 }

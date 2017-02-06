@@ -1,7 +1,9 @@
 package kz.allpay.api.model.response;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * @author magzhan.karasayev
@@ -17,6 +19,9 @@ public class UserProfileResponse extends AbstractResponse {
     private BigDecimal blockedBalance;
 
     private Date lastLogin;
+
+    private List<String> userAccountsList = new ArrayList<>();
+
 
     public UserProfileResponse() {
         this.setUserMessage("");
@@ -79,4 +84,13 @@ public class UserProfileResponse extends AbstractResponse {
     public void setLastLogin(Date lastLogin) {
         this.lastLogin = lastLogin;
     }
+
+    public List<String> getUserAccountsList() {
+        return userAccountsList;
+    }
+
+    public void setUserAccountsList(List<String> userAccountsList) {
+        this.userAccountsList = userAccountsList;
+    }
 }
+
