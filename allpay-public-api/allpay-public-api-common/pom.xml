@@ -7,6 +7,12 @@
             <artifactId>javaee-api</artifactId>
             <version>7.0</version>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/io.swagger/swagger-annotations -->
+        <dependency>
+            <groupId>io.swagger</groupId>
+            <artifactId>swagger-annotations</artifactId>
+            <version>1.5.12</version>
+        </dependency>
     </dependencies>
     <packaging>jar</packaging>
     <artifactId>allpay.public.api.common</artifactId>
