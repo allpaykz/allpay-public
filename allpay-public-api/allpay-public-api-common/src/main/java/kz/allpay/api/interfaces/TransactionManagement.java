@@ -1,13 +1,17 @@
 package kz.allpay.api.interfaces;
 
+import io.swagger.annotations.*;
 import kz.allpay.api.exception.GeneralException;
 import kz.allpay.api.exception.LoginNotValidException;
-import kz.allpay.api.model.request.CreatePendingTransactionForP2PPayByMerchantId;
-import kz.allpay.api.model.request.CreatePendingTransactionForP2PSendRequest;
-import kz.allpay.api.model.request.TransactionHistoryRequest;
-import kz.allpay.api.model.request.TransactionInfoRequest;
+import kz.allpay.api.model.request.*;
+import kz.allpay.api.model.response.FavoritePaymentsResponse;
 import kz.allpay.api.model.response.TransactionInfoResponse;
 import kz.allpay.api.model.response.TransactionHistoryResponse;
+
+import javax.ws.rs.GET;
+import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
 
 /**
  * Этот интерфейс содержит методы создания и управления жизненным циклом транзакций.
@@ -26,6 +30,11 @@ public interface TransactionManagement {
      * Получение списка транзакций по фильтрующим критериям.
      */
     public TransactionHistoryResponse getTransactionHistory(TransactionHistoryRequest request) throws LoginNotValidException, GeneralException;
+
+    /**
+     * Получение списка изранных платежей по логину пользователя
+     */
+    public FavoritePaymentsResponse getFavoritePayments(FavoritePaymentsRequest request) throws LoginNotValidException, GeneralException;
 
     /**
      * Проверка доступности наличных, прав и тд без фактического создания транзакций
