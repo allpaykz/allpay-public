@@ -16,7 +16,7 @@ public interface UserProfileManagement {
     /**
      * Получение общей информации о пользователе
      */
-    public Response getUserInfo();
+    public Response getUserInfo(UserProfileRequest request);
 
     /**
      * Изменения метода уведомления
