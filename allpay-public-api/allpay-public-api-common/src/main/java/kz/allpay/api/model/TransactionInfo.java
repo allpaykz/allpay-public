@@ -22,6 +22,49 @@ public class TransactionInfo {
     private String toUser;
     private String onlineTransactionId;
     private BigDecimal amount;
+    private BigDecimal charges;
+    private String name;
+    private String status;
+
+    public TransactionInfo charges(final BigDecimal charges) {
+        this.charges = charges;
+        return this;
+    }
+
+    public TransactionInfo name(final String name) {
+        this.name = name;
+        return this;
+    }
+
+    public TransactionInfo status(final String status) {
+        this.status = status;
+        return this;
+    }
+
+
+    public BigDecimal getCharges() {
+        return charges;
+    }
+
+    public void setCharges(BigDecimal charges) {
+        this.charges = charges;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
 
     public BigDecimal getAmount() {
         return amount;
