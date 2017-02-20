@@ -44,6 +44,7 @@
             html += "<tr class='clickable-row'>";
             html += "<td>" + data.basicUserInfo.firstName + "</td>";
             html += "<td>" + data.basicUserInfo.lastName + "</td>";
+            html += "<td>" + data.basicUserInfo.patronymic + "</td>";
             html += "<td>" + data.basicUserInfo.identified + "</td>";
             html += "<td>" + data.basicUserInfo.iin + "</td>";
             html += "</tr>";
@@ -126,6 +127,7 @@
                         <tr>
                             <th>Имя</th>
                             <th>Фамилия</th>
+                            <th>Отчество</th>
                             <th>Идентифицирован</th>
                             <th>ИИН</th>
                         </tr>
