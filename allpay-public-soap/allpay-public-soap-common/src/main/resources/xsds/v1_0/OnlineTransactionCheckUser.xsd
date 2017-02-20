@@ -39,6 +39,7 @@
             <xs:element name="IIN"        type="IIN"          minOccurs="0"/>
             <xs:element name="firstName"  type="xs:string"    minOccurs="0"/>
             <xs:element name="lastName"   type="xs:string"    minOccurs="0"/>
+            <xs:element name="patronymic" type="xs:string"    minOccurs="0"/>
         </xs:sequence>
     </xs:complexType>
 </xs:schema>
