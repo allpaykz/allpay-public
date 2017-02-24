@@ -1,5 +1,7 @@
 package kz.allpay.api.model.response;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import kz.allpay.api.model.TransactionInfo;
 import kz.allpay.api.model.TransactionInformation;
 
@@ -8,6 +10,7 @@ import kz.allpay.api.model.TransactionInformation;
  * @author magzhan.karasayev
  * @since 11/16/16 7:13 PM
  */
+@ApiModel
 public class TransactionInfoResponse extends AbstractResponse {
     private TransactionInformation transactionInformation;
 
@@ -24,6 +27,7 @@ public class TransactionInfoResponse extends AbstractResponse {
         this.setDeveloperMessage(developerMessage);
     }
 
+    @ApiModelProperty(notes = "Информация о транзакции")
     public TransactionInformation getTransactionInformation() {
         return transactionInformation;
     }

@@ -25,8 +25,6 @@ public class UserProfileResponse extends AbstractResponse {
 
     private Date lastLogin;
 
-    private List<String> userAccountsList = new ArrayList<>();
-
     public UserProfileResponse() {
         super();
     }
@@ -96,15 +94,6 @@ public class UserProfileResponse extends AbstractResponse {
 
     public void setLastLogin(Date lastLogin) {
         this.lastLogin = lastLogin;
-    }
-
-    @ApiModelProperty(notes = "Номера счетов пользователя")
-    public List<String> getUserAccountsList() {
-        return userAccountsList;
-    }
-
-    public void setUserAccountsList(List<String> userAccountsList) {
-        this.userAccountsList = userAccountsList;
     }
 }
 

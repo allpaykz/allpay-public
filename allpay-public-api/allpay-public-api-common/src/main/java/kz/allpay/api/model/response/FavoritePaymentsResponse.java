@@ -1,5 +1,7 @@
 package kz.allpay.api.model.response;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import kz.allpay.api.model.FavoritePaymentInfo;
 import java.util.List;
 
@@ -8,6 +10,7 @@ import java.util.List;
  * Created by magzhan on 2/9/17.
  */
 
+@ApiModel
 public class FavoritePaymentsResponse extends AbstractResponse {
 
     private List<FavoritePaymentInfo> favoritePaymentInfos;
@@ -19,6 +22,7 @@ public class FavoritePaymentsResponse extends AbstractResponse {
     }
 
 
+    @ApiModelProperty(notes = "Информация об избранных платежах")
     public List<FavoritePaymentInfo> getFavoritePaymentInfos() {
         return favoritePaymentInfos;
     }
