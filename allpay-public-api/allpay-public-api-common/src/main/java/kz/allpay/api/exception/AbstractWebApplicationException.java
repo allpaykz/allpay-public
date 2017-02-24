@@ -1,5 +1,6 @@
 package kz.allpay.api.exception;
 
+import io.swagger.annotations.ApiModelProperty;
 import kz.allpay.api.model.Language;
 
 import javax.ejb.ApplicationException;
@@ -90,10 +91,12 @@ public abstract class AbstractWebApplicationException extends Exception implemen
         return lang;
     }
 
+    @ApiModelProperty(notes = "Сообщение для пользователя")
     public String getUserMessage() {
         return userMessage;
     }
 
+    @ApiModelProperty(notes = "Сообщение для разработчика")
     public String getDeveloperMessage() {
         return developerMessage;
     }
