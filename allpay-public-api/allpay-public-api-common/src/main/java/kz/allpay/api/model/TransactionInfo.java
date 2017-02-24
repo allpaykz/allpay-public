@@ -1,5 +1,8 @@
 package kz.allpay.api.model;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
 import java.math.BigDecimal;
 import java.util.Date;
 
@@ -9,6 +12,7 @@ import java.util.Date;
  * @author magzhan.karasayev
  * @since 11/16/16 7:36 PM
  */
+@ApiModel
 public class TransactionInfo {
 
     private String transactionNumber;
@@ -119,42 +123,52 @@ public class TransactionInfo {
         this.onlineTransactionId = onlineTransactionId;
     }
 
+    @ApiModelProperty(notes = "Номер транзакции")
     public String getTransactionNumber() {
         return transactionNumber;
     }
 
+    @ApiModelProperty(notes = "Уникальный айди транзакции")
     public String getUtn() {
         return utn;
     }
 
+    @ApiModelProperty(notes = "Дата проведения")
     public Date getPostedOn() {
         return postedOn;
     }
 
+    @ApiModelProperty(notes = "Описание")
     public String getDescription() {
         return description;
     }
 
+    @ApiModelProperty(notes = "Какая сумма пришла")
     public BigDecimal getAmountCredit() {
         return amountCredit;
     }
 
+    @ApiModelProperty(notes = "Какая сумма ушла")
     public BigDecimal getAmountDebit() {
         return amountDebit;
     }
 
+    @ApiModelProperty(notes = "Сколько денег на счету")
     public BigDecimal getRunningBalance() {
         return runningBalance;
     }
 
+    @ApiModelProperty(notes = "От кого платеж")
     public String getFromUser() {
         return fromUser;
     }
 
+    @ApiModelProperty(notes = "Кому предназачен платеж")
     public String getToUser() {
         return toUser;
     }
 
+    @ApiModelProperty(notes = "ID онлайн транзакции")
     public String getOnlineTransactionId() {
         return onlineTransactionId;
     }

@@ -3,9 +3,9 @@ package kz.allpay.api.interfaces;
 import kz.allpay.api.exception.GeneralException;
 import kz.allpay.api.exception.LoginNotValidException;
 import kz.allpay.api.model.request.*;
+import kz.allpay.api.model.response.DefaultResponse;
+import kz.allpay.api.model.response.GetUserWalletResponse;
 import kz.allpay.api.model.response.UserProfileResponse;
-
-import javax.ws.rs.core.Response;
 
 /**
  * Этот класс содержит запросы для управления своим профилем
@@ -21,25 +21,25 @@ public interface UserProfileManagement {
     /**
      * Изменения метода уведомления
      */
-    public Response changeAlertMethod(ChangeAlertRequest request) throws GeneralException;
+    public DefaultResponse changeAlertMethod(ChangeAlertRequest request) throws GeneralException;
 
     /**
      * Изменение пина
      */
-    public Response changePin(ChangePinRequest request) throws LoginNotValidException, GeneralException;
+    public DefaultResponse changePin(ChangePinRequest request) throws LoginNotValidException, GeneralException;
 
     /**
      * Логаут сессии
      */
-    public Response sessionLogout();
+    public DefaultResponse sessionLogout();
 
     /**
      * Отвязка устройства
      */
-    public Response unbindDevice(UnbindDeviceRequest request);
+    public DefaultResponse unbindDevice(UnbindDeviceRequest request) throws GeneralException;
 
     /**
      * Получить кошельки текущего юзера
      */
-    public Response getUserWallet();
+    public GetUserWalletResponse getUserWallet(String lang) throws GeneralException;
 }
