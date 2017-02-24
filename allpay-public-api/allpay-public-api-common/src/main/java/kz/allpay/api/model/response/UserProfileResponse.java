@@ -21,7 +21,6 @@ public class UserProfileResponse extends AbstractResponse {
 
     private BigDecimal availableBalance;
     private BigDecimal currentBalance;
-    private BigDecimal blockedBalance;
 
     private Date lastLogin;
 
@@ -86,14 +85,6 @@ public class UserProfileResponse extends AbstractResponse {
         this.currentBalance = currentBalance;
     }
 
-    @ApiModelProperty(notes = "Блокированные деньги пользователя")
-    public BigDecimal getBlockedBalance() {
-        return blockedBalance;
-    }
-
-    public void setBlockedBalance(BigDecimal blockedBalance) {
-        this.blockedBalance = blockedBalance;
-    }
 
     @ApiModelProperty(notes = "Дата последнего входа пользователя")
     public Date getLastLogin() {

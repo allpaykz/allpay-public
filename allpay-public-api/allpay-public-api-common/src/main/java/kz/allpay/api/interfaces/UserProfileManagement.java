@@ -17,7 +17,7 @@ public interface UserProfileManagement {
     /**
      * Получение общей информации о пользователе
      */
-    public UserProfileResponse getUserInfo() throws GeneralException;
+    public Response getUserInfo() throws GeneralException;
 
     /**
      * Изменения метода уведомления
