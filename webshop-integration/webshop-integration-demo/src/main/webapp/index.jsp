@@ -98,7 +98,7 @@
 
     <div class="panel panel-success col-md-3">
         <div class="panel-heading">
-            <h3 class="panel-title">Для test.all-pay.kz</h3>
+            <h3 class="panel-title">Для beta.allpay.kz</h3>
         </div>
         <div class="panel-body">
             Логин - 75551234561<br>
@@ -120,7 +120,7 @@
     </div>
     <div class="panel panel-success col-md-3">
         <div class="panel-heading">
-            <h3 class="panel-title">Для mfsci</h3>
+            <h3 class="panel-title">Для alpha.allpay.kz</h3>
         </div>
         <div class="panel-body">
             ID: 75551234580<br>
