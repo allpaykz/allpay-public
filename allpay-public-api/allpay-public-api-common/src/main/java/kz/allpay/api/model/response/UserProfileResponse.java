@@ -14,13 +14,14 @@ import java.util.List;
  */
 @ApiModel
 public class UserProfileResponse extends AbstractResponse {
-    private UserProfileResponse userInfo;
+
     private String loginName;
     private String firstName;
     private String lastName;
 
     private BigDecimal availableBalance;
     private BigDecimal currentBalance;
+    private BigDecimal blockedBalance;
 
     private Date lastLogin;
 
@@ -32,12 +33,6 @@ public class UserProfileResponse extends AbstractResponse {
 
     public UserProfileResponse(String userMessage, String developerMessage) {
         super(userMessage, developerMessage);
-    }
-
-    public UserProfileResponse(String userMessage, String developerMessage,
-                               UserProfileResponse userInfo) {
-        super(userMessage, developerMessage);
-        this.userInfo = userInfo;
     }
 
     @ApiModelProperty(notes = "Логин пользователя")
@@ -85,6 +80,14 @@ public class UserProfileResponse extends AbstractResponse {
         this.currentBalance = currentBalance;
     }
 
+    @ApiModelProperty(notes = "Блокированные деньги пользователя")
+    public BigDecimal getBlockedBalance() {
+        return blockedBalance;
+    }
+
+    public void setBlockedBalance(BigDecimal blockedBalance) {
+        this.blockedBalance = blockedBalance;
+    }
 
     @ApiModelProperty(notes = "Дата последнего входа пользователя")
     public Date getLastLogin() {
