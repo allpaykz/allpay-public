@@ -4,6 +4,7 @@ import kz.allpay.api.exception.GeneralException;
 import kz.allpay.api.exception.LoginNotValidException;
 import kz.allpay.api.model.request.*;
 import kz.allpay.api.model.response.DefaultResponse;
+import kz.allpay.api.model.response.UserProfileResponse;
 
 import javax.ws.rs.core.Response;
 
@@ -16,7 +17,7 @@ public interface UserProfileManagement {
     /**
      * Получение общей информации о пользователе
      */
-    public Response getUserInfo();
+    public UserProfileResponse getUserInfo() throws GeneralException;
 
     /**
      * Изменения метода уведомления

@@ -1,5 +1,8 @@
 package kz.allpay.api.model.response;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
@@ -9,7 +12,9 @@ import java.util.List;
  * @author magzhan.karasayev
  * @since 11/16/16 7:12 PM
  */
+@ApiModel
 public class UserProfileResponse extends AbstractResponse {
+    private UserProfileResponse userInfo;
     private String loginName;
     private String firstName;
     private String lastName;
@@ -22,12 +27,21 @@ public class UserProfileResponse extends AbstractResponse {
 
     private List<String> userAccountsList = new ArrayList<>();
 
-
     public UserProfileResponse() {
-        this.setUserMessage("");
-        this.setDeveloperMessage("");
+        super();
     }
 
+    public UserProfileResponse(String userMessage, String developerMessage) {
+        super(userMessage, developerMessage);
+    }
+
+    public UserProfileResponse(String userMessage, String developerMessage,
+                               UserProfileResponse userInfo) {
+        super(userMessage, developerMessage);
+        this.userInfo = userInfo;
+    }
+
+    @ApiModelProperty(notes = "Логин пользователя")
     public String getLoginName() {
         return loginName;
     }
@@ -36,6 +50,7 @@ public class UserProfileResponse extends AbstractResponse {
         this.loginName = loginName;
     }
 
+    @ApiModelProperty(notes = "Имя пользователя")
     public String getFirstName() {
         return firstName;
     }
@@ -44,6 +59,7 @@ public class UserProfileResponse extends AbstractResponse {
         this.firstName = firstName;
     }
 
+    @ApiModelProperty(notes = "Фамилия пользователя")
     public String getLastName() {
         return lastName;
     }
@@ -52,6 +68,7 @@ public class UserProfileResponse extends AbstractResponse {
         this.lastName = lastName;
     }
 
+    @ApiModelProperty(notes = "Доступные деньги пользователя")
     public BigDecimal getAvailableBalance() {
         return availableBalance;
     }
@@ -60,6 +77,7 @@ public class UserProfileResponse extends AbstractResponse {
         this.availableBalance = availableBalance;
     }
 
+    @ApiModelProperty(notes = "Текущие деньги пользователя")
     public BigDecimal getCurrentBalance() {
         return currentBalance;
     }
@@ -68,8 +86,8 @@ public class UserProfileResponse extends AbstractResponse {
         this.currentBalance = currentBalance;
     }
 
+    @ApiModelProperty(notes = "Блокированные деньги пользователя")
     public BigDecimal getBlockedBalance() {
-        blockedBalance = currentBalance.subtract(availableBalance);
         return blockedBalance;
     }
 
@@ -77,6 +95,7 @@ public class UserProfileResponse extends AbstractResponse {
         this.blockedBalance = blockedBalance;
     }
 
+    @ApiModelProperty(notes = "Дата последнего входа пользователя")
     public Date getLastLogin() {
         return lastLogin;
     }
@@ -85,6 +104,7 @@ public class UserProfileResponse extends AbstractResponse {
         this.lastLogin = lastLogin;
     }
 
+    @ApiModelProperty(notes = "Номера счетов пользователя")
     public List<String> getUserAccountsList() {
         return userAccountsList;
     }
