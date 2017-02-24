@@ -60,7 +60,7 @@ public abstract class AbstractWebApplicationException extends Exception implemen
         return Response.status(Response.Status.BAD_REQUEST).entity(new ExceptionResponse(developerMessage, userMessage)).build();
     }
 
-    private class ExceptionResponse {
+    public class ExceptionResponse {
         private String developerMessage;
         private String userMessage;
 
