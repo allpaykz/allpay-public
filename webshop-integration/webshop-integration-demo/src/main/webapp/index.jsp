@@ -95,49 +95,15 @@
 
 <div class="container col-md-6 col-xs-12 col-md-offset-3">
     <h2>Подсказки для тестов</h2>
-
     <div class="panel panel-success col-md-3">
         <div class="panel-heading">
-            <h3 class="panel-title">Для beta.allpay.kz</h3>
+            <h3 class="panel-title">Сертификаты этого мерчанта должны лежать в папке mockKeys</h3>
         </div>
         <div class="panel-body">
             Логин - 75551234561<br>
             пароль - merchant<br>
             номер счета - LM200000<br>
             ID терминала - 55424
-        </div>
-    </div>
-    <div class="panel panel-primary col-md-3">
-        <div class="panel-heading">
-            <h3 class="panel-title">Для тестирования магазина PHP</h3>
-        </div>
-        <div class="panel-body">
-            ID:75551234569<br>
-            password:merchant<br>
-            номер счета - CH000000<br>
-            terminal_id: 25252
-        </div>
-    </div>
-    <div class="panel panel-success col-md-3">
-        <div class="panel-heading">
-            <h3 class="panel-title">Для alpha.allpay.kz</h3>
-        </div>
-        <div class="panel-body">
-            ID: 75551234580<br>
-            password: merchant<br>
-            номер счета - MF000000<br>
-            terminal_id: 75896
-        </div>
-    </div>
-    <div class="panel panel-primary col-md-3">
-        <div class="panel-heading">
-            <h3 class="panel-title">Для локального тестирования разработчиками</h3>
-        </div>
-        <div class="panel-body">
-            ID: 75551234560<br>
-            password: merchant<br>
-            номер счета - LM000000<br>
-            terminal_id: 00013, 00014
         </div>
     </div>
 </div>
