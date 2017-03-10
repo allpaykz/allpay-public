@@ -53,6 +53,16 @@
                    id="terminalIdInput" name="terminalId" placeholder="Введите ID терминала">
         </div>
 
+        <div class="form-group col-xs-10 col-md-10">
+            <label class="control-label" for="pemInput"></label>
+            <textarea class="form-control" name="pemInput" id="pemInputId" placeholder="Приватный ключ(для подписи запроса)"></textarea>
+        </div>
+
+        <div class="form-group col-xs-10 col-md-10">
+            <label class="control-label" for="pemInputResponse"></label>
+            <textarea class="form-control" name="pemInputResponse" id="pemInputResponseId" placeholder="Публичный ключ(для проверки подписи ответа)"></textarea>
+        </div>
+
         <%--This fields only for test purposes--%>
         <div class="form-group col-xs-12 col-md-12" id="testFields">
             <label for="terminalIdInput" class="control-label"></label>
@@ -62,12 +72,6 @@
                    min="600" max="86400"
                    id="transactionTimeOutInSeconds" name="transactionTimeOutInSeconds" placeholder="Таймаут">
             <p class="help-block">Введите  таймаут транзакции</p>
-            <div class="">
-                <label>
-                    <input type="checkbox" value="false" id="wrongKeyFile" name="wrongKeyFile">
-                    Подписать неправильным ключом
-                </label>
-            </div>
             <div class="">
                 <label>
                     <input type="checkbox" value="false" id="deleteRequiredFields" name="deleteRequiredFields">
@@ -122,14 +126,15 @@
         var amount = document.getElementById("amountInput").value;
         var shopName = document.getElementById("shopNameInput").value;
         var terminalId = document.getElementById("terminalIdInput").value;
-        var wrongKeyFile = document.getElementById("wrongKeyFile").value;
         var deleteRequiredFields = document.getElementById("deleteRequiredFields").value;
-        var transactionTimeOutInSeconds=document.getElementById("transactionTimeOutInSeconds").value;
+        var transactionTimeOutInSeconds = document.getElementById("transactionTimeOutInSeconds").value;
+        var pemInput = document.getElementById("pemInputId").value;
+        var pemInputResponse = document.getElementById("pemInputResponseId").value;
 
         $.ajax({
             type: "GET",
             async: false,
-            url: "${pageContext.request.contextPath}/webresources/test/getSignedXML?invoiceNumber=" + invoice + "&amount=" + amount + "&shopName=" + shopName + "&terminalId=" + terminalId+"&wrongKeyFile=" + wrongKeyFile+"&deleteRequiredFields="+deleteRequiredFields+"&transactionTimeOutInSeconds="+transactionTimeOutInSeconds
+            url: "${pageContext.request.contextPath}/webresources/test/getSignedXML?invoiceNumber=" + invoice + "&amount=" + amount + "&shopName=" + shopName + "&terminalId=" + terminalId + "&deleteRequiredFields="+deleteRequiredFields+"&transactionTimeOutInSeconds="+transactionTimeOutInSeconds + "&pemInput=" + encodeURIComponent(pemInput) + "&pemInputResponse=" + encodeURIComponent(pemInputResponse)
 
         }).done(function (data) {
             document.getElementById('webshopRequest').value = data.webshopRequest;
