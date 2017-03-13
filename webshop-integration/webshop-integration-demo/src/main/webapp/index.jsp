@@ -96,6 +96,16 @@
         </div>
     </form>
 </div>
+<div class="container">
+    <h1 >Для тестирования:</h1>
+    <p>Нужно сгенерировать ключи мерчанту интернет магазина. (У мерчанта должен быть активный терминал)</p>
+    <ol>
+    <li>Авторизовать как мерчант.</li>
+    <li>Пройти по <strong>Настройки</strong> -&gt;<strong>Управление сертификатами</strong></li>
+    <li>Нажать <strong>Сгенерировать пару и скачать приватный ключ</strong></li>
+    <li>Вставить содержимое файлов в форму (<strong>Приватный</strong> и <strong>Публичный ключ</strong>)</li>
+    </ol>
+</div>
 
 <%--<script src="js/jquery-1.11.3.min.js"></script>--%>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
