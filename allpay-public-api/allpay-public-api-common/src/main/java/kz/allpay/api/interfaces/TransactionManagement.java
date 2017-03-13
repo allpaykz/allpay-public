@@ -34,7 +34,7 @@ public interface TransactionManagement {
     /**
      * Получение списка изранных платежей по логину пользователя
      */
-    public FavoritePaymentsResponse getFavoritePayments(FavoritePaymentsRequest request) throws LoginNotValidException, GeneralException;
+    public FavoritePaymentsResponse getFavoritePayments(String language) throws LoginNotValidException, GeneralException;
 
     /**
      * Проверка доступности наличных, прав и тд без фактического создания транзакций
