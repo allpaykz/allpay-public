@@ -1,9 +1,13 @@
 package kz.allpay.api.model.request;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
 /**
  * @author magzhan.karasayev
  * @since 11/16/16 7:13 PM
  */
+@ApiModel
 public class TransactionHistoryRequest extends AbstractRequest {
     private String loginName;
     private Long dateFrom;
@@ -11,6 +15,7 @@ public class TransactionHistoryRequest extends AbstractRequest {
     private Integer offset;
     private Integer limit;
 
+    @ApiModelProperty(notes = "Отступ, с какого номера начать по порядку")
     public Integer getOffset() {
         return offset;
     }
@@ -19,6 +24,7 @@ public class TransactionHistoryRequest extends AbstractRequest {
         this.offset = offset;
     }
 
+    @ApiModelProperty(notes = "Сколько транзакций вернуть")
     public Integer getLimit() {
         return limit;
     }
@@ -27,6 +33,7 @@ public class TransactionHistoryRequest extends AbstractRequest {
         this.limit = limit;
     }
 
+    @ApiModelProperty(notes = "Логин")
     public String getLoginName() {
         return loginName;
     }
@@ -35,6 +42,7 @@ public class TransactionHistoryRequest extends AbstractRequest {
         this.loginName = loginName;
     }
 
+    @ApiModelProperty(notes = "Дата начала")
     public Long getDateFrom() {
         return dateFrom;
     }
@@ -43,6 +51,7 @@ public class TransactionHistoryRequest extends AbstractRequest {
         this.dateFrom = dateFrom;
     }
 
+    @ApiModelProperty(notes = "Дата конца")
     public Long getDateTo() {
         return dateTo;
     }
