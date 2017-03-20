@@ -29,6 +29,7 @@ public class TransactionInfo {
     private BigDecimal charges;
     private String name;
     private String status;
+    private Boolean parent;
 
     public TransactionInfo charges(final BigDecimal charges) {
         this.charges = charges;
@@ -223,6 +224,13 @@ public class TransactionInfo {
         return this;
     }
 
+    public Boolean getParent() {
+        return parent;
+    }
 
+    public TransactionInfo setParent(Boolean parent) {
+        this.parent = parent;
+        return this;
+    }
 }
 
