@@ -21,6 +21,9 @@ public class TransactionInformation {
     private String terminalId;
     private String status;
 
+    private String statusI18n;
+    private String typeI18n;
+
 
     public String getStatus() {
         return status;
@@ -116,5 +119,21 @@ public class TransactionInformation {
 
     public void setTerminalId(String terminalId) {
         this.terminalId = terminalId;
+    }
+
+    public String getStatusI18n() {
+        return statusI18n;
+    }
+
+    public void setStatusI18n(String statusI18n) {
+        this.statusI18n = statusI18n;
+    }
+
+    public String getTypeI18n() {
+        return typeI18n;
+    }
+
+    public void setTypeI18n(String typeI18n) {
+        this.typeI18n = typeI18n;
     }
 }
