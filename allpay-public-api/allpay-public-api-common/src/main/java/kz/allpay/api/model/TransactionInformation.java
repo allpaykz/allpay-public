@@ -21,6 +21,9 @@ public class TransactionInformation {
     private String terminalId;
     private String status;
 
+    private Long createdOn;
+    private Long valueDate;
+
     private String statusI18n;
     private String typeI18n;
 
@@ -148,6 +151,24 @@ public class TransactionInformation {
 
     public TransactionInformation setTypeI18n(String typeI18n) {
         this.typeI18n = typeI18n;
+        return this;
+    }
+
+    public Long getCreatedOn() {
+        return createdOn;
+    }
+
+    public TransactionInformation setCreatedOn(Long createdOn) {
+        this.createdOn = createdOn;
+        return this;
+    }
+
+    public Long getValueDate() {
+        return valueDate;
+    }
+
+    public TransactionInformation setValueDate(Long valueDate) {
+        this.valueDate = valueDate;
         return this;
     }
 }
