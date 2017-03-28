@@ -12,6 +12,7 @@ import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+import java.util.Date;
 
 /**
  * Этот интерфейс содержит методы создания и управления жизненным циклом транзакций.
@@ -29,7 +30,8 @@ public interface TransactionManagement {
     /**
      * Получение списка транзакций по фильтрующим критериям.
      */
-    public TransactionHistoryResponse getTransactionHistory(TransactionHistoryRequest request) throws LoginNotValidException, GeneralException;
+    public TransactionHistoryResponse getTransactionHistory(Long dateFrom, Long dateTo, Integer offset, Integer limit, String language)
+            throws LoginNotValidException, GeneralException;
 
     /**
      * Получение списка изранных платежей по логину пользователя

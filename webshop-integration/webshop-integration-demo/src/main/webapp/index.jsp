@@ -53,6 +53,16 @@
                    id="terminalIdInput" name="terminalId" placeholder="Введите ID терминала">
         </div>
 
+        <div class="form-group col-xs-10 col-md-10">
+            <label class="control-label" for="pemInput"></label>
+            <textarea class="form-control" name="pemInput" id="pemInputId" placeholder="Приватный ключ(для подписи запроса)"></textarea>
+        </div>
+
+        <div class="form-group col-xs-10 col-md-10">
+            <label class="control-label" for="pemInputResponse"></label>
+            <textarea class="form-control" name="pemInputResponse" id="pemInputResponseId" placeholder="Публичный ключ(для проверки подписи ответа)"></textarea>
+        </div>
+
         <%--This fields only for test purposes--%>
         <div class="form-group col-xs-12 col-md-12" id="testFields">
             <label for="terminalIdInput" class="control-label"></label>
@@ -62,12 +72,6 @@
                    min="600" max="86400"
                    id="transactionTimeOutInSeconds" name="transactionTimeOutInSeconds" placeholder="Таймаут">
             <p class="help-block">Введите  таймаут транзакции</p>
-            <div class="">
-                <label>
-                    <input type="checkbox" value="false" id="wrongKeyFile" name="wrongKeyFile">
-                    Подписать неправильным ключом
-                </label>
-            </div>
             <div class="">
                 <label>
                     <input type="checkbox" value="false" id="deleteRequiredFields" name="deleteRequiredFields">
@@ -92,54 +96,15 @@
         </div>
     </form>
 </div>
-
-<div class="container col-md-6 col-xs-12 col-md-offset-3">
-    <h2>Подсказки для тестов</h2>
-
-    <div class="panel panel-success col-md-3">
-        <div class="panel-heading">
-            <h3 class="panel-title">Для beta.allpay.kz</h3>
-        </div>
-        <div class="panel-body">
-            Логин - 75551234561<br>
-            пароль - merchant<br>
-            номер счета - LM200000<br>
-            ID терминала - 55424
-        </div>
-    </div>
-    <div class="panel panel-primary col-md-3">
-        <div class="panel-heading">
-            <h3 class="panel-title">Для тестирования магазина PHP</h3>
-        </div>
-        <div class="panel-body">
-            ID:75551234569<br>
-            password:merchant<br>
-            номер счета - CH000000<br>
-            terminal_id: 25252
-        </div>
-    </div>
-    <div class="panel panel-success col-md-3">
-        <div class="panel-heading">
-            <h3 class="panel-title">Для alpha.allpay.kz</h3>
-        </div>
-        <div class="panel-body">
-            ID: 75551234580<br>
-            password: merchant<br>
-            номер счета - MF000000<br>
-            terminal_id: 75896
-        </div>
-    </div>
-    <div class="panel panel-primary col-md-3">
-        <div class="panel-heading">
-            <h3 class="panel-title">Для локального тестирования разработчиками</h3>
-        </div>
-        <div class="panel-body">
-            ID: 75551234560<br>
-            password: merchant<br>
-            номер счета - LM000000<br>
-            terminal_id: 00013, 00014
-        </div>
-    </div>
+<div class="container">
+    <h1 >Для тестирования:</h1>
+    <p>Нужно сгенерировать ключи мерчанту интернет магазина. (У мерчанта должен быть активный терминал)</p>
+    <ol>
+    <li>Авторизовать как мерчант.</li>
+    <li>Пройти по <strong>Настройки</strong> -&gt;<strong>Управление сертификатами</strong></li>
+    <li>Нажать <strong>Сгенерировать пару и скачать приватный ключ</strong></li>
+    <li>Вставить содержимое файлов в форму (<strong>Приватный</strong> и <strong>Публичный ключ</strong>)</li>
+    </ol>
 </div>
 
 <%--<script src="js/jquery-1.11.3.min.js"></script>--%>
@@ -156,14 +121,15 @@
         var amount = document.getElementById("amountInput").value;
         var shopName = document.getElementById("shopNameInput").value;
         var terminalId = document.getElementById("terminalIdInput").value;
-        var wrongKeyFile = document.getElementById("wrongKeyFile").value;
         var deleteRequiredFields = document.getElementById("deleteRequiredFields").value;
-        var transactionTimeOutInSeconds=document.getElementById("transactionTimeOutInSeconds").value;
+        var transactionTimeOutInSeconds = document.getElementById("transactionTimeOutInSeconds").value;
+        var pemInput = document.getElementById("pemInputId").value;
+        var pemInputResponse = document.getElementById("pemInputResponseId").value;
 
         $.ajax({
             type: "GET",
             async: false,
-            url: "${pageContext.request.contextPath}/webresources/test/getSignedXML?invoiceNumber=" + invoice + "&amount=" + amount + "&shopName=" + shopName + "&terminalId=" + terminalId+"&wrongKeyFile=" + wrongKeyFile+"&deleteRequiredFields="+deleteRequiredFields+"&transactionTimeOutInSeconds="+transactionTimeOutInSeconds
+            url: "${pageContext.request.contextPath}/webresources/test/getSignedXML?invoiceNumber=" + invoice + "&amount=" + amount + "&shopName=" + shopName + "&terminalId=" + terminalId + "&deleteRequiredFields="+deleteRequiredFields+"&transactionTimeOutInSeconds="+transactionTimeOutInSeconds + "&pemInput=" + encodeURIComponent(pemInput) + "&pemInputResponse=" + encodeURIComponent(pemInputResponse)
 
         }).done(function (data) {
             document.getElementById('webshopRequest').value = data.webshopRequest;

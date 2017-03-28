@@ -8,16 +8,16 @@ import kz.allpay.mfs.webshop.generated.response.WebShopResponseType;
 import kz.allpay.mfs.webshop.keys.PrivateKeyReader;
 import kz.allpay.mfs.webshop.keys.PublicKeyReader;
 import kz.allpay.mfs.webshop.signature.SignatureUtils;
+import org.bouncycastle.openssl.PEMReader;
 import sun.misc.BASE64Decoder;
 import sun.misc.BASE64Encoder;
 
 import javax.ejb.Stateless;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
-import java.io.ByteArrayInputStream;
-import java.io.InputStream;
-import java.io.UnsupportedEncodingException;
+import java.io.*;
 import java.math.BigDecimal;
+import java.security.KeyPair;
 import java.security.PrivateKey;
 import java.security.PublicKey;
 import java.util.HashMap;
@@ -50,19 +50,22 @@ public class TestWebshopServices {
             @QueryParam("terminalId") String terminalId,
             @QueryParam("invoiceNumber") String invoiceNumber,
             @QueryParam("deleteRequiredFields") Boolean deleteRequiredFields,
-            @QueryParam("wrongKeyFile") Boolean wrongKeyFile,
-            @QueryParam("transactionTimeOutInSeconds") int transactionTimeOutInSeconds) {
+            @QueryParam("transactionTimeOutInSeconds") int transactionTimeOutInSeconds,
+            @QueryParam("pemInput") String pemInput,
+            @QueryParam("pemInputResponse") String pemInputResponse) {
 
         System.out.println("amount = " + amount);
         System.out.println("shopName = " + shopName);
         System.out.println("terminalId = " + terminalId);
         System.out.println("invoiceNumber = " + invoiceNumber);
         System.out.println("deleteRequiredFields = " + deleteRequiredFields);
-        System.out.println("wrongKeyFile = " + wrongKeyFile);
         System.out.println("transactionTimeOutInSeconds = " + transactionTimeOutInSeconds);
+        System.out.println("pemInput = " + pemInput);
+        System.out.println("pemInputResponse = " + pemInputResponse);
 
         try {
-            final String signedXML = addInvoiceToDatabase(amount, terminalId, invoiceNumber, shopName, wrongKeyFile,
+            SavedPublicKeyStorage.put(invoiceNumber, getPublicKey(pemInputResponse));
+            final String signedXML = addInvoiceToDatabase(amount, terminalId, invoiceNumber, shopName, pemInput,
                                                           deleteRequiredFields,transactionTimeOutInSeconds);
             final BASE64Encoder encoder = new BASE64Encoder();
             final String base64XML = encoder.encode(signedXML.getBytes());
@@ -70,14 +73,22 @@ public class TestWebshopServices {
             result.put("webshopRequest", base64XML);
 
             return result;
-        } catch (UnsupportedEncodingException e) {
+        } catch (IOException e) {
             e.printStackTrace();
             return null;
         }
     }
 
+    private PublicKey getPublicKey(String pemInputResponse) throws IOException {
+        final Reader reader = new StringReader(pemInputResponse);
+        final PEMReader pemReader = new PEMReader(reader);
+        return (PublicKey) pemReader.readObject();
+    }
+
+
+
     private String addInvoiceToDatabase(String amount, String terminalId,
-                                        String invoiceNumber, String shopName, Boolean wrongKeyFile,
+                                        String invoiceNumber, String shopName, String pemInput,
                                         Boolean deleteRequiredFields,int transactionTimeOutInSeconds) throws UnsupportedEncodingException {
 
         try {
@@ -103,9 +114,7 @@ public class TestWebshopServices {
 
             WebShopRequestTransformer transformer = new WebShopRequestTransformer();
 
-            InputStream privateKeyStream = TestWebshopServices.class.getResourceAsStream(
-                    wrongKeyFile ? PRIVATE_WRONG_KEY_FILE : PRIVATE_KEY_FILE);
-            PrivateKey privateKey = PrivateKeyReader.loadPrivateKeyFromFile(privateKeyStream);
+            PrivateKey privateKey = readPrivateKey(pemInput);
 
             InputStream myInputStream = new ByteArrayInputStream(transformer.marshallRequestToByteArr(request));
             String signedRequestXml = SignatureUtils.signXML(privateKey, myInputStream);
@@ -113,6 +122,12 @@ public class TestWebshopServices {
             return signedRequestXml;
         } catch (Exception e) {
             throw new RuntimeException(e);
+        }
+    }
+
+    private PrivateKey readPrivateKey(String pemInput) throws IOException {
+        try (PEMReader pemReader = new PEMReader(new StringReader(pemInput))) {
+            return ((KeyPair) pemReader.readObject()).getPrivate();
         }
     }
 
@@ -128,13 +143,12 @@ public class TestWebshopServices {
             final String decodedString = new String(decodedBytes, "UTF-8");
             logger.info("\n" + decodedString);
 
-            final InputStream keyStream = TestWebshopServices.class.getResourceAsStream(PUBLIC_KEY_FILE);
-            final PublicKey publicKey = PublicKeyReader.loadPublicKeyFromFile(keyStream);
-            final boolean verified = SignatureUtils.verifySignatureInXML(decodedString, publicKey);
-            logger.info("\n\tXML received is verified: " + verified);
-
             final InputStream stream = new ByteArrayInputStream(decodedBytes);
             final WebShopResponseType response = transformer.unmarshallResponse(stream);
+
+            PublicKey publicKey = SavedPublicKeyStorage.get(response.getInvoiceNumber());
+            final boolean verified = SignatureUtils.verifySignatureInXML(decodedString, publicKey);
+            logger.info("\n\tXML received is verified: " + verified);
 
             logger.info(response.getTransaction().getStatus());
             mockTransactionStatusDataBase.put(response.getTransaction().getTransactionId(),

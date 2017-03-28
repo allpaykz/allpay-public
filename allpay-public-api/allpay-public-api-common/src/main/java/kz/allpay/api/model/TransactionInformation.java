@@ -21,100 +21,154 @@ public class TransactionInformation {
     private String terminalId;
     private String status;
 
+    private Long createdOn;
+    private Long valueDate;
+
+    private String statusI18n;
+    private String typeI18n;
+
 
     public String getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public TransactionInformation setStatus(String status) {
         this.status = status;
+        return this;
     }
 
     public String getFromUser() {
         return fromUser;
     }
 
-    public void setFromUser(String fromUser) {
+    public TransactionInformation setFromUser(String fromUser) {
         this.fromUser = fromUser;
+        return this;
     }
 
     public String getToUser() {
         return toUser;
     }
 
-    public void setToUser(String toUser) {
+    public TransactionInformation setToUser(String toUser) {
         this.toUser = toUser;
+        return this;
     }
 
     public String getDescription() {
         return description;
     }
 
-    public void setDescription(String description) {
+    public TransactionInformation setDescription(String description) {
         this.description = description;
+        return this;
     }
 
     public BigDecimal getAmount() {
         return amount;
     }
 
-    public void setAmount(BigDecimal amount) {
+    public TransactionInformation setAmount(BigDecimal amount) {
         this.amount = amount;
+        return this;
     }
 
     public BigDecimal getTransactionNumber() {
         return transactionNumber;
     }
 
-    public void setTransactionNumber(BigDecimal transactionNumber) {
+    public TransactionInformation setTransactionNumber(BigDecimal transactionNumber) {
         this.transactionNumber = transactionNumber;
+        return this;
     }
 
     public String getChargeAmount() {
         return chargeAmount;
     }
 
-    public void setChargeAmount(String chargeAmount) {
+    public TransactionInformation setChargeAmount(String chargeAmount) {
         this.chargeAmount = chargeAmount;
+        return this;
     }
 
     public String getCurrencyCode() {
         return currencyCode;
     }
 
-    public void setCurrencyCode(String currencyCode) {
+    public TransactionInformation setCurrencyCode(String currencyCode) {
         this.currencyCode = currencyCode;
+        return this;
     }
 
     public String getRrn() {
         return rrn;
     }
 
-    public void setRrn(String rrn) {
+    public TransactionInformation setRrn(String rrn) {
         this.rrn = rrn;
+        return this;
     }
 
     public String getChannelId() {
         return channelId;
     }
 
-    public void setChannelId(String channelId) {
+    public TransactionInformation setChannelId(String channelId) {
         this.channelId = channelId;
+        return this;
     }
 
     public String getTransactionType() {
         return transactionType;
     }
 
-    public void setTransactionType(String transactionType) {
+    public TransactionInformation setTransactionType(String transactionType) {
         this.transactionType = transactionType;
+        return this;
     }
 
     public String getTerminalId() {
         return terminalId;
     }
 
-    public void setTerminalId(String terminalId) {
+    public TransactionInformation setTerminalId(String terminalId) {
         this.terminalId = terminalId;
+        return this;
+    }
+
+    public String getStatusI18n() {
+        return statusI18n;
+    }
+
+    public TransactionInformation setStatusI18n(String statusI18n) {
+        this.statusI18n = statusI18n;
+        return this;
+    }
+
+    public String getTypeI18n() {
+        return typeI18n;
+    }
+
+    public TransactionInformation setTypeI18n(String typeI18n) {
+        this.typeI18n = typeI18n;
+        return this;
+    }
+
+    public Long getCreatedOn() {
+        return createdOn;
+    }
+
+    public TransactionInformation setCreatedOn(Long createdOn) {
+        this.createdOn = createdOn;
+        return this;
+    }
+
+    public Long getValueDate() {
+        return valueDate;
+    }
+
+    public TransactionInformation setValueDate(Long valueDate) {
+        this.valueDate = valueDate;
+        return this;
     }
 }
