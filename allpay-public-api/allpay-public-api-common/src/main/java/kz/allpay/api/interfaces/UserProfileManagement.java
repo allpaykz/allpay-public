@@ -42,4 +42,9 @@ public interface UserProfileManagement {
      * Получить кошельки текущего юзера
      */
     public GetUserWalletResponse getUserWallet(String lang) throws GeneralException;
+
+    /**
+     * Сервис для отвязки устройства из приложения
+     */
+    public DefaultResponse unbindDeviceFromDeviceApplication(UnbindDeviceFromDeviceApplicationRequest request) throws GeneralException;
 }
