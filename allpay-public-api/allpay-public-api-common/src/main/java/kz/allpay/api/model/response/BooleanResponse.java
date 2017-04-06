@@ -17,6 +17,11 @@ public class BooleanResponse extends AbstractResponse {
         setResult(result);
     }
 
+    public BooleanResponse(Boolean result) {
+        super("Operation is completed", "Ok");
+        setResult(result);
+    }
+
     public Boolean getResult() {
         return result;
     }
