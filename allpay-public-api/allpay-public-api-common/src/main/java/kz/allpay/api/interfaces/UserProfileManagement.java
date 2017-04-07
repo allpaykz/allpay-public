@@ -1,5 +1,6 @@
 package kz.allpay.api.interfaces;
 
+
 import kz.allpay.api.exception.GeneralException;
 import kz.allpay.api.exception.LoginNotValidException;
 import kz.allpay.api.model.request.*;
@@ -42,4 +43,7 @@ public interface UserProfileManagement {
      * Получить кошельки текущего юзера
      */
     public GetUserWalletResponse getUserWallet(String lang) throws GeneralException;
+
+
+    Boolean acceptTermAndConditions() throws GeneralException;
 }
