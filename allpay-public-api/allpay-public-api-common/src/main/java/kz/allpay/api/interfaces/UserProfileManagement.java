@@ -46,4 +46,6 @@ public interface UserProfileManagement {
 
 
     Boolean acceptTermAndConditions() throws GeneralException;
+
+    Boolean checkAcceptanceOfTermsAndConditions() throws GeneralException;
 }
