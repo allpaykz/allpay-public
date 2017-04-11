@@ -45,7 +45,7 @@ public interface UserProfileManagement {
     public GetUserWalletResponse getUserWallet(String lang) throws GeneralException;
 
 
-    Boolean acceptTermAndConditions() throws GeneralException;
+    DefaultResponse acceptTermsAndConditions() throws GeneralException;
 
-    Boolean checkAcceptanceOfTermsAndConditions() throws GeneralException;
+    DefaultResponse checkAcceptanceOfTermsAndConditions() throws GeneralException;
 }
