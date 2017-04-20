@@ -3,6 +3,8 @@ package kz.allpay.api.model.response;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import kz.allpay.api.model.FavoritePaymentInfo;
+
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -11,7 +13,7 @@ import java.util.List;
  */
 
 @ApiModel
-public class FavoritePaymentsResponse extends AbstractResponse {
+public class FavoritePaymentsResponse extends AbstractResponse implements Serializable {
 
     private List<FavoritePaymentInfo> favoritePaymentInfos;
 

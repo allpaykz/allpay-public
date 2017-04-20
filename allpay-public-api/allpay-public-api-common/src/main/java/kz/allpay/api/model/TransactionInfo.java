@@ -3,6 +3,7 @@ package kz.allpay.api.model;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 
@@ -13,7 +14,7 @@ import java.util.Date;
  * @since 11/16/16 7:36 PM
  */
 @ApiModel
-public class TransactionInfo {
+public class TransactionInfo implements Serializable {
 
     private String transactionNumber;
     private String utn;
