@@ -5,13 +5,15 @@ import io.swagger.annotations.ApiModelProperty;
 import kz.allpay.api.model.TransactionInfo;
 import kz.allpay.api.model.TransactionInformation;
 
+import java.io.Serializable;
+
 /**
  * Contains nothing
  * @author magzhan.karasayev
  * @since 11/16/16 7:13 PM
  */
 @ApiModel
-public class TransactionInfoResponse extends AbstractResponse {
+public class TransactionInfoResponse extends AbstractResponse implements Serializable {
     private TransactionInformation transactionInformation;
 
     public TransactionInfoResponse() {

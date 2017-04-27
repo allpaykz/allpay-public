@@ -4,6 +4,7 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import kz.allpay.api.model.TransactionInfo;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -11,7 +12,7 @@ import java.util.List;
  * @since 11/16/16 7:13 PM
  */
 @ApiModel
-public class TransactionHistoryResponse extends AbstractResponse {
+public class TransactionHistoryResponse extends AbstractResponse implements Serializable {
 
     public TransactionHistoryResponse(List<TransactionInfo> transactionInfos) {
         this.transactionInfos = transactionInfos;

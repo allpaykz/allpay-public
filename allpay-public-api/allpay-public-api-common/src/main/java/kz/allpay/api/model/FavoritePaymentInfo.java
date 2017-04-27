@@ -1,5 +1,6 @@
 package kz.allpay.api.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -7,7 +8,7 @@ import java.util.Date;
  * <p>
  * Created by magzhan on 2/9/17.
  */
-public class FavoritePaymentInfo {
+public class FavoritePaymentInfo implements Serializable {
     private String serviceId;
     private String accountNumber;
     private Boolean trackable;

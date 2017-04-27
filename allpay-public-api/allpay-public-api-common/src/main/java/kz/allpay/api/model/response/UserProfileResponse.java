@@ -3,6 +3,7 @@ package kz.allpay.api.model.response;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
@@ -13,7 +14,7 @@ import java.util.List;
  * @since 11/16/16 7:12 PM
  */
 @ApiModel
-public class UserProfileResponse extends AbstractResponse {
+public class UserProfileResponse extends AbstractResponse implements Serializable {
 
     private String loginName;
     private String firstName;

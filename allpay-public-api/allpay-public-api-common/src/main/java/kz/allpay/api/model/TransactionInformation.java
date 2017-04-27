@@ -1,12 +1,13 @@
 package kz.allpay.api.model;
 
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 
 /**
  * Created by yerzhan.khibatkhanuly on 1/12/17.
  */
-public class TransactionInformation {
+public class TransactionInformation implements Serializable {
 
     private String channelId;
     private String transactionType;

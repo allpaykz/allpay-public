@@ -1,5 +1,6 @@
 package kz.allpay.api.interfaces;
 
+
 import kz.allpay.api.exception.GeneralException;
 import kz.allpay.api.exception.LoginNotValidException;
 import kz.allpay.api.model.request.*;
@@ -47,4 +48,8 @@ public interface UserProfileManagement {
      * Сервис для отвязки устройства из приложения
      */
     public DefaultResponse unbindDeviceFromDeviceApplication(UnbindDeviceFromDeviceApplicationRequest request) throws GeneralException;
+
+    DefaultResponse acceptTermsAndConditions() throws GeneralException;
+
+    DefaultResponse checkAcceptanceOfTermsAndConditions() throws GeneralException;
 }

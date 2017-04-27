@@ -3,6 +3,7 @@ package kz.allpay.api.model.response;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -10,7 +11,7 @@ import java.util.List;
  * Date: 2/24/17
  */
 @ApiModel
-public class GetUserWalletResponse extends AbstractResponse {
+public class GetUserWalletResponse extends AbstractResponse implements Serializable {
     private List<String> userAccounts;
 
     @ApiModelProperty(notes = "Номера счетов пользователя")
