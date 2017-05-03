@@ -52,4 +52,9 @@ public interface UserProfileManagement {
     DefaultResponse acceptTermsAndConditions() throws GeneralException;
 
     DefaultResponse checkAcceptanceOfTermsAndConditions() throws GeneralException;
+
+    /**
+     * сервиса для проверки пароля
+     */
+    DefaultResponse checkPassword() throws GeneralException;
 }
