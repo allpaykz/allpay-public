@@ -5,6 +5,7 @@ import kz.allpay.api.exception.GeneralException;
 import kz.allpay.api.exception.LoginNotValidException;
 import kz.allpay.api.model.request.*;
 import kz.allpay.api.model.response.DefaultResponse;
+import kz.allpay.api.model.response.GetUserEmailResponse;
 import kz.allpay.api.model.response.GetUserWalletResponse;
 import kz.allpay.api.model.response.UserProfileResponse;
 
@@ -57,4 +58,6 @@ public interface UserProfileManagement {
      * сервиса для проверки пароля
      */
     DefaultResponse checkPassword() throws GeneralException;
+
+    GetUserEmailResponse getUserEmail() throws GeneralException;
 }
