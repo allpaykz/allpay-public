@@ -26,6 +26,9 @@ public class UserProfileResponse extends AbstractResponse implements Serializabl
 
     private Date lastLogin;
 
+    private String email;
+    private String nickname;
+
     public UserProfileResponse() {
         super();
     }
@@ -95,6 +98,24 @@ public class UserProfileResponse extends AbstractResponse implements Serializabl
 
     public void setLastLogin(Date lastLogin) {
         this.lastLogin = lastLogin;
+    }
+
+    @ApiModelProperty(notes = "Email пользователя")
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    @ApiModelProperty(notes = "Псевдоним пользователя")
+    public String getNickname() {
+        return nickname;
+    }
+
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
     }
 }
 
