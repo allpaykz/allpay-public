@@ -58,6 +58,4 @@ public interface UserProfileManagement {
      * сервиса для проверки пароля
      */
     DefaultResponse checkPassword() throws GeneralException;
-
-    GetUserEmailResponse getUserEmail() throws GeneralException;
 }
