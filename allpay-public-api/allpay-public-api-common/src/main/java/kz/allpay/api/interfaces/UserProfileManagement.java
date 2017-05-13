@@ -1,13 +1,15 @@
 package kz.allpay.api.interfaces;
 
 
+import io.swagger.annotations.*;
+import kz.allpay.api.exception.AbstractWebApplicationException;
 import kz.allpay.api.exception.GeneralException;
 import kz.allpay.api.exception.LoginNotValidException;
 import kz.allpay.api.model.request.*;
-import kz.allpay.api.model.response.DefaultResponse;
-import kz.allpay.api.model.response.GetUserEmailResponse;
-import kz.allpay.api.model.response.GetUserWalletResponse;
-import kz.allpay.api.model.response.UserProfileResponse;
+import kz.allpay.api.model.response.*;
+
+import javax.ws.rs.*;
+import javax.ws.rs.core.MediaType;
 
 /**
  * Этот класс содержит запросы для управления своим профилем
@@ -15,6 +17,11 @@ import kz.allpay.api.model.response.UserProfileResponse;
  * @since 11/16/16 6:56 PM
  */
 public interface UserProfileManagement {
+
+    public BooleanResponse requestNumberChange(String numberToChangeTo) throws GeneralException;
+
+    public BooleanResponse changeNumberByTan(String tan) throws GeneralException;
+
     /**
      * Получение общей информации о пользователе
      */
