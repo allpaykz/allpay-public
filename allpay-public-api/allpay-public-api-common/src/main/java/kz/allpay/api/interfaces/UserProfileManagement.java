@@ -64,7 +64,7 @@ public interface UserProfileManagement {
     /**
      * сервиса для проверки пароля
      */
-    DefaultResponse checkPassword() throws GeneralException;
+    DefaultResponse checkPasswordWasReset() throws GeneralException;
 
     DefaultResponse changeUserEmail(String email) throws GeneralException;
 
