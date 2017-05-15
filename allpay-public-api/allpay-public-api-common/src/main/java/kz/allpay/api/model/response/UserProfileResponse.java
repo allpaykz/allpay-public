@@ -28,6 +28,7 @@ public class UserProfileResponse extends AbstractResponse implements Serializabl
 
     private String email;
     private String nickname;
+    private String alertMethod;
 
     public UserProfileResponse() {
         super();
@@ -116,6 +117,15 @@ public class UserProfileResponse extends AbstractResponse implements Serializabl
 
     public void setNickname(String nickname) {
         this.nickname = nickname;
+    }
+
+    @ApiModelProperty(notes = "Метод уведомления пользователя")
+    public String getAlertMethod() {
+        return alertMethod;
+    }
+
+    public void setAlertMethod(String alertMethod) {
+        this.alertMethod = alertMethod;
     }
 }
 
