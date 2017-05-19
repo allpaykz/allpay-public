@@ -66,7 +66,9 @@ public interface UserProfileManagement {
      */
     DefaultResponse checkPasswordWasReset() throws GeneralException;
 
-    DefaultResponse changeUserEmail(String email, boolean emailReceipts) throws GeneralException;
+    DefaultResponse changeUserEmail(String email) throws GeneralException;
 
     DefaultResponse changeNickname(String nickname) throws GeneralException;
+
+    DefaultResponse changeEmailReceipt(Boolean emailReceipts) throws GeneralException;
 }

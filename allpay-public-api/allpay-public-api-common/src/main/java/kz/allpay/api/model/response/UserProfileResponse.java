@@ -30,6 +30,8 @@ public class UserProfileResponse extends AbstractResponse implements Serializabl
     private String nickname;
     private String alertMethod;
 
+    private Boolean emailReceipts;
+
     public UserProfileResponse() {
         super();
     }
@@ -126,6 +128,15 @@ public class UserProfileResponse extends AbstractResponse implements Serializabl
 
     public void setAlertMethod(String alertMethod) {
         this.alertMethod = alertMethod;
+    }
+
+    @ApiModelProperty(notes = "Квитанций на email")
+    public Boolean getEmailReceipts() {
+        return emailReceipts;
+    }
+
+    public void setEmailReceipts(Boolean emailReceipts) {
+        this.emailReceipts = emailReceipts;
     }
 }
 
