@@ -3,12 +3,17 @@ package kz.allpay.soap.demo;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
-import kz.allpay.mfs.ws.soap.generated.v1_0.CompleteTransactionResponse;
-
-import java.io.*;
+import com.google.gson.stream.JsonReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
+import java.io.Reader;
 import java.lang.reflect.Type;
 import java.util.HashMap;
 import java.util.Map;
+import kz.allpay.mfs.ws.soap.generated.v1_0.CompleteTransactionResponse;
 
 /**
  * User: Sanzhar Aubakirov
@@ -16,6 +21,8 @@ import java.util.Map;
  */
 
 public class DataBase {
+
+    private static Type myType = new TypeToken<HashMap<String, CompleteTransactionResponse>>() {}.getType();
 
     private static final Map<String, CompleteTransactionResponse> responseDatabase = new HashMap<>();
 
@@ -35,15 +42,17 @@ public class DataBase {
 
     public static void readFromStorageFile() throws IOException {
         final File storageFile = new File(STORAGE_FILE_FULL_NAME);
-        BufferedReader reader = new BufferedReader(new FileReader(storageFile));
-        String line;
-        StringBuilder builder = new StringBuilder();
-        while ((line = reader.readLine()) != null){
-            builder.append(line).append("\n");
+
+        if (!storageFile.exists()) {
+            return;
         }
-        reader.close();
-        String jsonDic = builder.toString();
-        Type myType = new TypeToken<HashMap<String, CompleteTransactionResponse>>() {}.getType();
-        responseDatabase.putAll(gson.fromJson(jsonDic, myType));
+
+        try (final Reader fileReader = new InputStreamReader(new FileInputStream(storageFile), "UTF-8")) {
+            final JsonReader reader = new JsonReader(fileReader);
+            final Map<String, CompleteTransactionResponse> databaseFile = gson.fromJson(reader, myType);
+            if (databaseFile != null) {
+                responseDatabase.putAll(databaseFile);
+            }
+        }
     }
 }
