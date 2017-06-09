@@ -1,7 +1,6 @@
 package kz.allpay.soap.demo;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
+import com.google.gson.*;
 import com.google.gson.reflect.TypeToken;
 import com.google.gson.stream.JsonReader;
 import java.io.File;
@@ -15,6 +14,9 @@ import java.util.HashMap;
 import java.util.Map;
 import kz.allpay.mfs.ws.soap.generated.v1_0.CompleteTransactionResponse;
 
+import javax.xml.datatype.DatatypeFactory;
+import javax.xml.datatype.XMLGregorianCalendar;
+
 /**
  * User: Sanzhar Aubakirov
  * Date: 12/6/16
@@ -27,17 +29,21 @@ public class DataBase {
     private static final Map<String, CompleteTransactionResponse> responseDatabase = new HashMap<>();
 
     private static final String STORAGE_FILE_FULL_NAME = "/tmp/storageFile.json";
-    private static final Gson gson = new GsonBuilder().create();
+
+    private static final Gson gson = new GsonBuilder()
+            .registerTypeAdapter(XMLGregorianCalendar.class, new XMLGregorianCalendarConverter.Serializer())
+            .registerTypeAdapter(XMLGregorianCalendar.class, new XMLGregorianCalendarConverter.Deserializer())
+            .create();
 
     public static Map<String, CompleteTransactionResponse> getResponseDatabase() {
         return responseDatabase;
     }
 
     public static void writeToStorageFile() throws IOException {
-        final PrintWriter writer = new PrintWriter(STORAGE_FILE_FULL_NAME);
-        final String mapAsString = gson.toJson(responseDatabase);
-        writer.println(mapAsString);
-        writer.close();
+        try (final PrintWriter writer = new PrintWriter(STORAGE_FILE_FULL_NAME)) {
+            final String mapAsString = gson.toJson(responseDatabase);
+            writer.println(mapAsString);
+        }
     }
 
     public static void readFromStorageFile() throws IOException {
@@ -52,6 +58,33 @@ public class DataBase {
             final Map<String, CompleteTransactionResponse> databaseFile = gson.fromJson(reader, myType);
             if (databaseFile != null) {
                 responseDatabase.putAll(databaseFile);
+            }
+        }
+    }
+
+    /**
+     * https://github.com/google/gson/issues/368
+     */
+    public static class XMLGregorianCalendarConverter {
+        public static class Serializer implements JsonSerializer {
+            public Serializer() {
+                super();
+            }
+            public JsonElement serialize(Object t, Type type,
+                                         JsonSerializationContext jsonSerializationContext) {
+                XMLGregorianCalendar xgcal = (XMLGregorianCalendar) t;
+                return new JsonPrimitive(xgcal.toXMLFormat());
+            }
+        }
+        public static class Deserializer implements JsonDeserializer {
+            public Object deserialize(JsonElement jsonElement, Type type,
+                                      JsonDeserializationContext jsonDeserializationContext) {
+                try {
+                    return DatatypeFactory.newInstance().newXMLGregorianCalendar(
+                            jsonElement.getAsString());
+                } catch (Exception e) {
+                    return null;
+                }
             }
         }
     }
