@@ -1,5 +1,7 @@
 package kz.allpay.mfs.restejb;
 
+import java.util.ArrayList;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -7,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+import kz.allpay.mfs.webshop.generated.response.TransationType;
 
 /**
  * User: Sanzhar Aubakirov
@@ -18,7 +21,7 @@ import java.util.Map;
  */
 public class TestPageServlet extends HttpServlet {
 
-    public final static Map<String, String> mockTransactionStatusDataBase = new HashMap<>();
+    public final static List<TransationType> mockTransactionStatusDataBase = new ArrayList<>();
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse response) throws ServletException, IOException {
