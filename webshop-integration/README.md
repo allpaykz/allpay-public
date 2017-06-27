@@ -2,6 +2,7 @@
 
 1. [Java библиотеки для подписи/валидации сообщений](https://github.com/allpaykz/webshop-service-examples/tree/master/webshop-integration-keypair)
 2. [Демо Java сервисов](https://github.com/allpaykz/webshop-service-examples/tree/master/webshop-integration-demo)
+3. [Документация по бизнес процессам здесь](https://github.com/allpaykz/documentation/tree/master/webshop-integration)
 
 Для генерации ключей нужно
 1. Авторизоваться мерчантом в системе.
