@@ -1,9 +1,11 @@
 package kz.allpay.mfs.restejb;
 
+import java.util.List;
 import kz.allpay.mfs.webshop.WebShopRequestTransformer;
 import kz.allpay.mfs.webshop.WebShopResponseTransformer;
 import kz.allpay.mfs.webshop.generated.request.MerchantType;
 import kz.allpay.mfs.webshop.generated.request.WebShopRequestType;
+import kz.allpay.mfs.webshop.generated.response.TransationType;
 import kz.allpay.mfs.webshop.generated.response.WebShopResponseType;
 import kz.allpay.mfs.webshop.keys.PrivateKeyReader;
 import kz.allpay.mfs.webshop.keys.PublicKeyReader;
@@ -151,8 +153,7 @@ public class TestWebshopServices {
             logger.info("\n\tXML received is verified: " + verified);
 
             logger.info(response.getTransaction().getStatus());
-            mockTransactionStatusDataBase.put(response.getTransaction().getTransactionId(),
-                                              response.getTransaction().getStatus());
+            mockTransactionStatusDataBase.add(response.getTransaction());
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -162,7 +163,7 @@ public class TestWebshopServices {
     @GET
     @Path("/getTransactions")
     @Produces(MediaType.APPLICATION_JSON)
-    public Map<String, String> getTransactions() {
+    public List<TransationType> getTransactions() {
         return mockTransactionStatusDataBase;
     }
 }
