@@ -1,5 +1,6 @@
 package kz.allpay.api.model.request;
 
+import io.swagger.annotations.ApiModelProperty;
 import kz.allpay.api.model.Language;
 
 /**
@@ -14,13 +15,12 @@ public class AbstractRequest {
      * DEFAULT LANGUAGE is RUSSIAN
      */
     private Language lang = Language.RU;
-    private String token;
 
     public AbstractRequest() {
         lang = Language.RU;
     }
 
-
+    @ApiModelProperty
     public Language getLang() {
         return lang;
     }
@@ -29,11 +29,9 @@ public class AbstractRequest {
         this.lang = lang;
     }
 
-    public String getToken() {
-        return token;
+    @ApiModelProperty(hidden = true)
+    public String convertAndGetLangAsStringLowerCase() {
+        return lang.toString().toLowerCase();
     }
 
-    public void setToken(String token) {
-        this.token = token;
-    }
 }
