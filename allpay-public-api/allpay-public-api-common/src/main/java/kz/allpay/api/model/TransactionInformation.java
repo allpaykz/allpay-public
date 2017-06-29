@@ -21,6 +21,7 @@ public class TransactionInformation implements Serializable {
     private String currencyCode;
     private String terminalId;
     private String status;
+    private String comment;
 
     private Long createdOn;
     private Long valueDate;
@@ -170,6 +171,15 @@ public class TransactionInformation implements Serializable {
 
     public TransactionInformation setValueDate(Long valueDate) {
         this.valueDate = valueDate;
+        return this;
+    }
+
+    public String getComment() {
+        return comment;
+    }
+
+    public TransactionInformation setComment(String comment) {
+        this.comment = comment;
         return this;
     }
 }

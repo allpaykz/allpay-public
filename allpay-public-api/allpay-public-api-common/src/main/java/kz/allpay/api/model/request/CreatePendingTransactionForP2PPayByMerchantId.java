@@ -10,6 +10,7 @@ public class CreatePendingTransactionForP2PPayByMerchantId extends AbstractReque
     private BigDecimal amount;
     private String account;
     private String terminalId;
+    private String comment;
 
     public BigDecimal getAmount() {
         return amount;
@@ -33,5 +34,13 @@ public class CreatePendingTransactionForP2PPayByMerchantId extends AbstractReque
 
     public void setTerminalId(String terminalId) {
         this.terminalId = terminalId;
+    }
+
+    public String getComment() {
+        return comment;
+    }
+
+    public void setComment(String comment) {
+        this.comment = comment;
     }
 }
