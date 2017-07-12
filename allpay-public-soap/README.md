@@ -1,5 +1,9 @@
 # Общий модуль для SOAP API
 
+Демо версия проекта, реализующая все API находится [здесь](http://beta.allpay.kz/allpay-public-soap-demo)
+
+Код demo проекта [здесь](https://github.com/allpaykz/allpay-public/tree/develop/allpay-public-soap/allpay-public-soap-demo)
+
 ### Документация
 
 Документация находится [здесь](https://github.com/allpaykz/documentation/tree/master/public-soap-integration)
