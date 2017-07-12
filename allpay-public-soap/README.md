@@ -12,7 +12,6 @@
 2. `cd allpay-public`
 3. `mvn clean install -P beta`
 
-
 После удачного билда, можете добавить в свой проект зависимость для использования TransactionManagementV1_0Client
 
         <dependency>
@@ -47,7 +46,16 @@ pom.xml:
     ...
 ```
 
+После чего добавляем
 
+```xml
+        <dependency>
+            <artifactId>allpay-public-soap-client</artifactId>
+            <groupId>kz.allpay.mfs</groupId>
+            <!-- соответствующая версия проекта - версия указанная в pom.xml в этом проекте -->
+            <version>2.0.8.2</version>
+        </dependency>
+```
 
 ### 1. allpay-public-soap-client
 
