@@ -1,7 +1,5 @@
 # Общий модуль для SOAP API
 
-Проект состоит из трех модулей
-
 ### Документация
 
 Документация находится [здесь](https://github.com/allpaykz/documentation/tree/master/public-soap-integration)
