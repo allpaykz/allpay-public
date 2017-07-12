@@ -10,7 +10,8 @@
 
 1. `git clone https://github.com/allpaykz/allpay-public.git`
 2. `cd allpay-public`
-3. `mvn clean install -P alpha`
+3. `mvn clean install -P beta`
+
 
 После удачного билда, можете добавить в свой проект зависимость для использования TransactionManagementV1_0Client
 
@@ -20,6 +21,32 @@
             <!-- соответствующая версия проекта - версия указанная в pom.xml в этом проекте -->
             <version>2.0.8.2</version>
         </dependency>
+
+Или, для использования библиотек через maven необходимо подключить следущие репозиориии:
+
+pom.xml:
+```xml
+    <repositories>
+
+        <repository>
+            <id>oss-sonatype-snapshots</id>
+            <name>oss-sonatype-snapshots</name>
+            <url>https://oss.sonatype.org/content/repositories/snapshots/</url>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+
+        <repository>
+            <id>oss-sonatype</id>
+            <name>oss-sonatype</name>
+            <url>https://oss.sonatype.org/content/groups/public/</url>
+        </repository>
+
+    </repositories>
+    ...
+```
+
 
 
 ### 1. allpay-public-soap-client
