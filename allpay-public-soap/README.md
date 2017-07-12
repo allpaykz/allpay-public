@@ -2,11 +2,11 @@
 
 Проект состоит из трех модулей
 
-# Документация
+### Документация
 
 Документация находится [здесь](https://github.com/allpaykz/documentation/tree/master/public-soap-integration)
 
-# Использование
+### Использование
 
 В первую очередь нужно сбилдить весь [проект](https://github.com/allpaykz/allpay-public)
 
