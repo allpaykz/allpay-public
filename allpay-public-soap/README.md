@@ -6,7 +6,7 @@
 
 ### Использование
 
-В первую очередь нужно сбилдить весь [проект](https://github.com/allpaykz/allpay-public)
+**Вариант А.** Нужно сбилдить весь [проект](https://github.com/allpaykz/allpay-public)
 
 1. `git clone https://github.com/allpaykz/allpay-public.git`
 2. `cd allpay-public`
@@ -21,7 +21,7 @@
             <version>2.0.8.2</version>
         </dependency>
 
-Или, для использования библиотек через maven необходимо подключить следущие репозиориии:
+**Вариант Б.** Для использования библиотек через maven необходимо подключить следущие репозиориии:
 
 pom.xml:
 ```xml
