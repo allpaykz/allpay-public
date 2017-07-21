@@ -12,27 +12,27 @@ import kz.allpay.api.model.response.AbstractResponse;
  */
 @ApiModel
 public class BluePayTxResponse extends AbstractResponse implements Serializable {
-    private BluePayTxInfo transactionInformation;
+    private BluePayTxInfo tx; //transactionInformation
 
     public BluePayTxResponse() {
     }
 
     public BluePayTxResponse(BluePayTxInfo transactionInformation){
-        this.transactionInformation = transactionInformation;
+        this.tx = transactionInformation;
     }
 
     public BluePayTxResponse(BluePayTxInfo transactionInformation, String userMessage, String developerMessage){
-        this.transactionInformation = transactionInformation;
+        this.tx = transactionInformation;
         this.setUserMessage(userMessage);
         this.setDeveloperMessage(developerMessage);
     }
 
     @ApiModelProperty(notes = "Информация о транзакции")
-    public BluePayTxInfo getTransactionInformation() {
-        return transactionInformation;
+    public BluePayTxInfo getTx() {
+        return tx;
     }
 
-    public void setTransactionInformation(BluePayTxInfo transactionInformation) {
-        this.transactionInformation = transactionInformation;
+    public void setTx(BluePayTxInfo transactionInformation) {
+        this.tx = transactionInformation;
     }
 }

@@ -9,97 +9,67 @@ import java.math.BigDecimal;
  */
 public class BluePayTxInfo implements Serializable {
 
-    private String channelId;
-    private BigDecimal amount;
-    private String fromUser;
-    private BigDecimal transactionNumber;
-    private String chargeAmount;
-    private String currencyCode;
-    private String terminalId;
-    private String status;
+    private BigDecimal a; // amount
+    private String f; //fromUser
+    private BigDecimal t; //transactionNumber
+    private String c; //chargeAmount
+    private String cc; //currencyCode
+    private String ti; //terminalId
+    private String s; //statusI18n
 
-
-    private String statusI18n;
-
-
-    public String getStatus() {
-        return status;
+    public BigDecimal getA() {
+        return this.a;
     }
 
-    public BluePayTxInfo setStatus(String status) {
-        this.status = status;
-        return this;
+    public void setA(final BigDecimal a) {
+        this.a = a;
     }
 
-    public String getFromUser() {
-        return fromUser;
+    public String getF() {
+        return this.f;
     }
 
-    public BluePayTxInfo setFromUser(String fromUser) {
-        this.fromUser = fromUser;
-        return this;
+    public void setF(final String f) {
+        this.f = f;
     }
 
-    public BigDecimal getAmount() {
-        return amount;
+    public BigDecimal getT() {
+        return this.t;
     }
 
-    public BluePayTxInfo setAmount(BigDecimal amount) {
-        this.amount = amount;
-        return this;
+    public void setT(final BigDecimal t) {
+        this.t = t;
     }
 
-    public BigDecimal getTransactionNumber() {
-        return transactionNumber;
+    public String getC() {
+        return this.c;
     }
 
-    public BluePayTxInfo setTransactionNumber(BigDecimal transactionNumber) {
-        this.transactionNumber = transactionNumber;
-        return this;
+    public void setC(final String c) {
+        this.c = c;
     }
 
-    public String getChargeAmount() {
-        return chargeAmount;
+    public String getCc() {
+        return this.cc;
     }
 
-    public BluePayTxInfo setChargeAmount(String chargeAmount) {
-        this.chargeAmount = chargeAmount;
-        return this;
+    public void setCc(final String cc) {
+        this.cc = cc;
     }
 
-    public String getCurrencyCode() {
-        return currencyCode;
+    public String getTi() {
+        return this.ti;
     }
 
-    public BluePayTxInfo setCurrencyCode(String currencyCode) {
-        this.currencyCode = currencyCode;
-        return this;
+    public void setTi(final String ti) {
+        this.ti = ti;
     }
 
-    public String getChannelId() {
-        return channelId;
+    public String getS() {
+        return this.s;
     }
 
-    public BluePayTxInfo setChannelId(String channelId) {
-        this.channelId = channelId;
-        return this;
-    }
-
-    public String getTerminalId() {
-        return terminalId;
-    }
-
-    public BluePayTxInfo setTerminalId(String terminalId) {
-        this.terminalId = terminalId;
-        return this;
-    }
-
-    public String getStatusI18n() {
-        return statusI18n;
-    }
-
-    public BluePayTxInfo setStatusI18n(String statusI18n) {
-        this.statusI18n = statusI18n;
-        return this;
+    public void setS(final String s) {
+        this.s = s;
     }
 }
