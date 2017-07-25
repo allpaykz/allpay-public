@@ -1,18 +1,20 @@
 # Общий модуль для SOAP API
 
-Проект состоит из трех модулей
+Демо версия проекта, реализующая все API находится [здесь](http://beta.allpay.kz/allpay-public-soap-demo)
 
-# Документация
+Код demo проекта [здесь](https://github.com/allpaykz/allpay-public/tree/develop/allpay-public-soap/allpay-public-soap-demo)
+
+### Документация
 
 Документация находится [здесь](https://github.com/allpaykz/documentation/tree/master/public-soap-integration)
 
-# Использование
+### Использование
 
-В первую очередь нужно сбилдить весь [проект](https://github.com/allpaykz/allpay-public)
+**Вариант А.** Нужно сбилдить весь [проект](https://github.com/allpaykz/allpay-public)
 
 1. `git clone https://github.com/allpaykz/allpay-public.git`
 2. `cd allpay-public`
-3. `mvn clean install -P alpha`
+3. `mvn clean install -P beta`
 
 После удачного билда, можете добавить в свой проект зависимость для использования TransactionManagementV1_0Client
 
@@ -20,9 +22,44 @@
             <artifactId>allpay-public-soap-client</artifactId>
             <groupId>kz.allpay.mfs</groupId>
             <!-- соответствующая версия проекта - версия указанная в pom.xml в этом проекте -->
-            <version>2.0.8</version>
+            <version>2.0.8.2</version>
         </dependency>
 
+**Вариант Б.** Для использования библиотек через maven необходимо подключить следущие репозиориии:
+
+pom.xml:
+```xml
+    <repositories>
+
+        <repository>
+            <id>oss-sonatype-snapshots</id>
+            <name>oss-sonatype-snapshots</name>
+            <url>https://oss.sonatype.org/content/repositories/snapshots/</url>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+
+        <repository>
+            <id>oss-sonatype</id>
+            <name>oss-sonatype</name>
+            <url>https://oss.sonatype.org/content/groups/public/</url>
+        </repository>
+
+    </repositories>
+    ...
+```
+
+После чего добавляем
+
+```xml
+        <dependency>
+            <artifactId>allpay-public-soap-client</artifactId>
+            <groupId>kz.allpay.mfs</groupId>
+            <!-- соответствующая версия проекта - версия указанная в pom.xml в этом проекте -->
+            <version>2.0.8.2</version>
+        </dependency>
+```
 
 ### 1. allpay-public-soap-client
 
