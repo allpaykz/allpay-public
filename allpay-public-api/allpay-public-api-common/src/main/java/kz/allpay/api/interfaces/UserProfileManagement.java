@@ -64,7 +64,7 @@ public interface UserProfileManagement {
     /**
      * сервиса для проверки пароля
      */
-    DefaultResponse checkPasswordWasReset() throws GeneralException;
+    PinStatusResponse checkPasswordWasResetOrExpired() throws GeneralException;
 
     DefaultResponse changeUserEmail(String email) throws GeneralException;
 
