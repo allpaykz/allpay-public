@@ -13,6 +13,7 @@ public class CreatePendingTransactionForP2PSendRequest extends AbstractRequest {
     // one of these two is required
     private String toAccountNumber;
     private String toLoginName;
+    private String comment;
 
     public BigDecimal getAmount() {
         return amount;
@@ -44,5 +45,13 @@ public class CreatePendingTransactionForP2PSendRequest extends AbstractRequest {
 
     public void setToLoginName(String toLoginName) {
         this.toLoginName = toLoginName;
+    }
+
+    public String getComment() {
+        return comment;
+    }
+
+    public void setComment(String comment) {
+        this.comment = comment;
     }
 }

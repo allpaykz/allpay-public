@@ -31,6 +31,7 @@ public class TransactionInfo implements Serializable {
     private String name;
     private String status;
     private Boolean parent;
+    private String comment;
 
     public TransactionInfo charges(final BigDecimal charges) {
         this.charges = charges;
@@ -225,6 +226,11 @@ public class TransactionInfo implements Serializable {
         return this;
     }
 
+    public TransactionInfo comment(final String comment) {
+        this.comment = comment;
+        return this;
+    }
+
     public Boolean getParent() {
         return parent;
     }
@@ -232,6 +238,14 @@ public class TransactionInfo implements Serializable {
     public TransactionInfo setParent(Boolean parent) {
         this.parent = parent;
         return this;
+    }
+
+    public String getComment() {
+        return comment;
+    }
+
+    public void setComment(String comment) {
+        this.comment = comment;
     }
 }
 

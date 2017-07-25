@@ -34,6 +34,7 @@
             <tr>
                 <th>Номер транзакции</th>
                 <th>Статус транзакции</th>
+                <th>Описание статуса</th>
             </tr>
             </thead>
         </table>
@@ -55,7 +56,7 @@
         var html = "";
 
         $.each(data, function (index, value) {
-            html += "<tr><td>" + index + "</td><td>" + value + "</td></tr>";
+            html += "<tr><td>" + value.TransactionId + "</td><td>" + value.Status + "</td><td>" + value.StatusDescription + "</td></tr>";
         })
         console.log(html)
 
