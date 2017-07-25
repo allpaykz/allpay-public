@@ -7,6 +7,7 @@ import kz.allpay.api.exception.AbstractWebApplicationException;
 import kz.allpay.api.exception.GeneralException;
 import kz.allpay.api.exception.LoginNotValidException;
 import kz.allpay.api.model.bluepay.BluePayTxResponse;
+import kz.allpay.api.model.bluepay.BluepayDeviceToServerRequestMessage;
 import kz.allpay.api.model.request.*;
 import kz.allpay.api.model.response.FavoritePaymentsResponse;
 import kz.allpay.api.model.response.TransactionInfoResponse;
@@ -80,9 +81,5 @@ public interface TransactionManagement {
     public TransactionInfoResponse declineTransaction(
             final TransactionInfoRequest request) throws GeneralException;
 
-    BluePayTxResponse validateBluePayTx(
-        CreatePendingTransactionForP2PPayByMerchantId request) throws GeneralException;
-
-    BluePayTxResponse createBluePayTx(
-        CreatePendingTransactionForP2PPayByMerchantId request) throws GeneralException;
+    BluePayTxResponse createBluePayTx(BluepayDeviceToServerRequestMessage message) throws GeneralException;
 }
