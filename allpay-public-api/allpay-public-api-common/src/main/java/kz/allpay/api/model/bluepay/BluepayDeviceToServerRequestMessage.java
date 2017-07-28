@@ -1,18 +1,22 @@
 package kz.allpay.api.model.bluepay;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 
 /**
  * @author magzhan.karasayev
  * @since 25.07.17 20:00
  */
-public class BluepayDeviceToServerRequestMessage {
-    private final BigDecimal amount;
-    private final String deviceId;
-    private final String mobileAppMessage;
-    private final String devicePublicKeyBase64;
-    private final String devicePublicKeySignature;
+public class BluepayDeviceToServerRequestMessage implements Serializable {
+    private BigDecimal amount;
+    private String deviceId;
+    private String mobileAppMessage;
+    private String devicePublicKeyBase64;
+    private String devicePublicKeySignature;
     private String base64Signature;
+
+    public BluepayDeviceToServerRequestMessage() {
+    }
 
     public BluepayDeviceToServerRequestMessage(BigDecimal amount, String deviceId, String mobileAppMessage, String devicePublicKeyBase64, String devicePublicKeySignature) {
         this.amount = amount;
@@ -52,5 +56,25 @@ public class BluepayDeviceToServerRequestMessage {
 
     public String getMessageToSign() {
         return new StringBuilder().append(amount).append(deviceId).append(mobileAppMessage).toString();
+    }
+
+    public void setAmount(BigDecimal amount) {
+        this.amount = amount;
+    }
+
+    public void setDeviceId(String deviceId) {
+        this.deviceId = deviceId;
+    }
+
+    public void setMobileAppMessage(String mobileAppMessage) {
+        this.mobileAppMessage = mobileAppMessage;
+    }
+
+    public void setDevicePublicKeyBase64(String devicePublicKeyBase64) {
+        this.devicePublicKeyBase64 = devicePublicKeyBase64;
+    }
+
+    public void setDevicePublicKeySignature(String devicePublicKeySignature) {
+        this.devicePublicKeySignature = devicePublicKeySignature;
     }
 }
