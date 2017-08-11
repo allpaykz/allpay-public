@@ -24,6 +24,7 @@ import javax.xml.datatype.DatatypeConfigurationException;
 import javax.xml.datatype.DatatypeFactory;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.security.spec.InvalidKeySpecException;
 import java.util.Arrays;
 import java.util.Date;
@@ -339,5 +340,72 @@ public class TransactionManagment {
             return ExceptionHandler.handleExceptionAsJson(req, resp, e);
         }
         return gson.toJson(completeTransaction);
+    }
+
+    @POST
+    @Path("availableBalance")
+    @Produces(MediaType.APPLICATION_JSON)
+    public String availableBalance(@Context HttpServletRequest req, @Context HttpServletResponse resp) throws IOException, InvalidKeySpecException {
+
+        // Pem input
+        final String pem = req.getParameter("pemInput");
+        logger.info("pem\t"+pem);
+
+        // Pem input response
+        final String pemInputResponse = req.getParameter("pemInputResponse");
+        logger.info("pemInputResponse\t"+pem);
+
+        // certificateIdInput
+        final String certificateIdInputAsString = req.getParameter("certificateIdInput");
+        Integer certificateIdInput = Integer.parseInt(certificateIdInputAsString);
+        logger.info("certificateIdInput\t"+certificateIdInput);
+
+        // Parsing login name of user
+        // We will transfer money from this user to agent
+        final String dirtyRequester = req.getParameter("loginName");
+        logger.info("dirtyRequester\t"+dirtyRequester);
+        final String requester = dirtyRequester.replaceAll("[^0-9]", "");
+        logger.info("requester\t"+requester);
+
+        // Создаем соап клиента, по ссылке из проперти файлов.
+        TransactionManagementV1_0 srv = TransactionManagementV1_0Client.getService(
+                PropertiesUtils.getApiUrl(),
+                Arrays.asList(new SecuritySoapHandlerClient(certificateIdInput,
+                        PrivateKeyReader.loadPrivateKeyFromFile(new ByteArrayInputStream(pem.getBytes("UTF-8"))),
+                        PublicKeyReader.loadPublicKeyFromFile(new ByteArrayInputStream(pemInputResponse.getBytes("UTF-8")))
+                ))
+        );
+
+        // ----
+        // Создаем запрос на информацию о клиенте
+        final AvailableBalanceRequest availableBalanceRequest = new AvailableBalanceRequest();
+        final OnlineTransactionRequestHeader header = new OnlineTransactionRequestHeader();
+
+        // Язык, от него зависят язык текстов в ответах от сервера
+        header.setLang(Language.RU);
+
+        // Логин агента. От имени этого логина совершается запрос в системе
+        header.setRequester(requester);
+
+        // Дата запроса на стороне запрашивающего
+        GregorianCalendar c = new GregorianCalendar();
+        c.setTime(new Date());
+
+        try {
+            header.setTimestamp(DatatypeFactory.newInstance().newXMLGregorianCalendar(c));
+        } catch (DatatypeConfigurationException e) {
+            throw new RuntimeException("Calendar not configured");
+        }
+
+        availableBalanceRequest.setHeader(header);
+        AvailableBalanceResponse response;
+
+        try {
+            response = srv.availableBalance(availableBalanceRequest);
+        } catch (Exception e) {
+            return ExceptionHandler.handleExceptionAsJson(req, resp, e);
+        }
+        return gson.toJson(response);
+
     }
 }
