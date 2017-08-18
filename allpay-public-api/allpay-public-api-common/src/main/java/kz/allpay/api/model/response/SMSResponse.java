@@ -1,6 +1,7 @@
 package kz.allpay.api.model.response;
 
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * Created by yerzhan on 8/18/17.
@@ -11,7 +12,7 @@ public class SMSResponse extends AbstractResponse implements Serializable {
     private String sender;
     private String receiver;
     private String msg;
-    private String sentTime;
+    private Date sentTime;
     private String receivedTime;
     private String operator;
     private String msgType;
@@ -21,7 +22,7 @@ public class SMSResponse extends AbstractResponse implements Serializable {
     public SMSResponse(){
     }
 
-    public SMSResponse(String sender, String receiver, String msg, String sentTime, String receivedTime,
+    public SMSResponse(String sender, String receiver, String msg, Date sentTime, String receivedTime,
                        String operator, String msgType, String status, String errorMsg) {
         this.sender = sender;
         this.receiver = receiver;
@@ -66,11 +67,11 @@ public class SMSResponse extends AbstractResponse implements Serializable {
         this.msg = msg;
     }
 
-    public String getSentTime() {
+    public Date getSentTime() {
         return sentTime;
     }
 
-    public void setSentTime(String sentTime) {
+    public void setSentTime(Date sentTime) {
         this.sentTime = sentTime;
     }
 
