@@ -34,6 +34,10 @@ public class SMSResponse extends AbstractResponse implements Serializable {
         this.errorMsg = errorMsg;
     }
 
+    public SMSResponse(String userMessage, String developerMessage) {
+        super(userMessage, developerMessage);
+    }
+
     public static long getSerialVersionUID() {
         return serialVersionUID;
     }
