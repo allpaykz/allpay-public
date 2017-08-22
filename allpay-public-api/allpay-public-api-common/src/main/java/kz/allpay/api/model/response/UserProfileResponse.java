@@ -29,6 +29,7 @@ public class UserProfileResponse extends AbstractResponse implements Serializabl
     private String email;
     private String nickname;
     private String alertMethod;
+    private String identifiedUser;
 
     private Boolean emailReceipts;
 
@@ -137,6 +138,15 @@ public class UserProfileResponse extends AbstractResponse implements Serializabl
 
     public void setEmailReceipts(Boolean emailReceipts) {
         this.emailReceipts = emailReceipts;
+    }
+
+    @ApiModelProperty(notes = "Пользователь идентифицирован")
+    public String getIdentifiedUser() {
+        return identifiedUser;
+    }
+
+    public void setIdentifiedUser(String identifiedUser) {
+        this.identifiedUser = identifiedUser;
     }
 }
 

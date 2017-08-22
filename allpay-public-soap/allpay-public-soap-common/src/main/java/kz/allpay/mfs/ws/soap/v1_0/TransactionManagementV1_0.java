@@ -39,4 +39,7 @@ public interface TransactionManagementV1_0 {
 
     @WebMethod(action = "checkUser")
     public CheckUserResponse checkUser(@WebParam(name = "CheckUserRequest") CheckUserRequest request);
+
+    @WebMethod(action = "availableBalance")
+    public AvailableBalanceResponse availableBalance(@WebParam(name = "AvailableBalanceRequest") AvailableBalanceRequest request);
 }
