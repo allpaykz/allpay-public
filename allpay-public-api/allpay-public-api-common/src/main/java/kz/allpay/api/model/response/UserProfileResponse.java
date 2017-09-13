@@ -29,7 +29,7 @@ public class UserProfileResponse extends AbstractResponse implements Serializabl
     private String email;
     private String nickname;
     private String alertMethod;
-    private String identifiedUser;
+    private Boolean identifiedUser;
 
     private Boolean emailReceipts;
 
@@ -141,11 +141,11 @@ public class UserProfileResponse extends AbstractResponse implements Serializabl
     }
 
     @ApiModelProperty(notes = "Пользователь идентифицирован")
-    public String getIdentifiedUser() {
+    public Boolean getIdentifiedUser() {
         return identifiedUser;
     }
 
-    public void setIdentifiedUser(String identifiedUser) {
+    public void setIdentifiedUser(Boolean identifiedUser) {
         this.identifiedUser = identifiedUser;
     }
 }
