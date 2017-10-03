@@ -9,10 +9,7 @@ import kz.allpay.api.exception.LoginNotValidException;
 import kz.allpay.api.model.bluepay.BluePayTxResponse;
 import kz.allpay.api.model.bluepay.BluepayDeviceToServerRequestMessage;
 import kz.allpay.api.model.request.*;
-import kz.allpay.api.model.response.BooleanResponse;
-import kz.allpay.api.model.response.FavoritePaymentsResponse;
-import kz.allpay.api.model.response.TransactionInfoResponse;
-import kz.allpay.api.model.response.TransactionHistoryResponse;
+import kz.allpay.api.model.response.*;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -63,7 +60,7 @@ public interface TransactionManagement {
     public TransactionInfoResponse validateTransactionForPayByMerchantId(
             final CreatePendingTransactionForP2PPayByMerchantId request) throws GeneralException;
 
-    BooleanResponse validateTransactionNativePay(
+    NativePayWebResponse validateTransactionNativePay(
             CreatePendingTransactionForNativePay request) throws GeneralException;
 
     TransactionInfoResponse createTransactionNativePay(
