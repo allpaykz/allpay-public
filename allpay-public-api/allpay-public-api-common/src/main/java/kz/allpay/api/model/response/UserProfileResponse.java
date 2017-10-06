@@ -5,7 +5,6 @@ import io.swagger.annotations.ApiModelProperty;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -33,7 +32,7 @@ public class UserProfileResponse extends AbstractResponse implements Serializabl
 
     private Boolean emailReceipts;
 
-    private List<String> accountNumbers;
+    private String primaryAccountNumber;
 
     public UserProfileResponse() {
         super();
@@ -152,12 +151,12 @@ public class UserProfileResponse extends AbstractResponse implements Serializabl
     }
 
     @ApiModelProperty(notes = "Список номеров аккаунтов")
-    public List<String> getAccountNumbers() {
-        return accountNumbers;
+    public String getPrimaryAccountNumber() {
+        return primaryAccountNumber;
     }
 
-    public void setAccountNumbers(List<String> accountNumbers) {
-        this.accountNumbers = accountNumbers;
+    public void setPrimaryAccountNumber(String accountNumbers) {
+        this.primaryAccountNumber = accountNumbers;
     }
 }
 
