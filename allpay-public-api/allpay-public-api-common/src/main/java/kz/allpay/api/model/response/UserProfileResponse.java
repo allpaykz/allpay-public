@@ -33,6 +33,8 @@ public class UserProfileResponse extends AbstractResponse implements Serializabl
 
     private Boolean emailReceipts;
 
+    private List<String> accountNumbers;
+
     public UserProfileResponse() {
         super();
     }
@@ -147,6 +149,15 @@ public class UserProfileResponse extends AbstractResponse implements Serializabl
 
     public void setIdentifiedUser(Boolean identifiedUser) {
         this.identifiedUser = identifiedUser;
+    }
+
+    @ApiModelProperty(notes = "Список номеров аккаунтов")
+    public List<String> getAccountNumbers() {
+        return accountNumbers;
+    }
+
+    public void setAccountNumbers(List<String> accountNumbers) {
+        this.accountNumbers = accountNumbers;
     }
 }
 
