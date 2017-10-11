@@ -3,9 +3,7 @@ package kz.allpay.mfs.webshop.signature;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.StringReader;
+import java.io.*;
 import java.util.logging.Logger;
 
 public class SignatureServiceSoapImplTest {
@@ -22,33 +20,45 @@ public class SignatureServiceSoapImplTest {
     public void testSignXML() throws Exception {
         InputStream is = SignatureServiceSoapImplTest.class.getClassLoader().getResourceAsStream(
                 "soap-messages/getTransactionRequest-1-not-signed.xml");
-        String s = signatureServiceSoap.signXML(TestUtils.getKeyPair().getPrivate(), is);
+        String s = signatureServiceSoap.signXML(TestUtils.getKeyPair().getPrivate(), cannonicalizeInputStream(is));
         System.out.println("s = " + s);
         System.out.flush();
     }
 
-    @Test(enabled = false)
+    @Test
     public void testVerifySignatureInXML() throws Exception {
         InputStream is = SignatureServiceSoapImplTest.class.getClassLoader().getResourceAsStream(
                 "soap-messages/getTransactionRequest-1.xml");
-        boolean re = signatureServiceSoap.verifySignatureInXML(new InputStreamReader(is), TestUtils.getKeyPair().getPublic());
+        boolean re = signatureServiceSoap.verifySignatureInXML(new InputStreamReader(cannonicalizeInputStream(is)), TestUtils.getKeyPair().getPublic());
         Assert.assertTrue(re);
     }
 
-    @Test(enabled = false)
+    static String convertStreamToString(java.io.InputStream is) {
+        java.util.Scanner s = new java.util.Scanner(is).useDelimiter("\\A");
+        return s.hasNext() ? s.next() : "";
+    }
+
+    @Test
     public void testVerifySignatureInXML_Formatted() throws Exception {
         InputStream is = SignatureServiceSoapImplTest.class.getClassLoader().getResourceAsStream(
                 "soap-messages/getTransactionRequest-1-formatted-same-signature.xml");
-        boolean re = signatureServiceSoap.verifySignatureInXML(new InputStreamReader(is), TestUtils.getKeyPair().getPublic());
+        boolean re = signatureServiceSoap.verifySignatureInXML(new InputStreamReader(cannonicalizeInputStream(is)), TestUtils.getKeyPair().getPublic());
         Assert.assertTrue(re);
     }
 
-    @Test(enabled = false)
+    private ByteArrayInputStream cannonicalizeInputStream(InputStream is) {
+        org.apache.xml.security.Init.init();
+        byte[] bytes = SignatureUtils.canonicalizedByteArray(convertStreamToString(is));
+        return new ByteArrayInputStream(bytes);
+    }
+
+    @Test
     public void testSignAndVerifySignature() throws Exception {
         InputStream is = SignatureServiceSoapImplTest.class.getClassLoader().getResourceAsStream(
                 "soap-messages/getTransactionRequest-1-not-signed.xml");
-        String s = signatureServiceSoap.signXML(TestUtils.getKeyPair().getPrivate(), is);
-        boolean re = signatureServiceSoap.verifySignatureInXML(new StringReader(s), TestUtils.getKeyPair().getPublic());
+        String s = signatureServiceSoap.signXML(TestUtils.getKeyPair().getPrivate(), cannonicalizeInputStream(is));
+        Reader reader = new InputStreamReader(cannonicalizeInputStream(new ByteArrayInputStream(s.getBytes("UTF-8"))));
+        boolean re = signatureServiceSoap.verifySignatureInXML(reader, TestUtils.getKeyPair().getPublic());
         Assert.assertTrue(re);
     }
 }

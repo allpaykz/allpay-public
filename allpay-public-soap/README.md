@@ -104,3 +104,19 @@ pom.xml:
 
 Боевой сервис расположен [здесь](http://mfs.allpay.kz/allpay-public-soap/transaction-management/v1.0?wsdl)
 Тестовый соответственно [здесь](http://beta.allpay.kz/allpay-public-soap/transaction-management/v1.0?wsdl)
+
+### Написание своей библиотеки для подписей
+
+Примеры xml:
+
+ - [Не подписанная xml-ка](https://github.com/allpaykz/allpay-public/blob/develop/webshop-integration/webshop-integration-keypair/src/test/resources/soap-messages/getTransactionRequest-1-not-signed.xml)
+ - [Подписанная xml-ка](https://github.com/allpaykz/allpay-public/blob/develop/webshop-integration/webshop-integration-keypair/src/test/resources/soap-messages/getTransactionRequest-1.xml)
+ - [Подписанная и немного измененная xml-ка](https://github.com/allpaykz/allpay-public/blob/develop/webshop-integration/webshop-integration-keypair/src/test/resources/soap-messages/getTransactionRequest-1-formatted-same-signature.xml)
+
+Проверяется это вот этим [тестом](https://github.com/allpaykz/allpay-public/blob/develop/webshop-integration/webshop-integration-keypair/src/test/java/kz/allpay/mfs/webshop/signature/SignatureServiceSoapImplTest.java)
+
+Для подписи этих XML использовались следущие ключи:
+
+ - [Приватный](https://github.com/allpaykz/allpay-public/blob/develop/webshop-integration/webshop-integration-keypair/src/main/resources/mockKeys/TEST.priv.pem)
+ - [Публичный](https://github.com/allpaykz/allpay-public/blob/develop/webshop-integration/webshop-integration-keypair/src/main/resources/mockKeys/TEST.pub.pem)
+
