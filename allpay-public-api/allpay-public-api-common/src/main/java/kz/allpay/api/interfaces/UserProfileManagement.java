@@ -71,4 +71,6 @@ public interface UserProfileManagement {
     DefaultResponse changeNickname(String nickname) throws GeneralException;
 
     DefaultResponse changeEmailReceipt(Boolean emailReceipts) throws GeneralException;
+
+    DefaultResponse sendMessageToSupport(String messageSubject, String messageText) throws GeneralException;
 }
