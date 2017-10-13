@@ -1,21 +1,11 @@
 package kz.allpay.api.interfaces;
 
-import io.swagger.annotations.*;
-import javax.ws.rs.Consumes;
-import javax.ws.rs.POST;
-import kz.allpay.api.exception.AbstractWebApplicationException;
 import kz.allpay.api.exception.GeneralException;
 import kz.allpay.api.exception.LoginNotValidException;
 import kz.allpay.api.model.bluepay.BluePayTxResponse;
 import kz.allpay.api.model.bluepay.BluepayDeviceToServerRequestMessage;
 import kz.allpay.api.model.request.*;
 import kz.allpay.api.model.response.*;
-
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
-import javax.ws.rs.core.MediaType;
-import java.util.Date;
 
 /**
  * Этот интерфейс содержит методы создания и управления жизненным циклом транзакций.
@@ -53,6 +43,10 @@ public interface TransactionManagement {
      */
     public TransactionInfoResponse createTransactionForP2PSend(
             final CreatePendingTransactionForP2PSendRequest request) throws GeneralException;
+
+    TransactionInfoResponse createTransactionForP2PSendByAccountNumber(
+            final CreatePendingTransactionForP2PSendRequestByAccountNumber request) throws GeneralException;
+
 
     /**
      * Проверка доступности наличных, прав и тд без фактического создания транзакций
