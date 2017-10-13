@@ -11,7 +11,6 @@ public class CreatePendingTransactionForP2PSendRequest extends AbstractRequest {
     // optional - default will be used in case if it's null
     private String account;
     // one of these two is required
-    private String toAccountNumber;
     private String toLoginName;
     private String comment;
 
@@ -29,14 +28,6 @@ public class CreatePendingTransactionForP2PSendRequest extends AbstractRequest {
 
     public void setAccount(String account) {
         this.account = account;
-    }
-
-    public String getToAccountNumber() {
-        return toAccountNumber;
-    }
-
-    public void setToAccountNumber(String toAccountNumber) {
-        this.toAccountNumber = toAccountNumber;
     }
 
     public String getToLoginName() {
