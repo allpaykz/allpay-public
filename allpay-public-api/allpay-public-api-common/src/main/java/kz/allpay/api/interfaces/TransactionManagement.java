@@ -44,10 +44,10 @@ public interface TransactionManagement {
     public TransactionInfoResponse createTransactionForP2PSend(
             final CreatePendingTransactionForP2PSendRequest request) throws GeneralException;
 
-    TransactionInfoResponse createTransactionForP2PSendAccount(
+    TransactionInfoResponse createTransactionForP2PSendByAccountNumber(
             final CreatePendingTransactionForP2PSendRequestByAccountNumber request) throws GeneralException;
 
-    TransactionInfoResponse validateTransactionForP2PSendAccount(
+    TransactionInfoResponse validateTransactionForP2PSendByAccountNumber(
             final CreatePendingTransactionForP2PSendRequestByAccountNumber request) throws GeneralException;
 
     /**
