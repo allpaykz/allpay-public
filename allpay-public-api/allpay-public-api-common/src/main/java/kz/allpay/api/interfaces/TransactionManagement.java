@@ -44,9 +44,11 @@ public interface TransactionManagement {
     public TransactionInfoResponse createTransactionForP2PSend(
             final CreatePendingTransactionForP2PSendRequest request) throws GeneralException;
 
-    TransactionInfoResponse createTransactionForP2PSendByAccountNumber(
+    TransactionInfoResponse createTransactionForP2PSendAccount(
             final CreatePendingTransactionForP2PSendRequestByAccountNumber request) throws GeneralException;
 
+    TransactionInfoResponse validateTransactionForP2PSendAccount(
+            final CreatePendingTransactionForP2PSendRequestByAccountNumber request) throws GeneralException;
 
     /**
      * Проверка доступности наличных, прав и тд без фактического создания транзакций
