@@ -73,4 +73,6 @@ public interface UserProfileManagement {
     DefaultResponse changeEmailReceipt(Boolean emailReceipts) throws GeneralException;
 
     DefaultResponse sendMessageToSupport(String messageSubject, String messageText) throws GeneralException;
+
+    StringResponse getPaymentTipsByTerminalId(String terminalId);
 }
