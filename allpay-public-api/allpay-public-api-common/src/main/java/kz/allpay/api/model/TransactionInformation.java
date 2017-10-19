@@ -22,6 +22,7 @@ public class TransactionInformation implements Serializable {
     private String terminalId;
     private String status;
     private String comment;
+    private String toAccountNumber;
 
     private Long createdOn;
     private Long valueDate;
@@ -181,5 +182,13 @@ public class TransactionInformation implements Serializable {
     public TransactionInformation setComment(String comment) {
         this.comment = comment;
         return this;
+    }
+
+    public String getToAccountNumber() {
+        return toAccountNumber;
+    }
+
+    public void setToAccountNumber(String toAccountNumber) {
+        this.toAccountNumber = toAccountNumber;
     }
 }
