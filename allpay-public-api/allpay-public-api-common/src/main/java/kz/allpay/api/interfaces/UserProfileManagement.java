@@ -5,6 +5,7 @@ import io.swagger.annotations.*;
 import kz.allpay.api.exception.AbstractWebApplicationException;
 import kz.allpay.api.exception.GeneralException;
 import kz.allpay.api.exception.LoginNotValidException;
+import kz.allpay.api.model.PaymentComment;
 import kz.allpay.api.model.request.*;
 import kz.allpay.api.model.response.*;
 
@@ -74,5 +75,5 @@ public interface UserProfileManagement {
 
     DefaultResponse sendMessageToSupport(String messageSubject, String messageText) throws GeneralException;
 
-    StringResponse getPaymentTipsByTerminalId(String terminalId);
+    PaymentTipsResponse getPaymentTipsByTerminalId(String terminalId, String language) throws GeneralException;
 }
