@@ -6,8 +6,8 @@ import kz.allpay.mfs.webshop.keys.PrivateKeyReader;
 import kz.allpay.mfs.webshop.keys.PublicKeyReader;
 import kz.allpay.mfs.ws.soap.generated.v1_0.*;
 import kz.allpay.mfs.ws.soap.handlers.SecuritySoapHandlerClient;
-import kz.allpay.mfs.ws.soap.v1_0.TransactionManagementV1_0;
-import kz.allpay.mfs.ws.soap.v1_0.TransactionManagementV1_0Client;
+import kz.allpay.mfs.ws.soap.v1_1.TransactionManagementV1_1;
+import kz.allpay.mfs.ws.soap.v1_1.TransactionManagementV1_1Client;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -81,7 +81,7 @@ public class TransactionManagment {
         logger.info("transactionId\t"+transactionId);
 
         // Создаем соап клиента, по ссылке из проперти файлов.
-        TransactionManagementV1_0 srv = TransactionManagementV1_0Client.getService(
+        TransactionManagementV1_1 srv = TransactionManagementV1_1Client.getService(
                 PropertiesUtils.getApiUrl(),
                 Arrays.asList(new SecuritySoapHandlerClient(certificateIdInput,
                         PrivateKeyReader.loadPrivateKeyFromFile(new ByteArrayInputStream(pem.getBytes("UTF-8"))),
@@ -188,7 +188,7 @@ public class TransactionManagment {
         logger.info("transactionId\t"+transactionId);
 
         // Создаем соап клиента, по ссылке из проперти файлов.
-        TransactionManagementV1_0 srv = TransactionManagementV1_0Client.getService(
+        TransactionManagementV1_1 srv = TransactionManagementV1_1Client.getService(
                 PropertiesUtils.getApiUrl(),
                 Arrays.asList(new SecuritySoapHandlerClient(certificateIdInput,
                         PrivateKeyReader.loadPrivateKeyFromFile(new ByteArrayInputStream(pem.getBytes("UTF-8"))),
@@ -297,7 +297,7 @@ public class TransactionManagment {
         logger.info("requester\t"+requester);
 
         // Создаем соап клиента, по ссылке из проперти файлов.
-        TransactionManagementV1_0 srv = TransactionManagementV1_0Client.getService(
+        TransactionManagementV1_1 srv = TransactionManagementV1_1Client.getService(
                 PropertiesUtils.getApiUrl(),
                 Arrays.asList(new SecuritySoapHandlerClient(certificateIdInput,
                         PrivateKeyReader.loadPrivateKeyFromFile(new ByteArrayInputStream(pem.getBytes("UTF-8"))),
@@ -335,7 +335,7 @@ public class TransactionManagment {
         // Отправляем запрос
         final CheckUserResponse completeTransaction;
         try {
-            completeTransaction = srv.checkUser(request);
+            completeTransaction = srv.checkUserAndValidateCashIn(request);
         } catch (Exception e) {
             return ExceptionHandler.handleExceptionAsJson(req, resp, e);
         }
@@ -368,7 +368,7 @@ public class TransactionManagment {
         logger.info("requester\t"+requester);
 
         // Создаем соап клиента, по ссылке из проперти файлов.
-        TransactionManagementV1_0 srv = TransactionManagementV1_0Client.getService(
+        TransactionManagementV1_1 srv = TransactionManagementV1_1Client.getService(
                 PropertiesUtils.getApiUrl(),
                 Arrays.asList(new SecuritySoapHandlerClient(certificateIdInput,
                         PrivateKeyReader.loadPrivateKeyFromFile(new ByteArrayInputStream(pem.getBytes("UTF-8"))),

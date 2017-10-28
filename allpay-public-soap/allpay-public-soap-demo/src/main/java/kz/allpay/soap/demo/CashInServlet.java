@@ -7,8 +7,8 @@ import kz.allpay.mfs.ws.soap.generated.v1_0.CompleteTransactionResponse;
 import kz.allpay.mfs.ws.soap.generated.v1_0.Language;
 import kz.allpay.mfs.ws.soap.generated.v1_0.OnlineTransactionRequestHeader;
 import kz.allpay.mfs.ws.soap.handlers.SecuritySoapHandlerClient;
-import kz.allpay.mfs.ws.soap.v1_0.TransactionManagementV1_0;
-import kz.allpay.mfs.ws.soap.v1_0.TransactionManagementV1_0Client;
+import kz.allpay.mfs.ws.soap.v1_1.TransactionManagementV1_1;
+import kz.allpay.mfs.ws.soap.v1_1.TransactionManagementV1_1Client;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -72,9 +72,9 @@ public class CashInServlet extends HttpServlet{
         logger.info("amount\t"+amount);
 
         // Создаем соап клиента, по ссылке из проперти файлов.
-        final TransactionManagementV1_0 srv;
+        final TransactionManagementV1_1 srv;
         try {
-            srv = TransactionManagementV1_0Client.getService(PropertiesUtils.getApiUrl(),
+            srv = TransactionManagementV1_1Client.getService(PropertiesUtils.getApiUrl(),
                     Arrays.asList(new SecuritySoapHandlerClient(certificateIdInput,
                             PrivateKeyReader.loadPrivateKeyFromFile(new ByteArrayInputStream(pem.getBytes("UTF-8"))),
                             PublicKeyReader.loadPublicKeyFromFile(new ByteArrayInputStream(pemInputResponse.getBytes("UTF-8")))
