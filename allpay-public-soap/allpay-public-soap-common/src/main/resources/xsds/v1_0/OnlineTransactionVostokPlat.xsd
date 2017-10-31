@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:otc="http://allpay.kz/xsd/1.0.0/OnlineTransactionCommons.xsd"
+           targetNamespace="http://allpay.kz/xsd/1.0.0/OnlineTransactionCheckUser.xsd"
+           xmlns="http://allpay.kz/xsd/1.0.0/OnlineTransactionCheckUser.xsd"
+           version="1.0.0">
+    <xs:import namespace="http://allpay.kz/xsd/1.0.0/OnlineTransactionCommons.xsd" schemaLocation="OnlineTransactionCommons.xsd"/>
+
+    <xs:complexType name="vostokPlatCheckRequest">
+        <xs:annotation>
+            <xs:documentation>This request answers if user exists or not. If it does then it returns basic information about that user</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="header" type="otc:onlineTransactionRequestHeader"/>
+            <xs:element name="userName" type="otc:userName"/>
+            <xs:element name="utilityAccountNumber" type="utilityAccountNumber"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="vostokPlatCheckResponse">
+        <xs:sequence>
+            <xs:element name="header" type="otc:onlineTransactionResponseHeader"/>
+            <xs:element name="vostokPlatAccountNumberInfo" type="vostokPlatAccountNumberInfo"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="vostokPlatPayRequest">
+        <xs:annotation>
+            <xs:documentation>This request answers if user exists or not. If it does then it returns basic information about that user</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="header" type="otc:onlineTransactionRequestHeader"/>
+            <xs:element name="userName" type="otc:userName"/>
+            <xs:element name="utilityAccountNumber" type="utilityAccountNumber"/>
+            <xs:element name="amount"  type="otc:amount"/>
+            <xs:element name="rrn" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="vostokPlatPayResponse">
+        <xs:sequence>
+            <xs:element name="header" type="otc:onlineTransactionResponseHeader"/>
+            <xs:element name="payResponseCode" type="xs:integer">
+                <xs:annotation>
+                    <xs:documentation>
+                        will always be zero. This method throws soap fault in case of errors
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="vostokPlatAccountNumberInfo">
+        <xs:sequence>
+            <xs:element name="flatOwnerFullName" type="xs:string" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>
+                        Владелец квартиры
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="flatAddress" type="xs:string" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>
+                        Адрес квартиры
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="atMonthStartAmount" type="otc:amount" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>
+                        Для того чтобы вывести строчку:
+                        "[Долг/Переплата] на [01.ММ.ГГГГ] составляет [atMonthStartAmount] тг."
+                        (в поле [Долг/Переплата] отображается либо слово «Долг» если сумма atMonthStartAmount меньше нуля, либо слово «Переплата» если сумма atMonthStartAmount больше или равна нулю; в поле [ММ.ГГГГ] –текущий месяц и год)
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="debtOverpaymentDate" type="xs:date" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>
+                        Для того чтобы вывести строчку:
+                        "[Долг/Переплата] на [01.ММ.ГГГГ] составляет [atMonthStartAmount] тг."
+                        (в поле [Долг/Переплата] отображается либо слово «Долг» если сумма atMonthStartAmount меньше нуля, либо слово «Переплата» если сумма atMonthStartAmount больше или равна нулю; в поле [ММ.ГГГГ] –текущий месяц и год)
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="monthlyAmount" type="otc:amount" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>
+                        Для того чтобы вывести строчку:
+                        "Начисление в [ММ.ГГГГ] составляет [monthlyAmount] тг.Э
+                        (в поле [ММ.ГГГГ] в текстовом виде отображается текущий месяц; указывается сумма Счета на оплату, выставленного в текущем месяце);
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="currentMonthPaymentAmount" type="otc:amount" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>
+                        Для того чтобы вывести строчку:
+                        "Оплата в [ММ.ГГГГ] составляет [currentMonthPaymentAmount] тг." (в поле [ММ.ГГГГ] в текстовом виде отображается текущий месяц; указывается сумма оплаты, выполненной в текущем месяце);
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="currentAmount" type="otc:amount" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>
+                        Для того чтобы вывести строчку
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:simpleType name="utilityAccountNumber">
+        <xs:annotation>
+            <xs:documentation>№ лицевого счета в ТОО «ЖЭУ ВКО»</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+</xs:schema>

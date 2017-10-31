@@ -45,4 +45,10 @@ public interface TransactionManagementV1_1 {
 
     @WebMethod(action = "availableBalance")
     public AvailableBalanceResponse availableBalance(@WebParam(name = "AvailableBalanceRequest") AvailableBalanceRequest request);
+
+    @WebMethod(action = "vostokPlatCheck")
+    public VostokPlatCheckResponse vostokPlatCheck(@WebParam(name = "VostokPlatCheckRequest") VostokPlatCheckRequest vostokPlatCheckRequest);
+
+    @WebMethod(action = "vostokPlatPay")
+    public VostokPlatPayResponse vostokPlatPay(@WebParam(name = "VostokPlatPayRequest") VostokPlatPayRequest vostokPlatPayRequest);
 }
