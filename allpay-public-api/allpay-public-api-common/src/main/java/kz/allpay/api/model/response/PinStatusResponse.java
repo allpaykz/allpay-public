@@ -31,7 +31,7 @@ public class PinStatusResponse  extends AbstractResponse implements Serializable
         isExpired = expired;
     }
 
-    @ApiModelProperty(notes = "Пароль бы сброшен админом")
+    @ApiModelProperty(notes = "Пароль был сброшен админом")
     public Boolean getIsReset() {
         return isReset;
     }
