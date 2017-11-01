@@ -21,6 +21,7 @@
         <xs:sequence>
             <xs:element name="header" type="otc:onlineTransactionResponseHeader"/>
             <xs:element name="vostokPlatAccountNumberInfo" type="vostokPlatAccountNumberInfo"/>
+            <xs:element name="availableAgentBalance"  type="availableAgentBalance"/>
         </xs:sequence>
     </xs:complexType>
 
@@ -110,6 +111,13 @@
             </xs:element>
         </xs:sequence>
     </xs:complexType>
+
+    <xs:simpleType name="availableAgentBalance">
+        <xs:annotation>
+            <xs:documentation>Available balance of DS system agent</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:decimal"/>
+    </xs:simpleType>
 
     <xs:simpleType name="utilityAccountNumber">
         <xs:annotation>
