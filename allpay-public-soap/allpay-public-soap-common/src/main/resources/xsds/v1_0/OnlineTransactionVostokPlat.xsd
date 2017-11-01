@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
            xmlns:otc="http://allpay.kz/xsd/1.0.0/OnlineTransactionCommons.xsd"
-           targetNamespace="http://allpay.kz/xsd/1.0.0/OnlineTransactionCheckUser.xsd"
-           xmlns="http://allpay.kz/xsd/1.0.0/OnlineTransactionCheckUser.xsd"
+           targetNamespace="http://allpay.kz/xsd/1.0.0/OnlineTransactionVostokPlat.xsd"
+           xmlns="http://allpay.kz/xsd/1.0.0/OnlineTransactionVostokPlat.xsd"
            version="1.0.0">
     <xs:import namespace="http://allpay.kz/xsd/1.0.0/OnlineTransactionCommons.xsd" schemaLocation="OnlineTransactionCommons.xsd"/>
 
@@ -12,8 +12,20 @@
         </xs:annotation>
         <xs:sequence>
             <xs:element name="header" type="otc:onlineTransactionRequestHeader"/>
-            <xs:element name="userName" type="otc:userName"/>
-            <xs:element name="utilityAccountNumber" type="utilityAccountNumber"/>
+            <xs:element name="userName" type="otc:userName">
+                <xs:annotation>
+                    <xs:documentation>
+                        user name. If user does not exist allpay system creates a new background wallet
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="utilityAccountNumber" type="utilityAccountNumber">
+                <xs:annotation>
+                    <xs:documentation>
+                        A personal account to pay for
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
         </xs:sequence>
     </xs:complexType>
 
@@ -31,23 +43,55 @@
         </xs:annotation>
         <xs:sequence>
             <xs:element name="header" type="otc:onlineTransactionRequestHeader"/>
-            <xs:element name="userName" type="otc:userName"/>
-            <xs:element name="utilityAccountNumber" type="utilityAccountNumber"/>
-            <xs:element name="amount"  type="otc:amount"/>
-            <xs:element name="rrn" type="xs:string"/>
+            <xs:element name="userName" type="otc:userName">
+                <xs:annotation>
+                    <xs:documentation>
+                        User login in allpay system. User must be registered at this point
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="utilityAccountNumber" type="utilityAccountNumber">
+                <xs:annotation>
+                    <xs:documentation>
+                        Personal account of user
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="amount"  type="otc:amount">
+                <xs:annotation>
+                    <xs:documentation>
+                        amount of money after commission
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="fullAmount"  type="otc:amount">
+                <xs:annotation>
+                    <xs:documentation>
+                        full amount - amount of money a user have put in
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="rrn" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation>
+                        unique transaction number in agent's system
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="valueDate"  type="xs:dateTime">
+                <xs:annotation>
+                    <xs:documentation>
+                        transaction date
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
         </xs:sequence>
     </xs:complexType>
 
     <xs:complexType name="vostokPlatPayResponse">
         <xs:sequence>
             <xs:element name="header" type="otc:onlineTransactionResponseHeader"/>
-            <xs:element name="payResponseCode" type="xs:integer">
-                <xs:annotation>
-                    <xs:documentation>
-                        will always be zero. This method throws soap fault in case of errors
-                    </xs:documentation>
-                </xs:annotation>
-            </xs:element>
+            <xs:element name="transactionInfo" type="otc:transactionInfo"/>
         </xs:sequence>
     </xs:complexType>
 
