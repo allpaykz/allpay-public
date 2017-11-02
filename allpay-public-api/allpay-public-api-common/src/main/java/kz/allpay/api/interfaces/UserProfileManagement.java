@@ -1,16 +1,10 @@
 package kz.allpay.api.interfaces;
 
 
-import io.swagger.annotations.*;
-import kz.allpay.api.exception.AbstractWebApplicationException;
 import kz.allpay.api.exception.GeneralException;
 import kz.allpay.api.exception.LoginNotValidException;
-import kz.allpay.api.model.PaymentComment;
 import kz.allpay.api.model.request.*;
 import kz.allpay.api.model.response.*;
-
-import javax.ws.rs.*;
-import javax.ws.rs.core.MediaType;
 
 /**
  * Этот класс содержит запросы для управления своим профилем
@@ -75,5 +69,5 @@ public interface UserProfileManagement {
 
     DefaultResponse sendMessageToSupport(String messageSubject, String messageText) throws GeneralException;
 
-    PaymentTipsResponse getPaymentTipsByTerminalId(String terminalId, String language) throws GeneralException;
+    PurposeOfPayment getPurposeOfPaymentByTerminalId(String terminalId, String language) throws GeneralException;
 }
