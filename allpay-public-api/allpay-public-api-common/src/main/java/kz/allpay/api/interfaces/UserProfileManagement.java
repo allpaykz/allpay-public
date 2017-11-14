@@ -70,4 +70,6 @@ public interface UserProfileManagement {
     DefaultResponse sendMessageToSupport(String messageSubject, String messageText) throws GeneralException;
 
     PurposeOfPayment getPurposeOfPaymentByTerminalId(String terminalId, String language) throws GeneralException;
+
+    UserSavedCardsResponse getUserCards(String lang) throws GeneralException;
 }
