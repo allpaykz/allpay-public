@@ -72,4 +72,6 @@ public interface UserProfileManagement {
     PurposeOfPayment getPurposeOfPaymentByTerminalId(String terminalId, String language) throws GeneralException;
 
     UserSavedCardsResponse getUserCards(String lang) throws GeneralException;
+
+    DefaultResponse deleteSavedCard(String lang, String cardId) throws GeneralException;
 }
