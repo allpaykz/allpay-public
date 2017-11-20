@@ -138,11 +138,11 @@
                     </xs:documentation>
                 </xs:annotation>
             </xs:element>
-            <xs:element name="currentMonthPaymentAmount" type="otc:amount" minOccurs="0">
+            <xs:element name="currentMonthPaymentSum" type="otc:amount" minOccurs="0">
                 <xs:annotation>
                     <xs:documentation>
                         Для того чтобы вывести строчку:
-                        "Оплата в [ММ.ГГГГ] составляет [currentMonthPaymentAmount] тг." (в поле [ММ.ГГГГ] в текстовом виде отображается текущий месяц; указывается сумма оплаты, выполненной в текущем месяце);
+                        "Оплата в [ММ.ГГГГ] составляет [currentMonthPaymentSum] тг." (в поле [ММ.ГГГГ] в текстовом виде отображается текущий месяц; указывается сумма оплаты, выполненной в текущем месяце);
                     </xs:documentation>
                 </xs:annotation>
             </xs:element>
