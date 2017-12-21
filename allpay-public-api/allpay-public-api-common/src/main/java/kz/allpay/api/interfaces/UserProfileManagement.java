@@ -13,7 +13,7 @@ import kz.allpay.api.model.response.*;
  */
 public interface UserProfileManagement {
 
-    public BooleanResponse requestNumberChange(String numberToChangeTo) throws GeneralException;
+    public BooleanResponse requestNumberChange(String numberToChangeTo, String numberCountryLiteralCode) throws GeneralException;
 
     public BooleanResponse changeNumberByTan(String tan) throws GeneralException;
 
