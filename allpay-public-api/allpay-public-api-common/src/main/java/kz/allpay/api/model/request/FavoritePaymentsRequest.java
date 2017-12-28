@@ -6,7 +6,9 @@ package kz.allpay.api.model.request;
  */
 
 public class FavoritePaymentsRequest extends AbstractRequest {
+
     private String loginName;
+    private String countryLiteralCode;
 
     public String getLoginName() {
         return loginName;
@@ -14,5 +16,13 @@ public class FavoritePaymentsRequest extends AbstractRequest {
 
     public void setLoginName(String loginName) {
         this.loginName = loginName;
+    }
+
+    public String getCountryLiteralCode() {
+        return countryLiteralCode;
+    }
+
+    public void setCountryLiteralCode(String countryLiteralCode) {
+        this.countryLiteralCode = countryLiteralCode;
     }
 }
