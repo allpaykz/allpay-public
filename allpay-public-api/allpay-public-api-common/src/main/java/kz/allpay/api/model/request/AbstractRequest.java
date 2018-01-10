@@ -15,9 +15,11 @@ public class AbstractRequest {
      * DEFAULT LANGUAGE is RUSSIAN
      */
     private Language lang = Language.RU;
+    private String countryLiteralCode = "KZ";
 
     public AbstractRequest() {
         lang = Language.RU;
+        countryLiteralCode = "KZ";
     }
 
     @ApiModelProperty
@@ -34,4 +36,12 @@ public class AbstractRequest {
         return lang.toString().toLowerCase();
     }
 
+    @ApiModelProperty(notes = "буквенный код страны")
+    public String getCountryLiteralCode() {
+        return countryLiteralCode;
+    }
+
+    public void setCountryLiteralCode(String countryLiteralCode) {
+        this.countryLiteralCode = countryLiteralCode;
+    }
 }
