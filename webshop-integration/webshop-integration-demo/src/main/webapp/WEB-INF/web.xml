@@ -31,8 +31,24 @@
     </servlet-mapping>
 
 
+    <!--<servlet-mapping>-->
+        <!--<servlet-name>javax.ws.rs.core.Application</servlet-name>-->
+        <!--<url-pattern>/webresources/*</url-pattern>-->
+    <!--</servlet-mapping>-->
+    <servlet>
+        <servlet-name>jersey-servlet</servlet-name>
+        <servlet-class>com.sun.jersey.spi.container.servlet.ServletContainer</servlet-class>
+        <init-param>
+            <param-name>javax.ws.rs.core.Application</param-name>
+            <param-value>kz.allpay.mfs.restejb</param-value>
+        </init-param>
+        <init-param>
+            <param-name>com.sun.jersey.api.json.POJOMappingFeature</param-name>
+            <param-value>true</param-value>
+        </init-param>
+    </servlet>
     <servlet-mapping>
-        <servlet-name>javax.ws.rs.core.Application</servlet-name>
+        <servlet-name>jersey-servlet</servlet-name>
         <url-pattern>/webresources/*</url-pattern>
     </servlet-mapping>
 </web-app>

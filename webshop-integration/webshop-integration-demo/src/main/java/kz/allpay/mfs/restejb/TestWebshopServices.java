@@ -1,5 +1,6 @@
 package kz.allpay.mfs.restejb;
 
+import java.security.Security;
 import java.util.List;
 import kz.allpay.mfs.webshop.WebShopRequestTransformer;
 import kz.allpay.mfs.webshop.WebShopResponseTransformer;
@@ -10,6 +11,7 @@ import kz.allpay.mfs.webshop.generated.response.WebShopResponseType;
 import kz.allpay.mfs.webshop.keys.PrivateKeyReader;
 import kz.allpay.mfs.webshop.keys.PublicKeyReader;
 import kz.allpay.mfs.webshop.signature.SignatureUtils;
+import org.bouncycastle.jce.provider.BouncyCastleProvider;
 import org.bouncycastle.openssl.PEMReader;
 import sun.misc.BASE64Decoder;
 import sun.misc.BASE64Encoder;
@@ -55,6 +57,8 @@ public class TestWebshopServices {
             @QueryParam("transactionTimeOutInSeconds") int transactionTimeOutInSeconds,
             @QueryParam("pemInput") String pemInput,
             @QueryParam("pemInputResponse") String pemInputResponse) {
+
+        Security.addProvider(new BouncyCastleProvider());
 
         System.out.println("amount = " + amount);
         System.out.println("shopName = " + shopName);
