@@ -156,13 +156,13 @@ public class SignatureUtils {
         if (coreValidity == false) {
             logger.warning("Signature failed core validation");
             boolean sv = signature.getSignatureValue().validate(valContext);
-            logger.warning("signature validation status: " + sv);
+            logger.warning("signature validation status: " + sv + (!sv ? "(wrong key?)" : ""));
             // check the validation status of each Reference
             Iterator i = signature.getSignedInfo().getReferences().iterator();
             for (int j = 0; i.hasNext(); j++) {
                 boolean refValid =
                         ((Reference) i.next()).validate(valContext);
-                logger.info("ref[" + j + "] validity status: " + refValid);
+                logger.info("ref[" + j + "] validity status: " + refValid + (!refValid ? "(formatting problem?)" : ""));
             }
             return false;
         } else {

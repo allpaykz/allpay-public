@@ -12,6 +12,7 @@ public class Constants {
     public static final String SIGNING_ALGORITHM = "SHA1withRSA";
 
     public static final String PRIVATE_KEY_FILE = "/mockKeys/TEST.priv.pem";
+    public static final String PRIVATE_KEY1_FILE = "/mockKeys/TEST1.priv.pem";
     public static final String PUBLIC_KEY_FILE = "/mockKeys/TEST.pub.pem";
 
     public static final String PRIVATE_WRONG_KEY_FILE = "/mockKeys/TEST_WRONG_KEY.priv.pem";
