@@ -63,6 +63,14 @@
             <textarea class="form-control" name="pemInputResponse" id="pemInputResponseId" placeholder="Публичный ключ(для проверки подписи ответа)"></textarea>
         </div>
 
+        <div class="form-group col-xs-10 col-md-10" id="protocolVersion">
+            <label for="protocolVersionInput" class="control-label"></label>
+            <input type="text" class="form-control"
+                   spellcheck="false"
+                   value="" required="true"
+                   id="protocolVersionInput" name="protocolVersion" placeholder="Введите версию протокола">
+        </div>
+
         <%--This fields only for test purposes--%>
         <div class="form-group col-xs-12 col-md-12" id="testFields">
             <label for="terminalIdInput" class="control-label"></label>

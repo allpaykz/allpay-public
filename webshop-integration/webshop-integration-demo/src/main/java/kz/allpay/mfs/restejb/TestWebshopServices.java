@@ -54,7 +54,8 @@ public class TestWebshopServices {
             @QueryParam("deleteRequiredFields") Boolean deleteRequiredFields,
             @QueryParam("transactionTimeOutInSeconds") int transactionTimeOutInSeconds,
             @QueryParam("pemInput") String pemInput,
-            @QueryParam("pemInputResponse") String pemInputResponse) {
+            @QueryParam("pemInputResponse") String pemInputResponse,
+            @QueryParam("protocolVersion") BigDecimal protocolVersion) {
 
         System.out.println("amount = " + amount);
         System.out.println("shopName = " + shopName);
@@ -64,11 +65,12 @@ public class TestWebshopServices {
         System.out.println("transactionTimeOutInSeconds = " + transactionTimeOutInSeconds);
         System.out.println("pemInput = " + pemInput);
         System.out.println("pemInputResponse = " + pemInputResponse);
+        System.out.println("protocolVersion = " + protocolVersion);
 
         try {
             SavedPublicKeyStorage.put(invoiceNumber, getPublicKey(pemInputResponse));
             final String signedXML = addInvoiceToDatabase(amount, terminalId, invoiceNumber, shopName, pemInput,
-                                                          deleteRequiredFields,transactionTimeOutInSeconds);
+                                                          deleteRequiredFields,transactionTimeOutInSeconds, protocolVersion);
             final BASE64Encoder encoder = new BASE64Encoder();
             final String base64XML = encoder.encode(signedXML.getBytes());
             final Map<String, String> result = new HashMap<>();
@@ -89,9 +91,9 @@ public class TestWebshopServices {
 
 
 
-    private String addInvoiceToDatabase(String amount, String terminalId,
-                                        String invoiceNumber, String shopName, String pemInput,
-                                        Boolean deleteRequiredFields,int transactionTimeOutInSeconds) throws UnsupportedEncodingException {
+    private String addInvoiceToDatabase(String amount, String terminalId, String invoiceNumber, String shopName,
+                                        String pemInput, Boolean deleteRequiredFields, int transactionTimeOutInSeconds,
+                                        BigDecimal protocolVersion) throws UnsupportedEncodingException {
 
         try {
             final WebShopRequestType request = new WebShopRequestType();
@@ -105,6 +107,7 @@ public class TestWebshopServices {
             request.setSuccessLink(TEST_SUCCES_LINK);
             request.setFailureLink(TEST_FAILURE_LINK);
             request.setResponseURL(TEST_RESPONSE_URL);
+            request.setProtocolVersion(protocolVersion);
 
             MerchantType merchantType = new MerchantType();
 

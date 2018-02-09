@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:WSResp="http://allpay.kz/xsd/1.0.0/WebShopCustomerResponse.xsd"
+           xmlns:ds="http://www.w3.org/2000/09/xmldsig#"
+           targetNamespace="http://allpay.kz/xsd/1.0.0/WebShopCustomerResponse.xsd"
+           elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0.0">
+    <xs:import namespace="http://www.w3.org/2000/09/xmldsig#" schemaLocation="xmldsig-core-schema.xsd"/>
+    <xs:element name="WebShopCustomerResponse" type="WSResp:WebShopCustomerResponse">
+        <xs:annotation>
+            <xs:documentation>Response from webshop</xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <xs:complexType name="WebShopCustomerResponse">
+        <xs:sequence>
+            <xs:element name="Status">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string"/>
+                </xs:simpleType>
+            </xs:element>
+            <xs:element name="Reason">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string"/>
+                </xs:simpleType>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+</xs:schema>

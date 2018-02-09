@@ -48,6 +48,7 @@ import java.math.BigDecimal;
  *         &lt;element name="SuccessLink" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="FailureLink" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="ResponseURL" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+ *         &lt;element name="ProtocolVersion" type="{http://www.w3.org/2001/XMLSchema}decimal"/>
  *         &lt;element name="TimeoutInSeconds">
  *           &lt;simpleType>
  *             &lt;restriction base="{http://www.w3.org/2001/XMLSchema}integer">
@@ -73,6 +74,7 @@ import java.math.BigDecimal;
         "successLink",
         "failureLink",
         "responseURL",
+        "protocolVersion",
         "timeoutInSeconds",
         "autoTransaction"
 }, namespace = Constants.REQUEST_XSD)
@@ -93,6 +95,8 @@ public class WebShopRequestType implements Serializable {
     protected String successLink;
     @XmlElement(name = "FailureLink", namespace = Constants.REQUEST_XSD)
     protected String failureLink;
+    @XmlElement(name = "ProtocolVersion", required = true, namespace = Constants.REQUEST_XSD)
+    protected BigDecimal protocolVersion;
     @XmlElement(name = "TimeoutInSeconds", namespace = Constants.REQUEST_XSD)
     protected int timeoutInSeconds;
     @XmlElement(name = "ResponseURL", namespace = Constants.REQUEST_XSD)
@@ -238,6 +242,26 @@ public class WebShopRequestType implements Serializable {
      */
     public void setFailureLink(String value) {
         this.failureLink = value;
+    }
+
+    /**
+     * Gets the value of the protocolVersion property.
+     *
+     * @return possible object is
+     * {@link BigDecimal }
+     */
+    public BigDecimal getProtocolVersion() {
+        return protocolVersion;
+    }
+
+    /**
+     * Sets the value of the protocolVersion property.
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
+     */
+    public void setProtocolVersion(BigDecimal value) {
+        this.protocolVersion = value;
     }
 
     /**

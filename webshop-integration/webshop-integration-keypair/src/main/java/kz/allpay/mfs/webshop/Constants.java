@@ -18,5 +18,6 @@ public class Constants {
     public static final String PUBLIC_WRONG_KEY_FILE = "/mockKeys/TEST_WRONG_KEY.pub.pem";
 
     public static final String RESPONSE_XSD="http://allpay.kz/xsd/1.0.0/WebShopResponse.xsd";
+    public static final String CUSTOMER_RESPONSE_XSD="http://allpay.kz/xsd/1.0.0/WebShopCustomerResponse.xsd";
     public static final String REQUEST_XSD="http://allpay.kz/xsd/1.0.0/WebShopRequest.xsd";
 }
