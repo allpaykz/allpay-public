@@ -15,18 +15,23 @@ import org.testng.annotations.Test;
 import org.xml.sax.SAXException;
 
 import javax.xml.XMLConstants;
+import javax.xml.crypto.MarshalException;
 import javax.xml.crypto.dsig.TransformException;
+import javax.xml.crypto.dsig.XMLSignatureException;
 import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.TransformerException;
 import javax.xml.transform.stream.StreamSource;
 import javax.xml.validation.Schema;
 import javax.xml.validation.SchemaFactory;
 import javax.xml.validation.Validator;
+import javax.xml.xpath.XPathExpressionException;
 import java.io.*;
 import java.math.BigInteger;
 import java.net.URL;
 import java.security.*;
 import java.security.spec.InvalidKeySpecException;
 
+import static kz.allpay.mfs.webshop.Constants.PRIVATE_KEY1_FILE;
 import static kz.allpay.mfs.webshop.Constants.PRIVATE_KEY_FILE;
 import static kz.allpay.mfs.webshop.Constants.PUBLIC_KEY_FILE;
 
@@ -68,14 +73,53 @@ public class SignatureUtilsTest {
     }
 
     @Test(groups = "verify")
-    public static void signVerify() throws Exception {
-        InputStream privateKeyStream = SignatureUtilsTest.class.getResourceAsStream(PRIVATE_KEY_FILE);
-        InputStream publicKeyStream = SignatureUtilsTest.class.getResourceAsStream(PUBLIC_KEY_FILE);
-        PublicKey publicKey = PublicKeyReader.loadPublicKeyFromFile(publicKeyStream);
-        PrivateKey privateKey = PrivateKeyReader.loadPrivateKeyFromFile(privateKeyStream);
-        InputStream requestXML = SignatureUtilsTest.class.getResourceAsStream("/WebShopRequest.xml");
+    public static void signVerify_whenSigned_shouldPassVerify() throws Exception {
+        final String signedResponseDocument = signResponse(PRIVATE_KEY_FILE);
+        Assert.assertTrue(verifySignature(signedResponseDocument), "signature verification status must be right");
+    }
+
+    @Test(groups = "verify")
+    public static void signVerify_whenCalledWithWrongKey_shouldFail() throws Exception {
+        final String signedResponseDocument = signResponse(PRIVATE_KEY1_FILE);
+        Assert.assertFalse(verifySignature(signedResponseDocument), "signature verification status must be right");
+    }
+
+    @Test(groups = "verify")
+    public static void signVerify_whenCalledWithSomeFormatting_shouldFail() throws Exception {
+        final String signedResponseDocument = signResponse(PRIVATE_KEY_FILE).replaceAll("    <WSResp", "<WSResp");
+        Assert.assertFalse(verifySignature(signedResponseDocument), "signature verification status must be right");
+    }
+
+    @Test(groups = "verify")
+    public static void signVerify_whenCalledWithSomeFormattingAndWrongKeyFile_shouldFail() throws Exception {
+        final String signedResponseDocument = signResponse(PRIVATE_KEY1_FILE).replaceAll("    <WSResp", "<WSResp");
+        Assert.assertFalse(verifySignature(signedResponseDocument), "signature verification status must be right");
+    }
+
+    private static String signResponse(String privateKeyFile) throws IOException, InvalidKeySpecException, InstantiationException, IllegalAccessException, ClassNotFoundException, NoSuchAlgorithmException, InvalidAlgorithmParameterException, KeyException, SAXException, ParserConfigurationException, MarshalException, XMLSignatureException, TransformerException, XPathExpressionException {
         InputStream responseXML = SignatureUtilsTest.class.getResourceAsStream("/WebShopResponse.xml");
 
+        InputStream privateKeyStream = SignatureUtilsTest.class.getResourceAsStream(privateKeyFile);
+        PrivateKey privateKey = PrivateKeyReader.loadPrivateKeyFromFile(privateKeyStream);
+        String res = SignatureUtils.signXML(privateKey, responseXML);
+        System.out.println(res);
+        validateResponseXSD(res);
+        return res;
+    }
+
+    private static void validateResponseXSD(String signedResponseDocument) throws SAXException, IOException {
+        URL responseSchema = new URL(Constants.RESPONSE_XSD);
+        Schema responseSchemaFile = newSchema(responseSchema);
+        Validator responseValidator = responseSchemaFile.newValidator();
+        responseValidator.validate(new StreamSource(new ByteArrayInputStream(signedResponseDocument.getBytes())));
+    }
+
+    @Test
+    public void signAndValidateRequest() throws Exception {
+        InputStream privateKeyStream = SignatureUtilsTest.class.getResourceAsStream(PRIVATE_KEY_FILE);
+        PrivateKey privateKey = PrivateKeyReader.loadPrivateKeyFromFile(privateKeyStream);
+
+        InputStream requestXML = SignatureUtilsTest.class.getResourceAsStream("/WebShopRequest.xml");
         final String signedRequestDocument = SignatureUtils.signXML(privateKey, requestXML);
         System.out.println(signedRequestDocument);
 
@@ -83,17 +127,12 @@ public class SignatureUtilsTest {
         Schema schema = newSchema(new URL(Constants.REQUEST_XSD));
         Validator validator = schema.newValidator();
         validator.validate(new StreamSource(new ByteArrayInputStream(signedRequestDocument.getBytes())));
+    }
 
-        final String signedResponseDocument = SignatureUtils.signXML(privateKey, responseXML);
-        System.out.println(signedResponseDocument);
-
-        // Validate signed xml
-        URL responseSchema = new URL(Constants.RESPONSE_XSD);
-        Schema responseSchemaFile = newSchema(responseSchema);
-        Validator responseValidator = responseSchemaFile.newValidator();
-        responseValidator.validate(new StreamSource(new ByteArrayInputStream(signedResponseDocument.getBytes())));
-
-        Assert.assertTrue(SignatureUtils.verifySignatureInXML(signedResponseDocument, publicKey), "signature must be verified");
+    private static boolean verifySignature(String signedResponseDocument) throws Exception {
+        InputStream publicKeyStream = SignatureUtilsTest.class.getResourceAsStream(PUBLIC_KEY_FILE);
+        PublicKey publicKey = PublicKeyReader.loadPublicKeyFromFile(publicKeyStream);
+        return SignatureUtils.verifySignatureInXML(signedResponseDocument, publicKey);
     }
 
     private static Schema newSchema(URL schemaFile) {
@@ -105,24 +144,24 @@ public class SignatureUtilsTest {
         }
     }
 
-    @Test
     /**
      * This test show what is canonicalization and what it is exactly do
      * To understand difference between original xml and result
      * check sout output and original Canonicalization_demonstration.xml
      */
+    @Test
     public static void testCanonicalization() throws ClassNotFoundException, IllegalAccessException, InstantiationException, InvalidAlgorithmParameterException, NoSuchAlgorithmException, ParserConfigurationException, IOException, SAXException, TransformException, InvalidCanonicalizerException, CanonicalizationException, Base64DecodingException {
         printCanonicalized(Canonicalizer.ALGO_ID_C14N_OMIT_COMMENTS,
-                           SignatureUtilsTest.class.getResourceAsStream("/Canonicalization_demonstration.xml"));
+                SignatureUtilsTest.class.getResourceAsStream("/Canonicalization_demonstration.xml"));
         printCanonicalized(Canonicalizer.ALGO_ID_C14N_WITH_COMMENTS,
                            SignatureUtilsTest.class.getResourceAsStream("/Canonicalization_demonstration.xml"));
     }
 
-    @Test
     /**
      * This test show that digest is usual SHA1 digest encoded into Base64
      * Important that result is critically depends on canonicalization method
      */
+    @Test
     public static void testDigest() throws ClassNotFoundException, IllegalAccessException, InstantiationException, InvalidAlgorithmParameterException, NoSuchAlgorithmException, ParserConfigurationException, IOException, SAXException, TransformException, InvalidCanonicalizerException, CanonicalizationException, Base64DecodingException {
         System.out.println("\n\tDigest_demonstration.xml will produce 'w4I/gjh5HCynhh2yKA1qgRmo6rY=' as a digest" +
                                    "\n\tif you Sign it with ALGO_ID_C14N_WITH_COMMENTS canonicalizer\n");
