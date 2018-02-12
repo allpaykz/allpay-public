@@ -13,7 +13,14 @@
         <xs:sequence>
             <xs:element name="Status">
                 <xs:simpleType>
-                    <xs:restriction base="xs:string"/>
+                    <xs:annotation>
+                        <xs:documentation>Status of payment</xs:documentation>
+                    </xs:annotation>
+                    <xs:restriction base="xs:string">
+                        <xs:enumeration value = "0"/><!-- DONE -->
+                        <xs:enumeration value = "1"/><!-- PENDING -->
+                        <xs:enumeration value = "2"/><!-- FAIL -->
+                    </xs:restriction>
                 </xs:simpleType>
             </xs:element>
             <xs:element name="Reason">
