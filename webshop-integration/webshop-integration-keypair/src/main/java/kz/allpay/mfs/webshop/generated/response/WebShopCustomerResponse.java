@@ -6,6 +6,7 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.*;
+import java.io.InputStream;
 import java.io.Serializable;
 import java.io.StringReader;
 import java.util.logging.Logger;
@@ -65,6 +66,13 @@ public class WebShopCustomerResponse implements Serializable{
         Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
 
         WebShopCustomerResponse result = (WebShopCustomerResponse) unmarshaller.unmarshal(new StringReader(xml.trim().replaceFirst("^([\\W]+)<", "<")));
+        return result;
+    }
+
+    public static WebShopCustomerResponse fromXml(InputStream is) throws JAXBException {
+        Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
+
+        WebShopCustomerResponse result = (WebShopCustomerResponse) unmarshaller.unmarshal(is);
         return result;
     }
 

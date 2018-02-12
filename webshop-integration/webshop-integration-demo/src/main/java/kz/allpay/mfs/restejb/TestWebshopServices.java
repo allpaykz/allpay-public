@@ -7,8 +7,6 @@ import kz.allpay.mfs.webshop.generated.request.MerchantType;
 import kz.allpay.mfs.webshop.generated.request.WebShopRequestType;
 import kz.allpay.mfs.webshop.generated.response.TransationType;
 import kz.allpay.mfs.webshop.generated.response.WebShopResponseType;
-import kz.allpay.mfs.webshop.keys.PrivateKeyReader;
-import kz.allpay.mfs.webshop.keys.PublicKeyReader;
 import kz.allpay.mfs.webshop.signature.SignatureUtils;
 import org.bouncycastle.openssl.PEMReader;
 import sun.misc.BASE64Decoder;
@@ -27,7 +25,6 @@ import java.util.Map;
 import java.util.logging.Logger;
 
 import static kz.allpay.mfs.restejb.TestPageServlet.mockTransactionStatusDataBase;
-import static kz.allpay.mfs.webshop.Constants.*;
 
 /**
  * User: Sanzhar Aubakirov
@@ -55,7 +52,7 @@ public class TestWebshopServices {
             @QueryParam("transactionTimeOutInSeconds") int transactionTimeOutInSeconds,
             @QueryParam("pemInput") String pemInput,
             @QueryParam("pemInputResponse") String pemInputResponse,
-            @QueryParam("protocolVersion") BigDecimal protocolVersion) {
+            @QueryParam("protocolVersion") String protocolVersion) {
 
         System.out.println("amount = " + amount);
         System.out.println("shopName = " + shopName);
@@ -93,7 +90,7 @@ public class TestWebshopServices {
 
     private String addInvoiceToDatabase(String amount, String terminalId, String invoiceNumber, String shopName,
                                         String pemInput, Boolean deleteRequiredFields, int transactionTimeOutInSeconds,
-                                        BigDecimal protocolVersion) throws UnsupportedEncodingException {
+                                        String protocolVersion) throws UnsupportedEncodingException {
 
         try {
             final WebShopRequestType request = new WebShopRequestType();
@@ -107,7 +104,7 @@ public class TestWebshopServices {
             request.setSuccessLink(TEST_SUCCES_LINK);
             request.setFailureLink(TEST_FAILURE_LINK);
             request.setResponseURL(TEST_RESPONSE_URL);
-            request.setProtocolVersion(protocolVersion);
+            request.setProtocolVersion((protocolVersion != null && !protocolVersion.isEmpty()) ? BigDecimal.valueOf(Double.valueOf(protocolVersion)) : null);
 
             MerchantType merchantType = new MerchantType();
 

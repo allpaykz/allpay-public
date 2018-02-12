@@ -35,7 +35,7 @@
             <xs:element name="SuccessLink" type="xs:string" minOccurs="0"/>
             <xs:element name="FailureLink" type="xs:string" minOccurs="0"/>
             <xs:element name="ResponseURL" type="xs:string" minOccurs="0"/>
-            <xs:element name="ProtocolVersion" type="xs:decimal" default="1"/>
+            <xs:element name="ProtocolVersion" type="xs:decimal"/>
             <xs:element name="TimeoutInSeconds">
                 <xs:simpleType>
                     <xs:restriction base="xs:integer">

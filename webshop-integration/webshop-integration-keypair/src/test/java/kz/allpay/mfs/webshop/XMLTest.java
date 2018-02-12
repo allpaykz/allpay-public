@@ -2,6 +2,7 @@ package kz.allpay.mfs.webshop;
 
 import kz.allpay.mfs.webshop.generated.request.MerchantType;
 import kz.allpay.mfs.webshop.generated.request.WebShopRequestType;
+import kz.allpay.mfs.webshop.generated.response.WebShopCustomerResponse;
 import kz.allpay.mfs.webshop.generated.response.WebShopResponseType;
 import kz.allpay.mfs.webshop.keys.PrivateKeyReader;
 import kz.allpay.mfs.webshop.signature.SignatureUtils;
@@ -118,6 +119,27 @@ public class XMLTest {
         String signedRequestXml = SignatureUtils.signXML(privateKey, myInputStream);
 
         System.out.println(signedRequestXml);
+    }
+
+    @Test
+    public void customerResponseTransformTest() {
+        System.out.println();
+        System.out.println("test customer response");
+        try {
+            InputStream is = XMLTest.class.getResourceAsStream("/WebShopCustomerResponse.xml");
+
+            Assert.assertNotNull(is);
+
+            WebShopCustomerResponse req = WebShopCustomerResponse.fromXml(is);
+            Assert.assertNotNull(req);
+
+            System.out.println("Shop Name = " + req.getStatus());
+            System.out.println("Invoice Num = " + req.getReason());
+
+        } catch (Exception ex) {
+            Logger.getLogger(XMLTest.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
     }
 
 

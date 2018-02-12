@@ -67,7 +67,7 @@
             <label for="protocolVersionInput" class="control-label"></label>
             <input type="text" class="form-control"
                    spellcheck="false"
-                   value="" required="true"
+                   value=""
                    id="protocolVersionInput" name="protocolVersion" placeholder="Введите версию протокола">
         </div>
 
@@ -133,11 +133,12 @@
         var transactionTimeOutInSeconds = document.getElementById("transactionTimeOutInSeconds").value;
         var pemInput = document.getElementById("pemInputId").value;
         var pemInputResponse = document.getElementById("pemInputResponseId").value;
+        var protocolVersion = document.getElementById("protocolVersionInput").value;
 
         $.ajax({
             type: "GET",
             async: false,
-            url: "${pageContext.request.contextPath}/webresources/test/getSignedXML?invoiceNumber=" + invoice + "&amount=" + amount + "&shopName=" + shopName + "&terminalId=" + terminalId + "&deleteRequiredFields="+deleteRequiredFields+"&transactionTimeOutInSeconds="+transactionTimeOutInSeconds + "&pemInput=" + encodeURIComponent(pemInput) + "&pemInputResponse=" + encodeURIComponent(pemInputResponse)
+            url: "${pageContext.request.contextPath}/webresources/test/getSignedXML?invoiceNumber=" + invoice + "&amount=" + amount + "&shopName=" + shopName + "&terminalId=" + terminalId + "&deleteRequiredFields="+deleteRequiredFields+"&transactionTimeOutInSeconds="+transactionTimeOutInSeconds + "&pemInput=" + encodeURIComponent(pemInput) + "&pemInputResponse=" + encodeURIComponent(pemInputResponse) + "&protocolVersion=" + protocolVersion
 
         }).done(function (data) {
             document.getElementById('webshopRequest').value = data.webshopRequest;
