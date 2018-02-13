@@ -3,7 +3,20 @@
            targetNamespace="http://allpay.kz/xsd/1.0.0/WebShopCustomerResponse.xsd"
            elementFormDefault="qualified">
 
-    <xs:element name="WebShopCustomerResponse" type="WSCResp:WebShopCustomerResponse"/>
+    <xs:element name="WebShopCustomerResponse" type="WSCResp:WebShopCustomerResponse">
+        <xs:annotation>
+            <xs:documentation>
+                Response from customer. Used from 2-nd protocol version.
+                After we have sent our response to the provided URL, we suppose to get response from customer.
+                Response consists from Status(required) and Reason(depends on status) elements.
+                |Status  |Reason          |
+                |--------|----------------|
+                |DONE    |doesn't required|
+                |PENDING |doesn't required|
+                |FAIL    |required        |
+            </xs:documentation>
+        </xs:annotation>
+    </xs:element>
 
     <xs:complexType name="WebShopCustomerResponse">
         <xs:sequence>
