@@ -2,6 +2,6 @@
 <WSCResp:WebShopCustomerResponse xsi:schemaLocation="http://allpay.kz/xsd/1.0.0/WebShopCustomerResponse.xsd"
                         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                         xmlns:WSCResp="http://allpay.kz/xsd/1.0.0/WebShopCustomerResponse.xsd">
-    <WSCResp:Status>0</WSCResp:Status>
+    <WSCResp:Status>DONE</WSCResp:Status>
     <WSCResp:Reason></WSCResp:Reason>
 </WSCResp:WebShopCustomerResponse>

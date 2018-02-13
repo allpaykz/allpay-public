@@ -2,7 +2,7 @@ package kz.allpay.mfs.webshop;
 
 import kz.allpay.mfs.webshop.generated.request.MerchantType;
 import kz.allpay.mfs.webshop.generated.request.WebShopRequestType;
-import kz.allpay.mfs.webshop.generated.response.WebShopCustomerResponse;
+import kz.allpay.mfs.webshop.generated.customer.response.WebShopCustomerResponse;
 import kz.allpay.mfs.webshop.generated.response.WebShopResponseType;
 import kz.allpay.mfs.webshop.keys.PrivateKeyReader;
 import kz.allpay.mfs.webshop.signature.SignatureUtils;
@@ -130,11 +130,11 @@ public class XMLTest {
 
             Assert.assertNotNull(is);
 
-            WebShopCustomerResponse req = WebShopCustomerResponse.fromXml(is);
+            WebShopCustomerResponse req = WebShopCustomerResponseTransformer.fromXml(is);
             Assert.assertNotNull(req);
 
-            System.out.println("Shop Name = " + req.getStatus());
-            System.out.println("Invoice Num = " + req.getReason());
+            System.out.println("Status = " + req.getStatus());
+            System.out.println("Reason = " + req.getReason());
 
         } catch (Exception ex) {
             Logger.getLogger(XMLTest.class.getName()).log(Level.SEVERE, null, ex);
