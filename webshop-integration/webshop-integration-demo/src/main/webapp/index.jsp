@@ -21,6 +21,14 @@
     <form class="form-horizontal" accept-charset="UTF-8" id="form"
           action="${pageContext.request.contextPath}/sendPayment"
           method="post">
+        <div class="form-group col-xs-10 col-md-10" id="loginName">
+            <label for="loginNameInput" class="control-label"></label>
+            <input type="text" class="form-control"
+                   spellcheck="false"
+                   value='' required="true"
+                   id="loginNameInput" name="loginName" placeholder="Логин нейм">
+        </div>
+
         <div class="form-group col-xs-10 col-md-10" id="shopName">
             <label for="shopNameInput" class="control-label"></label>
             <input type="text" class="form-control"
