@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:otc="http://allpay.kz/xsd/1.0.0/OnlineTransactionCommons.xsd"
+           targetNamespace="http://allpay.kz/xsd/1.0.0/TerminalPayment.xsd"
+           xmlns="http://allpay.kz/xsd/1.0.0/TerminalPayment.xsd"
+           version="1.0.0">
+    <xs:import namespace="http://allpay.kz/xsd/1.0.0/OnlineTransactionCommons.xsd" schemaLocation="OnlineTransactionCommons.xsd"/>
+
+
+    <xs:complexType name="terminalPaymentPayResponse">
+        <xs:sequence>
+            <xs:element name="header" type="otc:onlineTransactionResponseHeader"/>
+            <xs:element name="terminalPaymentTransactionStatus" type="terminalPaymentTransactionStatus"/>
+            <xs:element name="reason" type="xs:string" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>
+                        Optional reason for payment decline
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:simpleType name="terminalPaymentTransactionStatus">
+        <xs:annotation>
+            <xs:documentation>
+                Status can be one of
+                 - PENDING   - meaning that transaction is not completed or declined yet so another request should be issued later to find out the final status
+                 - COMPLETED - this status is final and it means that money
+                 - DECLINED  - this status is final and it means transaction failed to complete
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="PENDING"/>
+            <xs:enumeration value="COMPLETED"/>
+            <xs:enumeration value="DECLINED"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+</xs:schema>
