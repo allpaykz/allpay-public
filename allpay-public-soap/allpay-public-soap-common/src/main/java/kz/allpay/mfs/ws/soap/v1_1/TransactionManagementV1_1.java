@@ -50,5 +50,5 @@ public interface TransactionManagementV1_1 {
     public VostokPlatCheckResponse vostokPlatCheck(@WebParam(name = "VostokPlatCheckRequest") VostokPlatCheckRequest vostokPlatCheckRequest);
 
     @WebMethod(action = "vostokPlatPay")
-    public VostokPlatPayResponse vostokPlatPay(@WebParam(name = "VostokPlatPayRequest") VostokPlatPayRequest vostokPlatPayRequest);
+    public TerminalPaymentPayResponse vostokPlatPay(@WebParam(name = "VostokPlatPayRequest") VostokPlatPayRequest vostokPlatPayRequest);
 }
