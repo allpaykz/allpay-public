@@ -26,28 +26,10 @@ public interface CashInTransactionManagementV1_1 {
     @WebMethod(action = "createCashInPayment")
     public TerminalPaymentPayResponse createCashInPayment(@WebParam(name = "CashInRequest") CashInRequest request);
 
-    @WebMethod(action = "createCashOutTransaction")
-    public CompleteTransactionResponse createCashOutTransaction(@WebParam(name = "CashOutRequest") CashOutRequest request);
-
-    @WebMethod(action = "completeTransaction")
-    public CompleteTransactionResponse completeTransaction(@WebParam(name = "CompleteTransactionRequest") CompleteTransactionRequest request);
-
-    @WebMethod(action = "declineTransaction")
-    public CompleteTransactionResponse declineTransaction(@WebParam(name = "DeclineTransactionRequest") DeclineTransactionRequest request);
-
     @WebMethod(action = "checkUser")
     public CheckUserResponse checkUser(@WebParam(name = "CheckUserRequest") CheckUserRequest request);
 
     @WebMethod(action = "checkUserAndValidateCashIn")
     public CheckUserResponse checkUserAndValidateCashIn(@WebParam(name = "CheckUserRequest") CheckUserRequest request);
-
-    @WebMethod(action = "availableBalance")
-    public AvailableBalanceResponse availableBalance(@WebParam(name = "AvailableBalanceRequest") AvailableBalanceRequest request);
-
-    @WebMethod(action = "vostokPlatCheck")
-    public VostokPlatCheckResponse vostokPlatCheck(@WebParam(name = "VostokPlatCheckRequest") VostokPlatCheckRequest vostokPlatCheckRequest);
-
-    @WebMethod(action = "vostokPlatPay")
-    public TerminalPaymentPayResponse vostokPlatPay(@WebParam(name = "VostokPlatPayRequest") VostokPlatPayRequest vostokPlatPayRequest);
 
 }
