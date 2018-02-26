@@ -72,11 +72,11 @@
 
 
                     <div class="form-group">
-                        <label for="toUserName" class="control-label">Allpay пользователь</label>
+                        <label for="toUser" class="control-label">Allpay пользователь</label>
                         <input type="tel" class="form-control"
                                spellcheck="false"
                                value='' required="true"
-                               id="toUserName" name="toUserName" placeholder="Логин клиента">
+                               id="toUser" name="toUserName" placeholder="Логин клиента">
                     </div>
 
                     <div class="form-group">
