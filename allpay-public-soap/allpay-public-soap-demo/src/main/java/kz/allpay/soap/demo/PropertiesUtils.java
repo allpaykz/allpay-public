@@ -34,4 +34,11 @@ public class PropertiesUtils {
     public static String getApiUrl() {
         return getProps().getProperty("allpay.api.url");
     }
+
+    /**
+     * comes from profile
+     */
+    public static String getCashInApiUrl() {
+        return getProps().getProperty("allpay.cash.in.api.url");
+    }
 }

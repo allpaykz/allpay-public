@@ -42,6 +42,7 @@
                 <li class="${classTx}"><a href="${pageContext.request.contextPath}/transactions.jsp">Транзакции</a></li>
                 <li class="${classCashin}"><a href="${pageContext.request.contextPath}/cashin.jsp">Пополнить</a></li>
                 <li class="${classCashout}"><a href="${pageContext.request.contextPath}/cashout.jsp">Снять</a></li>
+                <li class="${classCashout}"><a href="${pageContext.request.contextPath}/terminalPayment.jsp">Терминальные операции</a></li>
                 <li class="${classComplete}"><a href="${pageContext.request.contextPath}/complete.jsp">Подтвердить</a></li>
                 <li class="${classDecline}"><a href="${pageContext.request.contextPath}/decline.jsp">Отменить</a></li>
                 <li class="${classUser}"><a href="${pageContext.request.contextPath}/userinfo.jsp">Юзер</a></li>

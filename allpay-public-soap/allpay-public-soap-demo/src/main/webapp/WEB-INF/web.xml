@@ -30,6 +30,15 @@
         <url-pattern>/cashout</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>Terminal Payment Servlet</servlet-name>
+        <servlet-class>kz.allpay.soap.demo.TerminalPaymentServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Terminal Payment Servlet</servlet-name>
+        <url-pattern>/terminal_payment</url-pattern>
+    </servlet-mapping>
+
     <!-- Auto scan REST service -->
     <context-param>
         <param-name>resteasy.scan</param-name>

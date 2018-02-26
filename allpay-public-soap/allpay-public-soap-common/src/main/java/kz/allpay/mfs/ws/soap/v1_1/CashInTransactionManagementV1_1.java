@@ -13,7 +13,7 @@ import javax.jws.WebService;
 public interface CashInTransactionManagementV1_1 {
 
     public static final String TARGET_NAMESPACE = "http://www.allpay.kz/mfs/soap/CashInTransactionManagement/1.1";
-    public static final String SERVICE = "TerminalTransactionManagementService";
+    public static final String SERVICE = "TransactionManagementService";
 
     /**
      * for certificate testing purposes
