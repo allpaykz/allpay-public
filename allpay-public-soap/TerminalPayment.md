@@ -223,7 +223,7 @@ xsd можно найти [здесь](https://github.com/allpaykz/allpay-public
 
 Адрес на [бете](http://beta.allpay.kz/allpay-public-soap/cash-in-transaction-management/v1.1?wsdl) и [боевая](http://mfs.allpay.kz/allpay-public-soap/cash-in-transaction-management/v1.1?wsdl)
 
-#### 4.1 Проверка пользователя запрос(checkUserAndValidateCashIn)
+#### 3.1 Проверка пользователя запрос(checkUserAndValidateCashIn)
 
 Пример запроса:
 
@@ -253,7 +253,7 @@ userName - логин пользователя которого нужно по�
 </soapenv:Envelope>
 ```
 
-#### 4.2 Проверка пользователя ответ(checkUserAndValidateCashIn)
+#### 3.2 Проверка пользователя ответ(checkUserAndValidateCashIn)
 
 Блок basicUserInfo - опционален. Если он отстутсвует - значит такого пользователя нет. Запрашивать можно только клиентов. Блок basicUserInfo содержит
 identified - является ли пользователь идентифицированным
@@ -294,7 +294,7 @@ patronymic - отчество
 </soapenv:Envelope>
 ```
 
-#### 5.1 Проведение пополнения запрос(createCashInPayment)
+#### 4.1 Проведение пополнения запрос(createCashInPayment)
 
 Входящие параметры:
 
@@ -328,7 +328,7 @@ patronymic - отчество
 
 В остальном аналогично vostokPlatPay
 
-#### 5.2 Проведение пополнения ответ(createCashInPayment)
+#### 4.2 Проведение пополнения ответ(createCashInPayment)
 
 ```xml
 <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns="http://www.allpay.kz/mfs/soap/CashInTransactionManagement/1.1">
