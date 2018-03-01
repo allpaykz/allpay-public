@@ -1,9 +1,7 @@
 
 ### Описание взаимодействия для оплаты через терминалы
 
-Адрес на бете:
-
-http://beta.allpay.kz/allpay-public-soap/transaction-management/v1.1?wsdl
+Адрес на [бете](http://beta.allpay.kz/allpay-public-soap/transaction-management/v1.1?wsdl) и [боевая](http://mfs.allpay.kz/allpay-public-soap/transaction-management/v1.1?wsdl)
 
 #### 1.1.Пример запроса на проверку состояния абонента(vostokPlatCheck)
 
@@ -223,9 +221,7 @@ xsd можно найти [здесь](https://github.com/allpaykz/allpay-public
 
 ### Описание взаимодействия для оплаты через терминалы(cash in)
 
-Адрес на бете:
-
-http://beta.allpay.kz/allpay-public-soap/cash-in-transaction-management/v1.1?wsdl
+Адрес на [бете](http://beta.allpay.kz/allpay-public-soap/cash-in-transaction-management/v1.1?wsdl) и [боевая](http://mfs.allpay.kz/allpay-public-soap/cash-in-transaction-management/v1.1?wsdl)
 
 #### 4.1 Проверка пользователя запрос(checkUserAndValidateCashIn)
 
