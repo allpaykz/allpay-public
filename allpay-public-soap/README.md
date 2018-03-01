@@ -8,6 +8,8 @@
 
 Документация находится [здесь](https://github.com/allpaykz/documentation/tree/master/public-soap-integration)
 
+Документация на терминальный апи находится [здесь](https://github.com/allpaykz/allpay-public/blob/develop/allpay-public-soap/TerminalPayment.md)
+
 ### Использование
 
 **Вариант А.** Нужно сбилдить весь [проект](https://github.com/allpaykz/allpay-public)
