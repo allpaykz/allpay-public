@@ -219,7 +219,7 @@
 
 xsd можно найти [здесь](https://github.com/allpaykz/allpay-public/tree/develop/allpay-public-soap/allpay-public-soap-common/src/main/resources/xsds/v1_0)
 
-### Описание взаимодействия для оплаты через терминалы(cash in)
+### Описание взаимодействия для оплаты через терминалы(v2)
 
 Адрес на [бете](http://beta.allpay.kz/allpay-public-soap/cash-in-transaction-management/v1.1?wsdl) и [боевая](http://mfs.allpay.kz/allpay-public-soap/cash-in-transaction-management/v1.1?wsdl)
 
