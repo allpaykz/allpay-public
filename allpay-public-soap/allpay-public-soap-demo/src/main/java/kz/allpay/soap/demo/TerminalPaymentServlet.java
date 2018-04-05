@@ -169,6 +169,7 @@ public class TerminalPaymentServlet extends HttpServlet {
         c.setTime(new Date());
         try {
             header.setTimestamp(DatatypeFactory.newInstance().newXMLGregorianCalendar(c));
+            cashInRequest.setValueDate(DatatypeFactory.newInstance().newXMLGregorianCalendar(c));
         } catch (DatatypeConfigurationException e) {
             throw new RuntimeException("Calendar not configured");
         }
