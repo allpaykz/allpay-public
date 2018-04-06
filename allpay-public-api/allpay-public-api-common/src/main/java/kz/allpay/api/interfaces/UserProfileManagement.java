@@ -38,6 +38,11 @@ public interface UserProfileManagement {
     public DefaultResponse sessionLogout();
 
     /**
+     * Логаут сессии по loginName и password
+     */
+    public DefaultResponse sessionLogoutByLoginNameAndPassword(SessionLogoutRequest request) throws GeneralException;
+
+    /**
      * Отвязка устройства
      */
     public DefaultResponse unbindDevice(UnbindDeviceRequest request) throws GeneralException;
