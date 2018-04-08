@@ -154,10 +154,17 @@ public class TestWebshopServices {
 
             logger.info(response.getTransaction().getStatus());
             mockTransactionStatusDataBase.add(response.getTransaction());
+            return "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n" +
+                    "<WebShopCustomerResponse>\n" +
+                    "  <Status>DONE</Status>\n" +
+                    "</WebShopCustomerResponse>";
         } catch (Exception e) {
             e.printStackTrace();
+            return "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n" +
+                    "<WebShopCustomerResponse>\n" +
+                    "  <Status>FAIL</Status>\n" +
+                    "</WebShopCustomerResponse>";
         }
-        return "OK";
     }
 
     @GET
