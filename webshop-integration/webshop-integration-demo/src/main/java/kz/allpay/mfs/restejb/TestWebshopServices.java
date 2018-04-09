@@ -154,10 +154,23 @@ public class TestWebshopServices {
 
             logger.info(response.getTransaction().getStatus());
             mockTransactionStatusDataBase.add(response.getTransaction());
+            return "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
+                    "<WSCResp:WebShopCustomerResponse xsi:schemaLocation=\"http://allpay.kz/xsd/1.0.0/WebShopCustomerResponse.xsd\"\n" +
+                    "                        xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\n" +
+                    "                        xmlns:WSCResp=\"http://allpay.kz/xsd/1.0.0/WebShopCustomerResponse.xsd\">\n" +
+                    "    <WSCResp:Status>DONE</WSCResp:Status>\n" +
+                    "    <WSCResp:Reason></WSCResp:Reason>\n" +
+                    "</WSCResp:WebShopCustomerResponse>";
         } catch (Exception e) {
             e.printStackTrace();
+            return "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
+                    "<WSCResp:WebShopCustomerResponse xsi:schemaLocation=\"http://allpay.kz/xsd/1.0.0/WebShopCustomerResponse.xsd\"\n" +
+                    "                        xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\n" +
+                    "                        xmlns:WSCResp=\"http://allpay.kz/xsd/1.0.0/WebShopCustomerResponse.xsd\">\n" +
+                    "    <WSCResp:Status>FAIL</WSCResp:Status>\n" +
+                    "    <WSCResp:Reason></WSCResp:Reason>\n" +
+                    "</WSCResp:WebShopCustomerResponse>";
         }
-        return "OK";
     }
 
     @GET
