@@ -14,7 +14,7 @@
             <xs:element name="toUserName" type="otc:userName"/>
             <xs:element name="amount" type="otc:amount"/>
             <xs:element name="GUID" type="otc:guid"/>
-            <xs:element name="valueDate"  type="xs:dateTime">
+            <xs:element name="valueDate"  type="xs:dateTime" minOccurs="0">
                 <xs:annotation>
                     <xs:documentation>
                         transaction date
