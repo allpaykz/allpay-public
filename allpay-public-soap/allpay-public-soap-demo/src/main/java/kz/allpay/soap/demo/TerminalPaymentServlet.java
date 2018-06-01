@@ -130,15 +130,21 @@ public class TerminalPaymentServlet extends HttpServlet {
 
         // Записываем ответ в БД
         final String rrn = cashInRequest.getGUID();
-        DataBaseTerminalPayments.getResponseCashInDatabase().put(rrn, terminalPaymentPayResponse);
+        if (terminalPaymentPayResponse.getTerminalPaymentTransactionStatus() == TerminalPaymentTransactionStatus.PENDING) {
+            DataBaseTerminalPayments.getResponseCashInDatabase().put(rrn, terminalPaymentPayResponse);
+        }
 
         // Редиректим юзера на страницу со списком транзакций
         response.setStatus(HttpServletResponse.SC_OK);
         response.getWriter().write("<html>\n" +
                 "<body>\n" +
-                "    <div>Request successfully finished</div>\n" +
+                "    <div>Request finished</div>\n" +
                 "    <div>Transaction number:</div>\n" +
                 "    <div>" +rrn+ "</div>\n" +
+                "    <div>Reason(optional):</div>\n" +
+                "    <div>" + terminalPaymentPayResponse.getReason() + "</div>\n" +
+                "    <div>Status:</div>\n" +
+                "    <div>" + terminalPaymentPayResponse.getTerminalPaymentTransactionStatus() + "</div>\n" +
                 "    <div id=\"counter\">5</div>\n" +
                 "    <script>\n" +
                 "        setInterval(function() {\n" +
