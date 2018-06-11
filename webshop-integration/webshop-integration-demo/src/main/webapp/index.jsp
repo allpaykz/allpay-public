@@ -47,7 +47,7 @@
 
         <div class="form-group col-xs-10 col-md-10" id="amount">
             <label for="amountInput" class="control-label"></label>
-            <input type="number" class="form-control"
+            <input type="number"  step="0.01" class="form-control"
                    autocomplete="off" spellcheck="false"
                    value="" required="true"
                    id="amountInput" name="amount" placeholder="Сумма в тенге">
