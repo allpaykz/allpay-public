@@ -240,9 +240,17 @@ public class TerminalPaymentServlet extends HttpServlet {
             throw new RuntimeException(e);
         }
 
+        final VostokPlatCheckRequest vostokPlatCheckRequest = getVostokPlatCheckRequest(toUser, loginName, utilityAccountNumber);
+        try {
+            srv.vostokPlatCheck(vostokPlatCheckRequest);
+        } catch (Exception e) {
+            ExceptionHandler.handleException(request, response, e);
+            return;
+        }
+
+
         final VostokPlatPayRequest vostokPlatPayRequest = getVostokPlatPayRequest(toUser, loginName, utilityAccountNumber,
                 amount, rrn);
-
         final TerminalPaymentPayResponse terminalPaymentPayResponse;
         try {
             terminalPaymentPayResponse = srv.vostokPlatPay(vostokPlatPayRequest);
@@ -301,6 +309,24 @@ public class TerminalPaymentServlet extends HttpServlet {
         }
         vostokPlatPayRequest.setHeader(header);
         return vostokPlatPayRequest;
+    }
+
+    private VostokPlatCheckRequest getVostokPlatCheckRequest(String userName, String requesterLogin, String utilityAccountNumber) {
+        final VostokPlatCheckRequest vostokPlatCheckRequest = new VostokPlatCheckRequest();
+        vostokPlatCheckRequest.setUserName(userName);
+        vostokPlatCheckRequest.setUtilityAccountNumber(utilityAccountNumber);
+        final OnlineTransactionRequestHeader header = new OnlineTransactionRequestHeader();
+        header.setLang(Language.RU);
+        header.setRequester(requesterLogin);
+        GregorianCalendar c = new GregorianCalendar();
+        c.setTime(new Date());
+        try {
+            header.setTimestamp(DatatypeFactory.newInstance().newXMLGregorianCalendar(c));
+        } catch (DatatypeConfigurationException e) {
+            throw new RuntimeException("Calendar not configured");
+        }
+        vostokPlatCheckRequest.setHeader(header);
+        return vostokPlatCheckRequest;
     }
 
     @POST
