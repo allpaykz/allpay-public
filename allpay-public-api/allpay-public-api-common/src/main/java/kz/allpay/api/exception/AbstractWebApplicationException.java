@@ -60,13 +60,25 @@ public abstract class AbstractWebApplicationException extends Exception implemen
         return Response.status(Response.Status.BAD_REQUEST).entity(new ExceptionResponse(developerMessage, userMessage)).build();
     }
 
+    public Response getResponseWithStackHash(String stackHash) {
+
+        return Response.status(Response.Status.BAD_REQUEST).entity(new ExceptionResponse(developerMessage, userMessage, stackHash)).build();
+    }
+
     public class ExceptionResponse {
         private String developerMessage;
         private String userMessage;
+        private String stackHash;
 
         ExceptionResponse(String developerMessage, String userMessage) {
             this.developerMessage = developerMessage;
             this.userMessage = userMessage;
+        }
+
+        ExceptionResponse(String developerMessage, String userMessage, String stackHash) {
+            this.developerMessage = developerMessage;
+            this.userMessage = userMessage;
+            this.stackHash = stackHash;
         }
 
         public String getDeveloperMessage() {
@@ -83,6 +95,16 @@ public abstract class AbstractWebApplicationException extends Exception implemen
 
         public void setUserMessage(String userMessage) {
             this.userMessage = userMessage;
+        }
+
+        public String getStackHash() {
+
+            return stackHash;
+        }
+
+        public void setStackHash(final String stackHash) {
+
+            this.stackHash = stackHash;
         }
     }
 
