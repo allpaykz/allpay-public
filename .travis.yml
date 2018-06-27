@@ -1,6 +1,9 @@
 language: java
 jdk:
 - oraclejdk8
+branches:
+  except:
+  - doc-br
 notifications:
   email:
     recipients:
