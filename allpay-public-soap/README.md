@@ -2,7 +2,7 @@
 
 Демо версия проекта, реализующая все API находится [здесь](http://beta.allpay.kz/allpay-public-soap-demo)
 
-Код demo проекта [здесь](https://github.com/allpaykz/allpay-public/tree/develop/allpay-public-soap/allpay-public-soap-demo)
+Код demo проекта [здесь](allpay-public-soap/allpay-public-soap-demo)
 
 ### Документация
 
@@ -20,7 +20,7 @@
 
 ### Использование
 
-**Вариант А.** Нужно сбилдить весь [проект](https://github.com/allpaykz/allpay-public)
+**Вариант А.** Нужно сбилдить весь [проект](.)
 
 1. `git clone https://github.com/allpaykz/allpay-public.git`
 2. `cd allpay-public`
