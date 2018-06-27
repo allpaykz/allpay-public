@@ -2,25 +2,25 @@
 
 Демо версия проекта, реализующая все API находится [здесь](http://beta.allpay.kz/allpay-public-soap-demo)
 
-Код demo проекта [здесь](https://github.com/allpaykz/allpay-public/tree/develop/allpay-public-soap/allpay-public-soap-demo)
+Код demo проекта [здесь](allpay-public-soap-demo)
 
 ### Документация
 
 Документация находится [здесь](https://github.com/allpaykz/documentation/tree/master/public-soap-integration)
 
-Документация на терминальный апи находится [здесь](https://github.com/allpaykz/allpay-public/blob/develop/allpay-public-soap/TerminalPayment.md)
+Документация на терминальный апи находится [здесь](TerminalPayment.md)
 
 В обоих случаях имеется возможность пополнения кошельков олпей.
 
  - в первом агент управляет жизненным циклом транзакции и может создавать транзакцию и завершать/отменять созданную.
  - во втором агент отправляет транзакцию в обработку, а потом повторяет запрос до получения результата(он может быть и фейлом, но скорее всего будет завершен)
 
-Первый АПИ более низкоуровневый, любые вызовы могут фейлиться по разным причинам, но он гибче, там можно отменять транзакции и завершать в любой момент. 
+Первый АПИ более низкоуровневый, любые вызовы могут фейлиться по разным причинам, но он гибче, там можно отменять транзакции и завершать в любой момент.
 Второй АПИ терминальный - там нет возможности отменять транзакции и разработан он под терминалы, основной спецификой которых является то что клиент сначала вносит деньги, а потом провайдеры вроде нас пытаются принять оплату. Тут нет возможности отклонить, потому что терминал не выдает сдачи(нет технической возможности). Поэтому если к примеру мы не можем совершить оплату сейчас, то мы пытаемся разрулить это и завершить оплату и будем держать оплату в ожидании до победного конца. Либо по запросу от агента можем отменить транзакцию если транзакция уже не завершена. Этот АПИ проще.
 
 ### Использование
 
-**Вариант А.** Нужно сбилдить весь [проект](https://github.com/allpaykz/allpay-public)
+**Вариант А.** Нужно сбилдить весь [проект](.)
 
 1. `git clone https://github.com/allpaykz/allpay-public.git`
 2. `cd allpay-public`
@@ -79,7 +79,7 @@ pom.xml:
 
 Общие классы для всего модуля. [Здесь](https://github.com/allpaykz/allpay-public/blob/develop/allpay-public-soap/allpay-public-soap-common/src/main/java/kz/allpay/mfs/ws/soap/handlers/SecuritySoapHandlerClient.java) можно найти хэндлер, который знает как правильно подписывать. [Здесь](https://github.com/allpaykz/allpay-public/blob/develop/allpay-public-soap/allpay-public-soap-common/src/main/java/kz/allpay/mfs/ws/soap/handlers/SecuritySoapHandlerServer.java) хэндлер для верификации подписи.
 
-В [ресурсах](https://github.com/allpaykz/allpay-public/tree/develop/allpay-public-soap/allpay-public-soap-common/src/main/resources/xsds/v1_0) лежат актуальные XSD схемы 
+В [ресурсах](https://github.com/allpaykz/allpay-public/tree/develop/allpay-public-soap/allpay-public-soap-common/src/main/resources/xsds/v1_0) лежат актуальные XSD схемы
 
 
 ### 3. allpay-public-soap-demo
@@ -129,4 +129,3 @@ pom.xml:
 
  - [Приватный](https://github.com/allpaykz/allpay-public/blob/develop/webshop-integration/webshop-integration-keypair/src/main/resources/mockKeys/TEST.priv.pem)
  - [Публичный](https://github.com/allpaykz/allpay-public/blob/develop/webshop-integration/webshop-integration-keypair/src/main/resources/mockKeys/TEST.pub.pem)
-
