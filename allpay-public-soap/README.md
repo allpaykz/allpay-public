@@ -2,7 +2,7 @@
 
 Демо версия проекта, реализующая все API находится [здесь](http://beta.allpay.kz/allpay-public-soap-demo)
 
-Код demo проекта [здесь](allpay-public-soap/allpay-public-soap-demo)
+Код demo проекта [здесь](allpay-public-soap-demo)
 
 ### Документация
 
