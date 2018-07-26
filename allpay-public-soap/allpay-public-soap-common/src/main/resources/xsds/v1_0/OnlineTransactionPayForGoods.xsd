@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:otc="http://allpay.kz/xsd/1.0.0/OnlineTransactionCommons.xsd"
+           xmlns:tns="http://allpay.kz/xsd/1.0.0/OnlineTransactionCashIn.xsd"
+           targetNamespace="http://allpay.kz/xsd/1.0.0/OnlineTransactionCashIn.xsd"
+           version="1.0.0">
+    <xs:import namespace="http://allpay.kz/xsd/1.0.0/OnlineTransactionCommons.xsd"
+               schemaLocation="OnlineTransactionCommons.xsd"/>
+
+    <xs:simpleType name="terminalId">
+        <xs:annotation>
+            <xs:documentation>terminalId this can consist of digits or alphanumeric characters</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+
+    <xs:complexType name="payForGoodsCheckRequest">
+        <xs:annotation>
+            <xs:documentation>This request checks if it is possible to pay, if terminal exists and no limits or other business rules violated</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="header" type="otc:onlineTransactionRequestHeader"/>
+            <xs:element name="toUserName" type="otc:userName">
+                <xs:annotation>
+                    <xs:documentation>
+                        user name. Login name which is usually a phone number in the format 7XXXXXXXXXX
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="terminalId" type="tns:terminalId"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="payForGoodsCheckResponse">
+        <xs:annotation>
+            <xs:documentation>This request checks if it is possible to pay, if terminal exists and no limits or other business rules violated</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="header" type="otc:onlineTransactionResponseHeader"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="payForGoodsRequest">
+        <xs:annotation>
+            <xs:documentation>This request creates a pending pay for goods transaction and cash in transaction which only block money</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="header" type="otc:onlineTransactionRequestHeader"/>
+            <xs:element name="toUserName" type="otc:userName"/>
+            <xs:element name="amount" type="otc:amount"/>
+            <xs:element name="GUID" type="otc:guid"/>
+            <xs:element name="terminalId" type="tns:terminalId"/>
+            <xs:element name="valueDate"  type="xs:dateTime" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>
+                        transaction date
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="rrn" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation>
+                        unique transaction number in agent's system
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+</xs:schema>

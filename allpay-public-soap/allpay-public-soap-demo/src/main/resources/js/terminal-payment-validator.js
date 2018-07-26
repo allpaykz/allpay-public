@@ -99,27 +99,25 @@ $(document).ready(function() {
 function cashInOnCheck() {
     var slidesCashIn = document.getElementsByClassName('cashIn');
     var slidesVostokPlat = document.getElementsByClassName('vostokPlat');
-    if (document.getElementById('cashInOperationType').checked) {
-        for(var i = 0; i < slidesCashIn.length; i++) {
-            slidesCashIn[i].style.visibility = 'visible';
-            slidesCashIn[i].style.display = 'block';
-        }
-    } else {
-        for(var j = 0; j < slidesCashIn.length; j++) {
-            slidesCashIn[j].style.visibility = 'hidden';
-            slidesCashIn[j].style.display = 'none';
-        }
-    }
-    if (document.getElementById('vostokPlatOperationType').checked) {
-        for(var i = 0; i < slidesVostokPlat.length; i++) {
-            slidesVostokPlat[i].style.visibility = 'visible';
-            slidesVostokPlat[i].style.display = 'block';
-        }
-    } else {
-        for(var j = 0; j < slidesVostokPlat.length; j++) {
-            slidesVostokPlat[j].style.display = 'none';
+    var slidesPayForGoods = document.getElementsByClassName('payForGoods');
+
+    function select(elementId, slides) {
+        if (document.getElementById(elementId).checked) {
+            for (var i = 0; i < slides.length; i++) {
+                slides[i].style.visibility = 'visible';
+                slides[i].style.display = 'block';
+            }
+        } else {
+            for (var j = 0; j < slides.length; j++) {
+                slides[j].style.visibility = 'hidden';
+                slides[j].style.display = 'none';
+            }
         }
     }
+
+    select('cashInOperationType', slidesCashIn);
+    select('vostokPlatOperationType', slidesVostokPlat);
+    select('payForGoodsOperationType', slidesPayForGoods);
 }
 /**
  * Created by aigerim on 2/23/18.

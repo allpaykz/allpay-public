@@ -33,8 +33,17 @@
                       action="${pageContext.request.contextPath}/terminal_payment"
                       method="post">
 
-                    <label for="cashInOperationType">CashIn</label><input id="cashInOperationType" type = "radio" checked="checked" onclick="cashInOnCheck()" name = "operationType" value="CASHIN">
-                    <label for="vostokPlatOperationType">VostokPlat</label><input id="vostokPlatOperationType" type = "radio" onclick="cashInOnCheck()" name = "operationType" value="VOSTOKPLAT">
+                    <label for="cashInOperationType">CashIn</label>
+                    <input id="cashInOperationType" type = "radio" checked="checked" onclick="cashInOnCheck()"
+                           name = "operationType" value="CASHIN">
+
+                    <label for="vostokPlatOperationType">VostokPlat</label>
+                    <input id="vostokPlatOperationType" type = "radio" onclick="cashInOnCheck()"
+                           name = "operationType" value="VOSTOKPLAT">
+
+                    <label for="payForGoodsOperationType">PayForGoods</label>
+                    <input id="payForGoodsOperationType" type = "radio" onclick="cashInOnCheck()"
+                           name = "operationType" value="PAYFORGOODS">
 
                     <div class="form-group">
                         <label for="loginInput" class="control-label">Логин</label>
@@ -95,6 +104,14 @@
                                id="utilityAccountNumber" name="utilityAccountNumber" placeholder="Номер счета">
                     </div>
 
+                    <div class="form-group payForGoods" style="visibility: hidden; display: none">
+                        <label for="terminalId" class="control-label">ID терминала</label>
+                        <input type="tel" class="form-control"
+                               spellcheck="false"
+                               value='' required="true"
+                               id="terminalId" name="terminalId" placeholder="ID терминала">
+                    </div>
+
                     <div class="form-group vostokPlat" style="visibility: hidden; display: none">
                         <label for="rrn" class="control-label">RRN</label>
                         <input type="tel" class="form-control"
@@ -103,7 +120,7 @@
                                id="rrn" name="rrn" placeholder="RRN">
                     </div>
 
-                    <div class="form-group cashIn">
+                    <div class="form-group cashIn payForGoods">
                         <label for="guid" class="control-label">GUID</label>
                         <input type="tel" class="form-control"
                                spellcheck="false"

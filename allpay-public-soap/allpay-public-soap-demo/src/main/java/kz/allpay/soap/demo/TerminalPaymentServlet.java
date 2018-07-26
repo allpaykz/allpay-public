@@ -55,6 +55,13 @@ public class TerminalPaymentServlet extends HttpServlet {
             case "CASHIN":
                 payCashIn(request, response);
                 break;
+            case "PAYFORGOODS":
+                try {
+                    payThroughPayPayForGoods(request, response);
+                } catch (InvalidKeySpecException e) {
+                    e.printStackTrace();
+                }
+                break;
             default:
                 throw new RuntimeException("Wrong operationType: " + operationType);
         }
@@ -263,6 +270,10 @@ public class TerminalPaymentServlet extends HttpServlet {
                 "    <div>Request successfully finished</div>\n" +
                 "    <div>Transaction number:</div>\n" +
                 "    <div>" +rrn+ "</div>\n" +
+                "    <div>Reason(optional):</div>\n" +
+                "    <div>" + terminalPaymentPayResponse.getReason() + "</div>\n" +
+                "    <div>Status:</div>\n" +
+                "    <div>" + terminalPaymentPayResponse.getTerminalPaymentTransactionStatus() + "</div>\n" +
                 "    <div id=\"counter\">5</div>\n" +
                 "    <script>\n" +
                 "        setInterval(function() {\n" +
@@ -301,6 +312,136 @@ public class TerminalPaymentServlet extends HttpServlet {
         }
         vostokPlatPayRequest.setHeader(header);
         return vostokPlatPayRequest;
+    }
+
+    public void payThroughPayPayForGoods(HttpServletRequest request, HttpServletResponse response) throws IOException, InvalidKeySpecException {
+
+        // Pem input
+        final String pem = request.getParameter("pemInput");
+        logger.info("pem\t"+pem);
+
+        // Pem input response
+        final String pemInputResponse = request.getParameter("pemInputResponse");
+        logger.info("pemInputResponse\t"+pem);
+
+        // certificateIdInput
+        final String certificateIdInputAsString = request.getParameter("certificateIdInput");
+        Integer certificateIdInput = Integer.parseInt(certificateIdInputAsString);
+        logger.info("certificateIdInput\t"+certificateIdInput);
+
+
+        // Parsing login name of user
+        // We will authorize request from this user
+        final String dirtyLoginName = request.getParameter("loginName");
+        logger.info("dirtyLoginName\t"+dirtyLoginName);
+        final String loginName = dirtyLoginName.replaceAll("[^0-9]", "");
+        logger.info("loginName\t"+loginName);
+
+        // Parsing login name of user
+        // We will transfer money to this login name
+        final String dirtyToUser = request.getParameter("toUserName");
+        logger.info("dirtyToUser\t"+dirtyToUser);
+        final String toUser = dirtyToUser.replaceAll("[^0-9]","");
+        logger.info("toUser\t"+toUser);
+
+        // Parsing amount of money to transfer
+        final String dirtyAmount = request.getParameter("amount");
+        logger.info("dirtyAmount\t"+dirtyAmount);
+        final BigDecimal amount = BigDecimal.valueOf(Long.parseLong(dirtyAmount));
+        logger.info("amount\t"+amount);
+
+        // Parsing guid of transaction
+        final String rrn = request.getParameter("rrn");
+        logger.info("rrn\t" + rrn);
+
+        // Parsing terminalId
+        final String terminalId = request.getParameter("terminalId");
+        logger.info("terminalId\t" + rrn);
+
+        // Parsing guid of transaction
+        final String guid = request.getParameter("guid");
+        logger.info("guid\t" + guid);
+
+        // Создаем соап клиента, по ссылке из проперти файлов.
+        final TransactionManagementV1_1 srv;
+        try {
+            srv = TransactionManagementV1_1Client.getService(PropertiesUtils.getApiUrl(),
+                    Arrays.asList(new SecuritySoapHandlerClient(certificateIdInput,
+                            PrivateKeyReader.loadPrivateKeyFromFile(new ByteArrayInputStream(pem.getBytes("UTF-8"))),
+                            PublicKeyReader.loadPublicKeyFromFile(new ByteArrayInputStream(pemInputResponse.getBytes("UTF-8")))
+                    ))
+            );
+        } catch (InvalidKeySpecException e) {
+            throw new RuntimeException(e);
+        }
+
+        final PayForGoodsRequest payForGoods = getPayForGoodsRequest(
+                toUser, loginName, terminalId, amount, rrn, guid
+        );
+
+        final TerminalPaymentPayResponse terminalPaymentPayResponse;
+        try {
+            terminalPaymentPayResponse = srv.payForGoodsPay(payForGoods);
+        } catch (Exception e) {
+            ExceptionHandler.handleException(request, response, e);
+            return;
+        }
+
+        logger.info(terminalPaymentPayResponse.getTerminalPaymentTransactionStatus());
+
+        // Записываем ответ в БД
+        DataBaseTerminalPayments.getResponseCashInDatabase().put(rrn, terminalPaymentPayResponse);
+
+        // Редиректим юзера на страницу со списком транзакций
+        response.setStatus(HttpServletResponse.SC_OK);
+        response.getWriter().write("<html>\n" +
+                "<body>\n" +
+                "    <div>Request successfully finished</div>\n" +
+                "    <div>Transaction number:</div>\n" +
+                "    <div>" +rrn+ "</div>\n" +
+                "    <div>Reason(optional):</div>\n" +
+                "    <div>" + terminalPaymentPayResponse.getReason() + "</div>\n" +
+                "    <div>Status:</div>\n" +
+                "    <div>" + terminalPaymentPayResponse.getTerminalPaymentTransactionStatus() + "</div>\n" +
+                "    <div id=\"counter\">5</div>\n" +
+                "    <script>\n" +
+                "        setInterval(function() {\n" +
+                "            var div = document.querySelector(\"#counter\");\n" +
+                "            var count = div.textContent * 1 - 1;\n" +
+                "            div.textContent = count;\n" +
+                "            if (count <= 0) {\n" +
+                "                location.href=\"" + request.getContextPath() +"/transactions.jsp\";\n" +
+                "            }\n" +
+                "        }, 1000);\n" +
+                "    </script>\n" +
+                "</body>\n" +
+                "</html>");
+        response.getWriter().flush();
+        response.getWriter().close();
+    }
+
+    private PayForGoodsRequest getPayForGoodsRequest(String toUser, String loginName, String terminalId, BigDecimal amount, String rrn, String guid) {
+        final PayForGoodsRequest payForGoodsRequest = new PayForGoodsRequest();
+        payForGoodsRequest.setToUserName(toUser);
+        payForGoodsRequest.setTerminalId(terminalId);
+        payForGoodsRequest.setRrn(rrn);
+        payForGoodsRequest.setAmount(amount);
+        payForGoodsRequest.setGUID(guid);
+
+        final OnlineTransactionRequestHeader header = new OnlineTransactionRequestHeader();
+        header.setLang(Language.RU);
+        header.setRequester(loginName);
+        GregorianCalendar c = new GregorianCalendar();
+        c.setTime(new Date());
+        try {
+            header.setTimestamp(DatatypeFactory.newInstance().newXMLGregorianCalendar(c));
+            payForGoodsRequest.setValueDate(DatatypeFactory.newInstance().newXMLGregorianCalendar(c));
+        } catch (DatatypeConfigurationException e) {
+            throw new RuntimeException("Calendar not configured");
+        }
+        payForGoodsRequest.setHeader(header);
+
+        return payForGoodsRequest;
     }
 
     @POST
