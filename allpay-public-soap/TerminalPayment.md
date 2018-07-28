@@ -31,3 +31,5 @@
 
 - [Пополнение кошелька](TerminalPaymentCashIn.md)
 - [Оплата через востокплат](TerminalPaymentVostokPlat.md)
+- [Оплата по номеру терминала](TerminalPaymentPayForGoods.md)
+

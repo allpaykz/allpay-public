@@ -28,6 +28,7 @@
                 </xs:annotation>
             </xs:element>
             <xs:element name="terminalId" type="tns:terminalId"/>
+            <xs:element name="amount" type="otc:amount" minOccurs="0"/>
         </xs:sequence>
     </xs:complexType>
 
@@ -48,7 +49,6 @@
             <xs:element name="header" type="otc:onlineTransactionRequestHeader"/>
             <xs:element name="toUserName" type="otc:userName"/>
             <xs:element name="amount" type="otc:amount"/>
-            <xs:element name="GUID" type="otc:guid"/>
             <xs:element name="terminalId" type="tns:terminalId"/>
             <xs:element name="valueDate"  type="xs:dateTime" minOccurs="0">
                 <xs:annotation>

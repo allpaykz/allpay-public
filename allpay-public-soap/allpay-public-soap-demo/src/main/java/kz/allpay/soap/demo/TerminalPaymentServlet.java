@@ -426,7 +426,6 @@ public class TerminalPaymentServlet extends HttpServlet {
         payForGoodsRequest.setTerminalId(terminalId);
         payForGoodsRequest.setRrn(rrn);
         payForGoodsRequest.setAmount(amount);
-        payForGoodsRequest.setGUID(guid);
 
         final OnlineTransactionRequestHeader header = new OnlineTransactionRequestHeader();
         header.setLang(Language.RU);
