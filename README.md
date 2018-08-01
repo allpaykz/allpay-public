@@ -14,7 +14,7 @@
 
 Авторизация запросов происходит при помощи системы токенов.
 
-# Web API для интеграции с онлайн магазинаами
+# Web API для интеграции с онлайн магазинами
 
 Модуль описан [здесь](https://github.com/allpaykz/allpay-public/tree/develop/webshop-integration)
 
