@@ -1,4 +1,4 @@
-### Описание взаимодействия для оплаты через терминалы - оплата востокплата
+### Описание взаимодействия для оплаты через терминалы
 
 Адрес на [бете](http://beta.allpay.kz/allpay-public-soap/transaction-management/v1.1?wsdl) и [боевая](http://mfs.allpay.kz/allpay-public-soap/transaction-management/v1.1?wsdl)
 

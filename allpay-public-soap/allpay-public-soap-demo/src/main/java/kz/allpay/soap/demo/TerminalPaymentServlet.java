@@ -350,13 +350,9 @@ public class TerminalPaymentServlet extends HttpServlet {
         final BigDecimal amount = BigDecimal.valueOf(Long.parseLong(dirtyAmount));
         logger.info("amount\t"+amount);
 
-        // Parsing guid of transaction
-        final String rrn = request.getParameter("rrn");
-        logger.info("rrn\t" + rrn);
-
         // Parsing terminalId
         final String terminalId = request.getParameter("terminalId");
-        logger.info("terminalId\t" + rrn);
+        logger.info("terminalId\t" + terminalId);
 
         // Parsing guid of transaction
         final String guid = request.getParameter("guid");
@@ -376,7 +372,7 @@ public class TerminalPaymentServlet extends HttpServlet {
         }
 
         final PayForGoodsRequest payForGoods = getPayForGoodsRequest(
-                toUser, loginName, terminalId, amount, rrn, guid
+                toUser, loginName, terminalId, amount, guid
         );
 
         final TerminalPaymentPayResponse terminalPaymentPayResponse;
@@ -390,7 +386,7 @@ public class TerminalPaymentServlet extends HttpServlet {
         logger.info(terminalPaymentPayResponse.getTerminalPaymentTransactionStatus());
 
         // Записываем ответ в БД
-        DataBaseTerminalPayments.getResponseCashInDatabase().put(rrn, terminalPaymentPayResponse);
+        DataBaseTerminalPayments.getResponseCashInDatabase().put(guid, terminalPaymentPayResponse);
 
         // Редиректим юзера на страницу со списком транзакций
         response.setStatus(HttpServletResponse.SC_OK);
@@ -398,7 +394,7 @@ public class TerminalPaymentServlet extends HttpServlet {
                 "<body>\n" +
                 "    <div>Request successfully finished</div>\n" +
                 "    <div>Transaction number:</div>\n" +
-                "    <div>" +rrn+ "</div>\n" +
+                "    <div>" +guid+ "</div>\n" +
                 "    <div>Reason(optional):</div>\n" +
                 "    <div>" + terminalPaymentPayResponse.getReason() + "</div>\n" +
                 "    <div>Status:</div>\n" +
@@ -420,7 +416,7 @@ public class TerminalPaymentServlet extends HttpServlet {
         response.getWriter().close();
     }
 
-    private PayForGoodsRequest getPayForGoodsRequest(String toUser, String loginName, String terminalId, BigDecimal amount, String rrn, String guid) {
+    private PayForGoodsRequest getPayForGoodsRequest(String toUser, String loginName, String terminalId, BigDecimal amount, String rrn) {
         final PayForGoodsRequest payForGoodsRequest = new PayForGoodsRequest();
         payForGoodsRequest.setToUserName(toUser);
         payForGoodsRequest.setTerminalId(terminalId);
