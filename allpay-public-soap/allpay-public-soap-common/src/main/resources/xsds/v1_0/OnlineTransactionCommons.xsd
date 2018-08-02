@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
            targetNamespace="http://allpay.kz/xsd/1.0.0/OnlineTransactionCommons.xsd"
+           xmlns:tns="http://allpay.kz/xsd/1.0.0/OnlineTransactionCommons.xsd"
            xmlns="http://allpay.kz/xsd/1.0.0/OnlineTransactionCommons.xsd"
            version="1.0.0">
     <xs:complexType name="onlineTransactionRequestHeader">
@@ -103,4 +104,13 @@
             <xs:pattern value="[0-9]{6}"/>
         </xs:restriction>
     </xs:simpleType>
+
+    <xs:complexType name="defaultCheckResponse" abstract="true">
+        <xs:annotation>
+            <xs:documentation>This request checks if it is possible to pay, if terminal exists and no limits or other business rules violated</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="header" type="tns:onlineTransactionResponseHeader"/>
+        </xs:sequence>
+    </xs:complexType>
 </xs:schema>

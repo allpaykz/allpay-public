@@ -1,6 +1,7 @@
 package kz.allpay.mfs.ws.soap.util;
 
 import kz.allpay.mfs.ws.soap.generated.v1_0.PayForGoodsRequest;
+import kz.allpay.mfs.ws.soap.generated.v1_0.PayForServicesRequest;
 import kz.allpay.mfs.ws.soap.generated.v1_0.VostokPlatPayRequest;
 
 import javax.xml.bind.JAXBContext;
@@ -23,6 +24,14 @@ public class VostokPlatRequestTransformer {
                 vostokPlatPayRequest,
                 new QName("http://allpay.kz/xsd/1.0.0/OnlineTransactionVostokPlat.xsd", "vostokPlatPayRequest"),
                 VostokPlatPayRequest.class
+        );
+    }
+
+    public static String marshallToXML(PayForServicesRequest payForServicesRequest) throws JAXBException {
+        return marshallToXML(
+                payForServicesRequest,
+                new QName("http://allpay.kz/xsd/1.0.0/OnlineTransactionPayForServices.xsd", "payForServicesRequest"),
+                PayForServicesRequest.class
         );
     }
 
