@@ -42,7 +42,7 @@
             <xs:element name="amount" type="otc:amount"/>
             <xs:element name="servicePublicCode" type="xs:long"/>
             <xs:element name="utilityAccountNumber" type="xs:string"/>
-            <xs:element name="valueDate"  type="xs:dateTime" minOccurs="0">
+            <xs:element name="valueDate"  type="xs:dateTime">
                 <xs:annotation>
                     <xs:documentation>
                         transaction date
