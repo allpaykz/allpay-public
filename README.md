@@ -2,23 +2,19 @@
 
 Репозиторий хранит описание и примеры использования всех публичных API allpay
 
-# SOAP API
-
+- SOAP API
 Модуль общение по протоколу SOAP описан [здесь](https://github.com/allpaykz/allpay-public/tree/develop/allpay-public-soap)
-
 Для авторизации запросов используются цифровые ключи.
-
-# Rest API
-
+- Rest API
 Модуль общения с помощью HTTP запросов описан [здесь](https://github.com/allpaykz/allpay-public/tree/develop/allpay-public-api)
 
 Авторизация запросов происходит при помощи системы токенов.
 
-# Web API для интеграции с онлайн магазинами
+- Web API для интеграции с онлайн магазинами
 
 Модуль описан [здесь](https://github.com/allpaykz/allpay-public/tree/develop/webshop-integration)
 
-# Подключение библиотек этого проекта через maven
+- Подключение библиотек этого проекта через maven
 
 Для использования библиотек через maven необходимо подключить следущие репозиориии:
 
