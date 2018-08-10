@@ -1,7 +1,6 @@
 package kz.allpay.mfs.ws.soap.util;
 
-import kz.allpay.mfs.ws.soap.generated.v1_0.PayForGoodsRequest;
-import kz.allpay.mfs.ws.soap.generated.v1_0.VostokPlatPayRequest;
+import kz.allpay.mfs.ws.soap.generated.v1_0.*;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBElement;
@@ -14,7 +13,7 @@ import java.util.logging.Logger;
 /**
  * Created by aigerim on 2/26/18.
  */
-public class VostokPlatRequestTransformer {
+public class PayRequestTransformer {
 
     private static final Logger log = Logger.getLogger("CashInRequest");
 
@@ -26,11 +25,27 @@ public class VostokPlatRequestTransformer {
         );
     }
 
+    public static String marshallToXML(PayForServicesRequest payForServicesRequest) throws JAXBException {
+        return marshallToXML(
+                payForServicesRequest,
+                new QName("http://allpay.kz/xsd/1.0.0/OnlineTransactionPayForServices.xsd", "payForServicesRequest"),
+                PayForServicesRequest.class
+        );
+    }
+
     public static String marshallToXML(PayForGoodsRequest payForGoodsRequest) throws JAXBException {
         return marshallToXML(
                 payForGoodsRequest,
                 new QName("http://allpay.kz/xsd/1.0.0/OnlineTransactionPayForGoods.xsd", "payForGoodsRequest"),
                 PayForGoodsRequest.class
+        );
+    }
+
+    public static String marshallToXML(CashOutThroughPayRequest cashOutRequest) throws JAXBException {
+        return marshallToXML(
+                cashOutRequest,
+                new QName("http://allpay.kz/xsd/1.0.0/OnlineTransactionCashOutThroughPay.xsd", "cashOutThroughPayRequest"),
+                CashOutThroughPayRequest.class
         );
     }
 
