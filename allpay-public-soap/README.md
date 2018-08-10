@@ -63,7 +63,7 @@ pom.xml:
 
 ### 1. allpay-public-soap-client
 
-Пример клиента для SOAP API. Простая реализация описана в классе [TransactionManagementV1_0Client](https://github.com/allpaykz/allpay-public/blob/develop/allpay-public-soap/allpay-public-soap-client/src/main/java/kz/allpay/mfs/ws/soap/v1_0/TransactionManagementV1_0Client.java)
+Пример клиента для SOAP API. Простая реализация описана в классе [TransactionManagementV1_0Client](./allpay-public-soap-client/src/main/java/kz/allpay/mfs/ws/soap)
 
 ### 2. allpay-public-soap-common
 
