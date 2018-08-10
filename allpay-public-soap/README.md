@@ -74,7 +74,7 @@ pom.xml:
 
 ### 3. allpay-public-soap-demo
 
-Демо проект для демонстрации API CashIn CashOut.
+Демо проект для демонстрации SOAP API.
 
 Проект строится с помощью maven 3. В проекте есть несколько maven profiles.
 
