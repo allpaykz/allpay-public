@@ -6,7 +6,7 @@
 
 ### Документация
 
-Документация на терминальный апи находится [здесь](https://github.com/allpaykz/allpay-public/wiki)
+Документация находится [здесь](https://github.com/allpaykz/allpay-public/wiki)
 
 ### Использование
 
