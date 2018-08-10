@@ -83,4 +83,4 @@ gpg --verify webshop-integration-keypair-2.0.8.1-javadoc.jar{.asc,}
 # gpg: Good signature from "Magzhan Karassayev (work-gpg) <magzhan.karasayev@allpay.kz>"
 ```
 
-Или просто собрать проект из сорсов на гитхабе.
+Или просто собрать проект из сорсов на гитхабе(Вариант А).
