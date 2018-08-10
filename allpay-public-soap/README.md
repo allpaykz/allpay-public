@@ -6,7 +6,8 @@
 
 ### Документация
 
-Документация находится [здесь](https://github.com/allpaykz/documentation/tree/master/public-soap-integration)
+Документация находится [здесь](/wiki)
+Документация находится [здесь](wiki)
 
 Документация на терминальный апи находится [здесь](TerminalPayment.md)
 
