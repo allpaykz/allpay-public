@@ -100,11 +100,6 @@ pom.xml:
 
 Если вы планируете писать свою реализации подписи/верификации, тогда обратите внимание на проект [webshop-integration](https://github.com/allpaykz/allpay-public/tree/master/webshop-integration). Модуль [webshop-keypair](https://github.com/allpaykz/allpay-public/tree/master/webshop-integration/webshop-integration-keypair)
 
-### Адреса wsdl
-
-Боевой сервис расположен [здесь](http://mfs.allpay.kz/allpay-public-soap/transaction-management/v1.0?wsdl)
-Тестовый соответственно [здесь](http://beta.allpay.kz/allpay-public-soap/transaction-management/v1.0?wsdl)
-
 ### Написание своей библиотеки для подписей
 
 Примеры xml:
