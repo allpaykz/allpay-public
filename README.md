@@ -6,9 +6,23 @@
 - **Web API для интеграции с онлайн магазинами.**
 Модуль описан [здесь](https://github.com/allpaykz/allpay-public/tree/develop/webshop-integration)
 
-### Подключение библиотек этого проекта через maven
+### Подключение библиотек этого проекта
 
-Для использования библиотек через maven необходимо подключить следущие репозиориии:
+**Вариант А.** Нужно сбилдить весь проект
+
+1. `git clone https://github.com/allpaykz/allpay-public.git`
+2. `mvn clean install -P beta`
+
+После удачного билда, можете добавить в свой проект зависимость для использования TransactionManagementV1_0Client
+
+        <dependency>
+            <artifactId>allpay-public-soap-client</artifactId>
+            <groupId>kz.allpay.mfs</groupId>
+            <!-- соответствующая версия проекта - версия указанная в pom.xml в этом проекте -->
+            <version>2.0.8.2</version>
+        </dependency>
+
+**Вариант Б.** Для использования библиотек через maven необходимо подключить следущие репозиориии:
 
 pom.xml:
 ```xml
