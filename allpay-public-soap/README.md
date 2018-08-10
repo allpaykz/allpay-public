@@ -10,7 +10,7 @@
 
 ### Использование
 
-**Вариант А.** Нужно сбилдить весь [проект](.)
+**Вариант А.** Нужно сбилдить весь проект
 
 1. `git clone https://github.com/allpaykz/allpay-public.git`
 2. `cd allpay-public`
