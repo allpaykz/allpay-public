@@ -1,6 +1,7 @@
 package kz.allpay.api.model;
 
 import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -30,6 +31,7 @@ public class NambaTransactionInfo implements Serializable {
     private String status;
     private String currencySymbol;
     private String transactionType;
+
 
     public String getTransactionType() {
         return transactionType;
