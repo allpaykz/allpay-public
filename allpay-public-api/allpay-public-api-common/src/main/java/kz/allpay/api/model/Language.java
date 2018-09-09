@@ -11,4 +11,16 @@ import java.io.Serializable;
 @ApiModel
 public enum Language implements Serializable {
     EN, RU, KK;
+
+    public static Language fromString(String lang) {
+        if (lang == null || lang.isEmpty()) {
+            return RU;
+        }
+        for (Language language : values()) {
+            if (language.name().equalsIgnoreCase(lang)) {
+                return language;
+            }
+        }
+        return RU;
+    }
 }
