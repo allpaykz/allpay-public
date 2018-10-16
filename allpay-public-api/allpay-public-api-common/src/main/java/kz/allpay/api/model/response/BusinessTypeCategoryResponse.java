@@ -1,8 +1,7 @@
 package kz.allpay.api.model.response;
 
 import io.swagger.annotations.ApiModel;
-import kz.allpay.api.model.CashbackAmount;
-import kz.allpay.api.model.CompanyIcon;
+import kz.allpay.api.model.TerminalCashback;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -16,13 +15,13 @@ import java.util.List;
 public class BusinessTypeCategoryResponse implements Serializable {
 
     private String companyAlias;
-    private String companyFieldOfActivity;
-    private CompanyIcon companyIcon;
-    private List<CashbackAmount> cashbacks;
+    private String fieldOfActivity;
+    private String iconImageUrl;
+    private List<TerminalCashback> terminalCashbacks;
     private Date creationDate;
     private BigDecimal latitude;
     private BigDecimal longitude;
-    private String prettyURL;
+    private String prettyUrl;
 
     public String getCompanyAlias() {
         return companyAlias;
@@ -32,28 +31,28 @@ public class BusinessTypeCategoryResponse implements Serializable {
         this.companyAlias = companyAlias;
     }
 
-    public String getCompanyFieldOfActivity() {
-        return companyFieldOfActivity;
+    public String getFieldOfActivity() {
+        return fieldOfActivity;
     }
 
-    public void setCompanyFieldOfActivity(String companyFieldOfActivity) {
-        this.companyFieldOfActivity = companyFieldOfActivity;
+    public void setFieldOfActivity(String fieldOfActivity) {
+        this.fieldOfActivity = fieldOfActivity;
     }
 
-    public CompanyIcon getCompanyIcon() {
-        return companyIcon;
+    public String getIconImageUrl() {
+        return iconImageUrl;
     }
 
-    public void setCompanyIcon(CompanyIcon companyIcon) {
-        this.companyIcon = companyIcon;
+    public void setIconImageUrl(String iconImageUrl) {
+        this.iconImageUrl = iconImageUrl;
     }
 
-    public List<CashbackAmount> getCashbacks() {
-        return cashbacks;
+    public List<TerminalCashback> getTerminalCashbacks() {
+        return terminalCashbacks;
     }
 
-    public void setCashbacks(List<CashbackAmount> cashbacks) {
-        this.cashbacks = cashbacks;
+    public void setTerminalCashbacks(List<TerminalCashback> terminalCashbacks) {
+        this.terminalCashbacks = terminalCashbacks;
     }
 
     public Date getCreationDate() {
@@ -80,11 +79,11 @@ public class BusinessTypeCategoryResponse implements Serializable {
         this.longitude = longitude;
     }
 
-    public String getPrettyURL() {
-        return prettyURL;
+    public String getPrettyUrl() {
+        return prettyUrl;
     }
 
-    public void setPrettyURL(String prettyURL) {
-        this.prettyURL = prettyURL;
+    public void setPrettyUrl(String prettyUrl) {
+        this.prettyUrl = prettyUrl;
     }
 }
