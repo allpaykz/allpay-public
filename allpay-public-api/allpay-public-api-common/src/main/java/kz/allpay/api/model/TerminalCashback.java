@@ -12,15 +12,20 @@ public class TerminalCashback implements Serializable {
     private BigDecimal cashbackToAmount;
     private String cashbackType;
     private BigDecimal cashbackAmount;
+    private String terminalId;
+    private Boolean active;
 
     public TerminalCashback() {
     }
 
-    public TerminalCashback(BigDecimal cashbackFromAmount, BigDecimal cashbackToAmount, String cashbackType, BigDecimal cashbackAmount) {
+    public TerminalCashback(BigDecimal cashbackFromAmount, BigDecimal cashbackToAmount, String cashbackType,
+                            BigDecimal cashbackAmount, String terminalId, Boolean active) {
         this.cashbackFromAmount = cashbackFromAmount;
         this.cashbackToAmount = cashbackToAmount;
         this.cashbackType = cashbackType;
         this.cashbackAmount = cashbackAmount;
+        this.terminalId = terminalId;
+        this.active = active;
     }
 
     public BigDecimal getCashbackFromAmount() {
@@ -53,5 +58,21 @@ public class TerminalCashback implements Serializable {
 
     public void setCashbackAmount(BigDecimal cashbackAmount) {
         this.cashbackAmount = cashbackAmount;
+    }
+
+    public String getTerminalId() {
+        return terminalId;
+    }
+
+    public void setTerminalId(String terminalId) {
+        this.terminalId = terminalId;
+    }
+
+    public Boolean getActive() {
+        return active;
+    }
+
+    public void setActive(Boolean active) {
+        this.active = active;
     }
 }

@@ -31,6 +31,7 @@ public class NambaTransactionInfo implements Serializable {
     private String status;
     private String currencySymbol;
     private String transactionType;
+    private String transactionTypeId;
 
 
     public String getTransactionType() {
@@ -176,6 +177,14 @@ public class NambaTransactionInfo implements Serializable {
         this.surnameOReceiverP2P = surnameOReceiverP2P;
         return this;
     }
-    
+
+    public String getTransactionTypeId() {
+        return transactionTypeId;
+    }
+
+    public NambaTransactionInfo setTransactionTypeId(String transactionTypeId) {
+        this.transactionTypeId = transactionTypeId;
+        return this;
+    }
 }
 
