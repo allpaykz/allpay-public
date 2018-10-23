@@ -1,7 +1,6 @@
 package kz.allpay.api.model.response;
 
 import io.swagger.annotations.ApiModel;
-import kz.allpay.api.model.CompanyIcon;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -18,11 +17,11 @@ public class NambaTransactionFullInfoResponse implements Serializable {
     private BigDecimal comissionAmount;
     private String paymentOptionName;
     private String companyAlias;
-    private CompanyIcon companyIcon;
+    private String companyImageIconUrl;
     private String companyFieldOfActivity;
     private BigDecimal transactionNumber;
     private String serviceName;
-    private CompanyIcon serviceIcon;
+    private String serviceImageIconUrl;
     private String serviceAccountNumber;
     private String loginOfReceiverP2P;
     private String loginOfSenderP2P;
@@ -89,15 +88,6 @@ public class NambaTransactionFullInfoResponse implements Serializable {
         return this;
     }
 
-    public CompanyIcon getCompanyIcon() {
-        return companyIcon;
-    }
-
-    public NambaTransactionFullInfoResponse setCompanyIcon(CompanyIcon companyIcon) {
-        this.companyIcon = companyIcon;
-        return this;
-    }
-
     public String getCompanyFieldOfActivity() {
         return companyFieldOfActivity;
     }
@@ -122,15 +112,6 @@ public class NambaTransactionFullInfoResponse implements Serializable {
 
     public NambaTransactionFullInfoResponse setServiceName(String serviceName) {
         this.serviceName = serviceName;
-        return this;
-    }
-
-    public CompanyIcon getServiceIcon() {
-        return serviceIcon;
-    }
-
-    public NambaTransactionFullInfoResponse setServiceIcon(CompanyIcon serviceIcon) {
-        this.serviceIcon = serviceIcon;
         return this;
     }
 
@@ -230,6 +211,24 @@ public class NambaTransactionFullInfoResponse implements Serializable {
 
     public NambaTransactionFullInfoResponse setTransactionComment(String transactionComment) {
         this.transactionComment = transactionComment;
+        return this;
+    }
+
+    public String getCompanyImageIconUrl() {
+        return companyImageIconUrl;
+    }
+
+    public NambaTransactionFullInfoResponse setCompanyImageIconUrl(String companyImageIconUrl) {
+        this.companyImageIconUrl = companyImageIconUrl;
+        return this;
+    }
+
+    public String getServiceImageIconUrl() {
+        return serviceImageIconUrl;
+    }
+
+    public NambaTransactionFullInfoResponse setServiceImageIconUrl(String serviceImageIconUrl) {
+        this.serviceImageIconUrl = serviceImageIconUrl;
         return this;
     }
 }
