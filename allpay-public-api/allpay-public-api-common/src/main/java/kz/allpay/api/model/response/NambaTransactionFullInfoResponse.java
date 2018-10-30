@@ -32,6 +32,7 @@ public class NambaTransactionFullInfoResponse implements Serializable {
     private String status;
     private String currencySymbol;
     private String transactionType;
+    private String transactionTypeId;
     private String transactionComment;
 
     public Long getCreatedOn() {
@@ -202,6 +203,15 @@ public class NambaTransactionFullInfoResponse implements Serializable {
 
     public NambaTransactionFullInfoResponse setTransactionType(String transactionType) {
         this.transactionType = transactionType;
+        return this;
+    }
+
+    public String getTransactionTypeId() {
+        return transactionTypeId;
+    }
+
+    public NambaTransactionFullInfoResponse setTransactionTypeId(String transactionTypeId) {
+        this.transactionTypeId = transactionTypeId;
         return this;
     }
 
