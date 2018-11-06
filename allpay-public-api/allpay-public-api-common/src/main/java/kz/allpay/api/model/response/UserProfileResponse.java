@@ -22,6 +22,7 @@ public class UserProfileResponse extends AbstractResponse implements Serializabl
     private BigDecimal availableBalance;
     private BigDecimal currentBalance;
     private BigDecimal blockedBalance;
+    private BigDecimal availableBalanceKG;
 
     private Date lastLogin;
 
@@ -94,6 +95,15 @@ public class UserProfileResponse extends AbstractResponse implements Serializabl
 
     public void setBlockedBalance(BigDecimal blockedBalance) {
         this.blockedBalance = blockedBalance;
+    }
+
+    @ApiModelProperty(notes = "Доступные деньги пользователя в киргизских сомах")
+    public BigDecimal getAvailableBalanceKG() {
+        return availableBalanceKG;
+    }
+
+    public void setAvailableBalanceKG(BigDecimal availableBalanceKG) {
+        this.availableBalanceKG = availableBalanceKG;
     }
 
     @ApiModelProperty(notes = "Дата последнего входа пользователя")
