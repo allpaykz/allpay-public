@@ -107,13 +107,19 @@ function cashInOnCheck() {
                 slides[i].style.visibility = 'visible';
                 slides[i].style.display = 'block';
             }
-        } else {
-            for (var j = 0; j < slides.length; j++) {
-                slides[j].style.visibility = 'hidden';
-                slides[j].style.display = 'none';
-            }
         }
     }
+
+    function unselect(slides) {
+        for (var j = 0; j < slides.length; j++) {
+            slides[j].style.visibility = 'hidden';
+            slides[j].style.display = 'none';
+        }
+    }
+
+    unselect(slidesCashIn);
+    unselect(slidesVostokPlat);
+    unselect(slidesPayForGoods);
 
     select('cashInOperationType', slidesCashIn);
     select('vostokPlatOperationType', slidesVostokPlat);

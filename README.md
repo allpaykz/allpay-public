@@ -1,26 +1,28 @@
-# allpay-public
-
 Репозиторий хранит описание и примеры использования всех публичных API allpay
 
-# SOAP API
-
+- **SOAP API**.
 Модуль общение по протоколу SOAP описан [здесь](https://github.com/allpaykz/allpay-public/tree/develop/allpay-public-soap)
-
 Для авторизации запросов используются цифровые ключи.
-
-# Rest API
-
-Модуль общения с помощью HTTP запросов описан [здесь](https://github.com/allpaykz/allpay-public/tree/develop/allpay-public-api)
-
-Авторизация запросов происходит при помощи системы токенов.
-
-# Web API для интеграции с онлайн магазинаами
-
+- **Web API для интеграции с онлайн магазинами.**
 Модуль описан [здесь](https://github.com/allpaykz/allpay-public/tree/develop/webshop-integration)
 
-# Подключение библиотек этого проекта через maven
+### Подключение библиотек этого проекта
 
-Для использования библиотек через maven необходимо подключить следущие репозиориии:
+**Вариант А.** Нужно сбилдить весь проект
+
+1. `git clone https://github.com/allpaykz/allpay-public.git`
+2. `mvn clean install -P beta`
+
+После удачного билда, можете добавить в свой проект зависимость для использования TransactionManagementV1_0Client
+
+        <dependency>
+            <artifactId>allpay-public-soap-client</artifactId>
+            <groupId>kz.allpay.mfs</groupId>
+            <!-- соответствующая версия проекта - версия указанная в pom.xml в этом проекте -->
+            <version>2.0.8.2</version>
+        </dependency>
+
+**Вариант Б.** Для использования библиотек через maven необходимо подключить следущие репозиориии:
 
 pom.xml:
 ```xml
@@ -81,4 +83,4 @@ gpg --verify webshop-integration-keypair-2.0.8.1-javadoc.jar{.asc,}
 # gpg: Good signature from "Magzhan Karassayev (work-gpg) <magzhan.karasayev@allpay.kz>"
 ```
 
-Или просто собрать проект из сорсов на гитхабе.
+Или просто собрать проект из сорсов на гитхабе(Вариант А).

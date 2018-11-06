@@ -20,7 +20,6 @@
 
     <modules>
         <module>allpay-public-api-common</module>
-        <module>allpay-public-api-client</module>
     </modules>
 
 

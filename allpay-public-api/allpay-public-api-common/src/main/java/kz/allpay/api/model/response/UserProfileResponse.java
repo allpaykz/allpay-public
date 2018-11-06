@@ -6,7 +6,6 @@ import io.swagger.annotations.ApiModelProperty;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
-import java.util.List;
 
 /**
  * @author magzhan.karasayev
@@ -18,6 +17,8 @@ public class UserProfileResponse extends AbstractResponse implements Serializabl
     private String loginName;
     private String firstName;
     private String lastName;
+    private String gender;
+    private Date birthDay;
 
     private BigDecimal availableBalance;
     private BigDecimal currentBalance;
@@ -167,6 +168,24 @@ public class UserProfileResponse extends AbstractResponse implements Serializabl
 
     public void setPrimaryAccountNumber(String accountNumbers) {
         this.primaryAccountNumber = accountNumbers;
+    }
+
+    @ApiModelProperty(notes = "Пол")
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
+    @ApiModelProperty(notes = "День рождения")
+    public Date getBirthDay() {
+        return birthDay;
+    }
+
+    public void setBirthDay(Date birthDay) {
+        this.birthDay = birthDay;
     }
 }
 
