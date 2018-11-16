@@ -2,7 +2,7 @@ package kz.allpay.api.model.response;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import kz.allpay.api.model.NambaTransactionInfo;
+import kz.allpay.api.model.namba.NambaTransactionInfo;
 
 import java.io.Serializable;
 import java.util.List;

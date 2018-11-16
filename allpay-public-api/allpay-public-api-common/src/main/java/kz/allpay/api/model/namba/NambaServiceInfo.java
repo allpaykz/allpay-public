@@ -1,4 +1,4 @@
-package kz.allpay.api.model;
+package kz.allpay.api.model.namba;
 
 import io.swagger.annotations.ApiModel;
 
