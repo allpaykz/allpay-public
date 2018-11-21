@@ -19,7 +19,7 @@
             <artifactId>allpay-public-soap-client</artifactId>
             <groupId>kz.allpay.mfs</groupId>
             <!-- соответствующая версия проекта - версия указанная в pom.xml в этом проекте -->
-            <version>2.0.8.2</version>
+            <version>2.0.8.3</version>
         </dependency>
 
 **Вариант Б.** Для использования библиотек через maven необходимо подключить следущие репозиориии:
@@ -55,7 +55,7 @@ pom.xml:
             <artifactId>webshop-integration-keypair</artifactId>
             <groupId>kz.allpay.mfs</groupId>
             <!-- соответствующая версия проекта - версия указанная в pom.xml в этом проекте -->
-            <version>2.0.8.2-SNAPSHOT</version>
+            <version>2.0.8.3-SNAPSHOT</version>
         </dependency>
 ```
 
@@ -66,7 +66,7 @@ pom.xml:
             <artifactId>webshop-integration-keypair</artifactId>
             <groupId>kz.allpay.mfs</groupId>
             <!-- соответствующая версия проекта - версия указанная в pom.xml в этом проекте -->
-            <version>2.0.8.2</version>
+            <version>2.0.8.3</version>
         </dependency>
 ```
 
