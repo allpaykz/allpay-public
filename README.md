@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/allpaykz/allpay-public.svg?branch=beta)](https://travis-ci.org/allpaykz/allpay-public)
+
 Репозиторий хранит описание и примеры использования всех публичных API allpay
 
 - **SOAP API**.
