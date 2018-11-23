@@ -34,6 +34,7 @@ public class NambaTransactionFullInfoResponse implements Serializable {
     private String transactionType;
     private String transactionTypeId;
     private String transactionComment;
+    private String accountId;
 
     public Long getCreatedOn() {
         return createdOn;
@@ -239,6 +240,15 @@ public class NambaTransactionFullInfoResponse implements Serializable {
 
     public NambaTransactionFullInfoResponse setServiceImageIconUrl(String serviceImageIconUrl) {
         this.serviceImageIconUrl = serviceImageIconUrl;
+        return this;
+    }
+
+    public String getAccountId() {
+        return accountId;
+    }
+
+    public NambaTransactionFullInfoResponse setAccountId(String accountId) {
+        this.accountId = accountId;
         return this;
     }
 }
