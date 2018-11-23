@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/allpaykz/allpay-public.svg?branch=beta)](https://travis-ci.org/allpaykz/allpay-public)
+
 Репозиторий хранит описание и примеры использования всех публичных API allpay
 
 - **SOAP API**.
@@ -19,7 +21,7 @@
             <artifactId>allpay-public-soap-client</artifactId>
             <groupId>kz.allpay.mfs</groupId>
             <!-- соответствующая версия проекта - версия указанная в pom.xml в этом проекте -->
-            <version>2.0.8.2</version>
+            <version>2.0.8.3</version>
         </dependency>
 
 **Вариант Б.** Для использования библиотек через maven необходимо подключить следущие репозиориии:
@@ -55,7 +57,7 @@ pom.xml:
             <artifactId>webshop-integration-keypair</artifactId>
             <groupId>kz.allpay.mfs</groupId>
             <!-- соответствующая версия проекта - версия указанная в pom.xml в этом проекте -->
-            <version>2.0.8.2-SNAPSHOT</version>
+            <version>2.0.8.3-SNAPSHOT</version>
         </dependency>
 ```
 
@@ -66,7 +68,7 @@ pom.xml:
             <artifactId>webshop-integration-keypair</artifactId>
             <groupId>kz.allpay.mfs</groupId>
             <!-- соответствующая версия проекта - версия указанная в pom.xml в этом проекте -->
-            <version>2.0.8.2</version>
+            <version>2.0.8.3</version>
         </dependency>
 ```
 
