@@ -2,6 +2,7 @@ package kz.allpay.api.model.response;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import kz.allpay.api.model.namba.NambaTransactionHistoryByPeriod;
 import kz.allpay.api.model.namba.NambaTransactionInfo;
 
 import java.io.Serializable;
@@ -14,20 +15,20 @@ import java.util.List;
 @ApiModel
 public class NambaTransactionHistoryResponse extends AbstractResponse implements Serializable {
 
-    public NambaTransactionHistoryResponse(List<NambaTransactionInfo> nambaTransactionInfos) {
-        this.nambaTransactionInfos = nambaTransactionInfos;
+    private NambaTransactionHistoryByPeriod historyByPeriod;
+
+    public NambaTransactionHistoryResponse(NambaTransactionHistoryByPeriod historyByPeriod) {
+        this.historyByPeriod = historyByPeriod;
         setUserMessage("");
         setDeveloperMessage("");
     }
 
-    private List<NambaTransactionInfo> nambaTransactionInfos;
-
-    @ApiModelProperty(notes = "Список транзакций с информацией по каждой из них")
-    public List<NambaTransactionInfo> getNambaTransactionInfos() {
-        return nambaTransactionInfos;
+    @ApiModelProperty(notes = "Список транзакций с информацией по каждой из них в отсортированном по дням формате.")
+    public NambaTransactionHistoryByPeriod getHistoryByPeriod() {
+        return historyByPeriod;
     }
 
-    public void setNambaTransactionInfos(List<NambaTransactionInfo> nambaTransactionInfos) {
-        this.nambaTransactionInfos = nambaTransactionInfos;
+    public void setHistoryByPeriod(NambaTransactionHistoryByPeriod historyByPeriod) {
+        this.historyByPeriod = historyByPeriod;
     }
 }

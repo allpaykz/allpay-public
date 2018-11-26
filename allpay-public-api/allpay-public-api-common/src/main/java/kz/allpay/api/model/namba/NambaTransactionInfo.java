@@ -2,7 +2,6 @@ package kz.allpay.api.model.namba;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import jdk.nashorn.internal.ir.annotations.Ignore;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -34,8 +33,8 @@ public class NambaTransactionInfo implements Serializable {
     private String transactionType;
     private String transactionTypeId;
 
-    @Ignore
     private BigDecimal chargesAmount;
+    private String statusId;
 
 
     public String getTransactionType() {
@@ -191,13 +190,21 @@ public class NambaTransactionInfo implements Serializable {
         return this;
     }
 
-    @Ignore
     public BigDecimal getChargesAmount() {
         return chargesAmount;
     }
 
     public NambaTransactionInfo setChargesAmount(BigDecimal chargesAmount) {
         this.chargesAmount = chargesAmount;
+        return this;
+    }
+
+    public String getStatusId() {
+        return statusId;
+    }
+
+    public NambaTransactionInfo setStatusId(String statusId) {
+        this.statusId = statusId;
         return this;
     }
 }
