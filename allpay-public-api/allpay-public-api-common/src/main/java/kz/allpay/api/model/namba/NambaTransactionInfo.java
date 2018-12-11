@@ -19,6 +19,7 @@ public class NambaTransactionInfo implements Serializable {
     private BigDecimal transactionAmount;
     private BigDecimal cashbackAmount;
     private String paymentOptionName;
+    private String accountId;
     private String companyAlias;
     private BigDecimal transactionNumber;
     private String serviceName;
@@ -97,6 +98,15 @@ public class NambaTransactionInfo implements Serializable {
 
     public NambaTransactionInfo setPaymentOptionName(String paymentOptionName) {
         this.paymentOptionName = paymentOptionName;
+        return this;
+    }
+
+    public String getAccountId() {
+        return accountId;
+    }
+
+    public NambaTransactionInfo setAccountId(String accountId) {
+        this.accountId = accountId;
         return this;
     }
 
