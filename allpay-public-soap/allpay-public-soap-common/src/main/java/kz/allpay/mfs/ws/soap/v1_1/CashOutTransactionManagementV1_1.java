@@ -29,4 +29,10 @@ public interface CashOutTransactionManagementV1_1 {
     @WebMethod(action = "checkCashOutThroughPayRequest")
     public CheckUserResponse checkCashOutThroughPayRequest(@WebParam(name = "CashOutThroughPayCheckRequest") CashOutThroughPayCheckRequest request);
 
+    @WebMethod(action = "createCashOut")
+    public TerminalPaymentPayResponse createCashOut(@WebParam(name = "CashOutRequest") CashOutRequest request);
+
+    @WebMethod(action = "checkCashOut")
+    public CheckUserResponse checkCashOut(@WebParam(name = "CashOutCheckRequest") CashOutCheckRequest request);
+
 }
