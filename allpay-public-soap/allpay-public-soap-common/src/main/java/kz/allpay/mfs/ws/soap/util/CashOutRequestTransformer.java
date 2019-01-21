@@ -16,12 +16,11 @@ import java.util.logging.Logger;
 public class CashOutRequestTransformer {
 
     private static final Logger log = Logger.getLogger("CashOutRequest");
+    private static final JAXBContext jaxbContext = initJAXBContext(); // thread safe so it is static
 
     public static String marshallToXML(CashOutRequest cashInRequest) throws JAXBException {
         log.info("Start CashOutRequest marshallToXML");
         StringWriter stringWriter = new StringWriter();
-
-        JAXBContext jaxbContext = JAXBContext.newInstance(CashOutRequest.class);
         Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
 
         // format the XML output
@@ -35,6 +34,16 @@ public class CashOutRequestTransformer {
 
         log.info("Finish CashOutRequest marshallToXML");
         return stringWriter.toString();
+    }
+
+    private static JAXBContext initJAXBContext() {
+        try {
+            return JAXBContext.newInstance(CashOutRequest.class);
+        } catch (JAXBException e) {
+            log.severe("could not initialize jaxbContext");
+            log.severe(e.getMessage());
+            return null;
+        }
     }
 
 }
