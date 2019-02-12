@@ -142,7 +142,8 @@ public class HandlerUtils {
                 soapFault.setFaultString(reason);
             }
             throw new SOAPFaultException(soapBody.getFault());
-        } catch (SOAPException e) {
+        } catch (SOAPException ex) {
+            throw new RuntimeException(ex);
         }
     }
 
