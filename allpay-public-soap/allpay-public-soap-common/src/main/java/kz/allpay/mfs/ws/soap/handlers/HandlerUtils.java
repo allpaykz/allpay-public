@@ -111,7 +111,7 @@ public class HandlerUtils {
         ByteArrayOutputStream out = new ByteArrayOutputStream();
         soapMessage.writeTo(out);
         String strMsg = new String(out.toByteArray());
-        logger.debug("strMsg = " + strMsg);
+        logger.debug("strMsg = '" + strMsg + "'");
         return strMsg;
     }
 
