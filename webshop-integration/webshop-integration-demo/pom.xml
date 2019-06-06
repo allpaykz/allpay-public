@@ -42,7 +42,7 @@
             <id>alpha</id>
             <properties>
                 <webshop.services.ip>alpha.allpay.kz</webshop.services.ip>
-                <where.to.redirect>alpha.allpay.kz</where.to.redirect>
+                <where.to.redirect>mfs.alpha.allpay.kz</where.to.redirect>
                 <webshop.services.port>:8080</webshop.services.port>
             </properties>
         </profile>
@@ -50,7 +50,7 @@
             <id>beta</id>
             <properties>
                 <webshop.services.ip>beta.allpay.kz</webshop.services.ip>
-                <where.to.redirect>beta.allpay.kz</where.to.redirect>
+                <where.to.redirect>mfs.beta.allpay.kz</where.to.redirect>
                 <webshop.services.port>:8080</webshop.services.port>
             </properties>
         </profile>
