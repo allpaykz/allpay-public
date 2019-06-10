@@ -37,15 +37,15 @@
         <profile>
             <id>alpha</id>
             <properties>
-                <allpay.api.url>https://alpha.allpay.kz/allpay-public-soap/transaction-management/v1.1?wsdl</allpay.api.url>
-                <allpay.cash.in.api.url>http://alpha.allpay.kz/allpay-public-soap/cash-in-transaction-management/v1.1?wsdl</allpay.cash.in.api.url>
+                <allpay.api.url>https://mfs.alpha.allpay.kz/allpay-public-soap/transaction-management/v1.1?wsdl</allpay.api.url>
+                <allpay.cash.in.api.url>http://mfs.alpha.allpay.kz/allpay-public-soap/cash-in-transaction-management/v1.1?wsdl</allpay.cash.in.api.url>
             </properties>
         </profile>
         <profile>
             <id>beta</id>
             <properties>
-                <allpay.api.url>http://beta.allpay.kz/allpay-public-soap/transaction-management/v1.1?wsdl</allpay.api.url>
-                <allpay.cash.in.api.url>http://beta.allpay.kz/allpay-public-soap/cash-in-transaction-management/v1.1?wsdl</allpay.cash.in.api.url>
+                <allpay.api.url>http://mfs.beta.allpay.kz/allpay-public-soap/transaction-management/v1.1?wsdl</allpay.api.url>
+                <allpay.cash.in.api.url>http://mfs.beta.allpay.kz/allpay-public-soap/cash-in-transaction-management/v1.1?wsdl</allpay.cash.in.api.url>
             </properties>
         </profile>
     </profiles>
