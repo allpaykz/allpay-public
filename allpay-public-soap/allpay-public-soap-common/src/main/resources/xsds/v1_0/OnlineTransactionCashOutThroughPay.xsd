@@ -14,6 +14,7 @@
             <xs:element name="fromUserName" type="otc:userName"/>
             <xs:element name="amount" type="otc:amount"/>
             <xs:element name="GUID" type="otc:guid"/>
+            <xs:element name="paymentDate" type="xs:dateTime"/>
         </xs:sequence>
     </xs:complexType>
 
