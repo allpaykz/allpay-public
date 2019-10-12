@@ -26,6 +26,9 @@ public interface CashInTransactionManagementV1_1 {
     @WebMethod(action = "createCashInPayment")
     public TerminalPaymentPayResponse createCashInPayment(@WebParam(name = "CashInRequest") CashInRequest request);
 
+    @WebMethod(action = "createCashInPaymentAvtobys")
+    public TerminalPaymentPayResponse createCashInPaymentAvtobys(@WebParam(name = "CashInRequest") CashInRequest request);
+
     @WebMethod(action = "checkUser")
     public CheckUserResponse checkUser(@WebParam(name = "CheckUserRequest") CheckUserRequest request);
 
