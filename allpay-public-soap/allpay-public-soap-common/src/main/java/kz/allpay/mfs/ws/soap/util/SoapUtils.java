@@ -39,6 +39,7 @@ public class SoapUtils {
             final String hashFromException = getHashFromException(ExceptionUtils.getRootCause(e));
             createDetailEntry(targetNamespace, hashFromException, detail, "stackHash");
 
+            log.info("Original exception during soap method: ", e);
             return new SOAPFaultException(soapFault);
         } catch (SOAPException e1) {
             log.error("We tried to generate good soap error message. Sorry", e1);
