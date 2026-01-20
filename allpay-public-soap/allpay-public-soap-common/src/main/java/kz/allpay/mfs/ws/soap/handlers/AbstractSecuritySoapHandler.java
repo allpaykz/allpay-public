@@ -29,6 +29,7 @@ public abstract class AbstractSecuritySoapHandler implements SOAPHandler<SOAPMes
     private static final QName QNAME_WSSE_PASSWORD = new QName(WSSE_NS_URI, "Password");
 
     protected final String NAMESPACE_URI = "https://allpay.kz";
+    protected final String NAMESPACE_URI_V2 = "https://innopay.kz";
     protected final String CERTIFICATE_TAG = "certificateNumber";
     protected final String REQUEST_DSIG_TAG = "requestDsig";
 
@@ -67,6 +68,8 @@ public abstract class AbstractSecuritySoapHandler implements SOAPHandler<SOAPMes
     protected final String getByXPath(String messageAsString, String expression) throws XPathExpressionException {
         XPathFactory xpathFactory = XPathFactory.newInstance();
         XPath xpath = xpathFactory.newXPath();
+        //Временное решение по переходу на v2 api (Смена allpay.kz -> innopay.kz)
+        final String apNs = detectApNamespaceFromMessage(messageAsString);
 
         xpath.setNamespaceContext(new NamespaceContext() {
             public String getNamespaceURI(String prefix) {
@@ -74,7 +77,7 @@ public abstract class AbstractSecuritySoapHandler implements SOAPHandler<SOAPMes
                 else if ("SOAP-ENV".equals(prefix)) return "http://schemas.xmlsoap.org/soap/envelope/";
                 else if ("soap".    equals(prefix)) return "http://schemas.xmlsoap.org/soap/envelope/";
                 else if ("dsig".    equals(prefix)) return "http://www.w3.org/2000/09/xmldsig#";
-                else if ("AP".      equals(prefix)) return NAMESPACE_URI;
+                else if ("AP".      equals(prefix)) return apNs;
                 else if ("xml".equals(prefix)) return XMLConstants.XML_NS_URI;
                 return XMLConstants.NULL_NS_URI;
             }
@@ -95,5 +98,13 @@ public abstract class AbstractSecuritySoapHandler implements SOAPHandler<SOAPMes
 
     protected final String getDsig(String messageAsString) throws XPathExpressionException {
         return getByXPath(messageAsString, "//soap:Header/dsig:Signature/dsig:SignedInfo/dsig:Reference/dsig:DigestValue");
+    }
+
+    String detectApNamespaceFromMessage(String xml) {
+        System.out.println("Baglan xml: " + xml);
+        if (xml.contains("http://www.innopay.kz/mfs/soap/") && xml.contains("/1.2")) {
+            return NAMESPACE_URI_V2;
+        }
+        return NAMESPACE_URI;
     }
 }
