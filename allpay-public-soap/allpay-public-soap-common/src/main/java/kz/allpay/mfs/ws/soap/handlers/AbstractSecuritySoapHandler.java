@@ -101,8 +101,7 @@ public abstract class AbstractSecuritySoapHandler implements SOAPHandler<SOAPMes
     }
 
     String detectApNamespaceFromMessage(String xml) {
-        System.out.println("Baglan xml: " + xml);
-        if (xml.contains("http://www.innopay.kz/mfs/soap/") && xml.contains("/1.2")) {
+        if (xml.contains("/1.2")) {
             return NAMESPACE_URI_V2;
         }
         return NAMESPACE_URI;
